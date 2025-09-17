@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     if (omras?.length > 0) {
-      setOmra(omras[0].name);
+      setOmra(omras[1].name);
     }
   }, [omras]);
 
@@ -57,7 +57,7 @@ function App() {
           )}
 
           <h1 className="flex justify-center mb-7 text-4xl">
-            عمرة <span className="mx-2 text-red-600 font-bold">{omra}</span>
+            عمرة <span className="mx-2  text-[#FF8D4C]/90 font-bold">{omra}</span>
           </h1>
 
           <h1

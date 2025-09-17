@@ -8,7 +8,7 @@ const getUsers = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const res = await axios.get(
-        "/api/users"
+        "/api/users?sort=createdAt"
       );
 
        toast.success("تمت العملية بنجاح")
