@@ -89,13 +89,13 @@ function App() {
                     .map((ele, index) => (
                       <tr
                         key={ele._id}
-                        className="border-t border-gray-300 hover:bg-yellow-100 transition"
+                        className="border-t border-gray-500 hover:bg-yellow-100 transition"
                       >
                         <td className="p-3 text-center font-bold">
                           {index + 1}
                         </td>
-                        <td className="p-3">{ele.name}</td>
-                        <td className="p-3">{ele.phone || "—"}</td>
+                        <td className="p-3 text-center">{ele.name}</td>
+                        <td className="p-3 text-center">{ele.phone || "—"}</td>
                         <td className="p-3 text-center">{ele.paidAmount}</td>
                         <td className="p-3 text-center">{ele.room || "—" }</td>
                         <td className="p-3 text-center ">{ele.details || "—"}</td>
