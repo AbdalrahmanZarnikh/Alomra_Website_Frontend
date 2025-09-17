@@ -34,12 +34,14 @@ const CardUser = ({
         {" "}
         عمرة <span className="text-red-500">{omra}</span>{" "}
       </h1> */}
-      <h1 className="text-lg font-bold">
+      <h1 className="text-lg font-bold ">
         الاسم : <span className="font-light">{name}</span>
       </h1>
-      <h1 className="text-lg font-bold">
-        الرقم : <span className="font-light">{phone}</span>
-      </h1>
+        {phone && (
+          <h1 className="text-lg font-bold">
+            الهاتف : <span className="font-light">{phone}</span>
+          </h1>
+        )}
       <h1 className="text-lg font-bold">
         المبلغ المدفوع : <span className="font-light">{paidAmount}</span>
       </h1>
