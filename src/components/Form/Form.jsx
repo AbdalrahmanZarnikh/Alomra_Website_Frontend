@@ -38,6 +38,7 @@ const Form = () => {
           paidAmount: found.paidAmount,
           taslim: found.taslim,
           details: found.details,
+          room: found.room,
           omra: found.omra?._id || "",
         });
       }
@@ -52,6 +53,7 @@ const Form = () => {
     form.append("phone", data.phone);
     form.append("details", data.details);
     form.append("taslim", data.taslim);
+    form.append("room", data.room);
     if (omras.length > 0) {
       form.append("omra", data.omra);
     }
@@ -68,14 +70,15 @@ const Form = () => {
   };
   return (
     <div className="p-10">
-
-    <div className="mb-4  bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50" onClick={()=>{
-      navigate(-1);
-    }}>رجوع</div>
-      <form
-        className="student-form-form"
-        onSubmit={handleSubmit(onSubmit)}
+      <div
+        className="mb-4  bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
+        onClick={() => {
+          navigate(-1);
+        }}
       >
+        رجوع
+      </div>
+      <form className="student-form-form" onSubmit={handleSubmit(onSubmit)}>
         {/* Form Fields */}
         <div className="form-group">
           <label htmlFor="Name">الاسم </label>
@@ -144,6 +147,19 @@ const Form = () => {
           />
           {errors.details && (
             <span className="text-red-400">{errors.details.message}</span>
+          )}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="Room">الغرفة </label>
+          <input
+            id="Room"
+            type="text"
+            placeholder="ادخل الغرفة ..."
+            {...register("room")}
+          />
+          {errors.room && (
+            <span className="text-red-400">{errors.room.message}</span>
           )}
         </div>
 

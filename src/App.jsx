@@ -73,13 +73,14 @@ function App() {
                 <thead className="bg-gray-800 text-white text-sm md:text-base">
                   <tr>
                     <th className="p-3">#</th>
-                    <th className="p-3">الاسم</th>
-                    <th className="p-3">الهاتف</th>
-                    <th className="p-3">المبلغ المدفوع</th>
-                    <th className="p-3">ملاحظات</th>
-                    <th className="p-3">حالة الجواز</th>
-                    <th className="p-3 print:hidden">الصور</th>
-                    <th className="p-3 print:hidden">التحكم</th>
+                    <th className="p-3 text-center">الاسم</th>
+                    <th className="p-3 text-center">الهاتف</th>
+                    <th className="p-3 text-center">المبلغ المدفوع</th>
+                    <th className="p-3 text-center">الغرفة</th>
+                    <th className="p-3 text-center">ملاحظات</th>
+                    <th className="p-3 text-center">حالة الجواز</th>
+                    <th className="p-3 text-center print:hidden">الصور</th>
+                    <th className="p-3 text-center print:hidden">التحكم</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm md:text-base bg-yellow-50">
@@ -95,8 +96,9 @@ function App() {
                         </td>
                         <td className="p-3">{ele.name}</td>
                         <td className="p-3">{ele.phone || "—"}</td>
-                        <td className="p-3">{ele.paidAmount}</td>
-                        <td className="p-3">{ele.details || "—"}</td>
+                        <td className="p-3 text-center">{ele.paidAmount}</td>
+                        <td className="p-3 text-center">{ele.room || "—" }</td>
+                        <td className="p-3 text-center ">{ele.details || "—"}</td>
                         <td className="p-3 text-center">
                           <span
                             className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
