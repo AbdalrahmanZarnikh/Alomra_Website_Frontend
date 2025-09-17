@@ -32,7 +32,9 @@ const Header = () => {
         >
           إنشاء عمرة جديدة
         </Link>
+
       </div>
+        <Link to={"/add-user"} className="md:hidden bg-white rounded-lg p-4 hover:bg-white/50 hover:text-white cursor-pointer text-xl font-bold">أضف معمترين</Link>
     </div>
   );
 };
