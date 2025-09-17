@@ -80,6 +80,7 @@ function App() {
                     phone={ele.phone}
                     taslim={ele.taslim}
                     images={ele?.images}
+                    details={ele.details}
                   />
                 ))}
           </div>

@@ -12,6 +12,7 @@ const CardUser = ({
   paidAmount,
   taslim,
   images,
+  details,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const CardUser = ({
         {index}
       </span>
       {Array.isArray(images) && images.length > 0 && (
-        <img src={images[0]?.url} className="w-20 h-20 " alt="" />
+        <img src={images[0]?.url} className="w-20 h-20 print:hidden" alt="" />
       )}
 
       {/* <h1 className="text-lg ">
@@ -43,6 +44,11 @@ const CardUser = ({
         المبلغ المدفوع : <span className="font-light">{paidAmount}</span>
       </h1>
 
+      {details && (
+        <h1 className="text-lg font-bold">
+          ملاحظات : <span className="font-light">{details}</span>
+        </h1>
+      )}
       <h1
         className={`${
           taslim ? "bg-green-500" : "bg-red-500"
