@@ -34,6 +34,20 @@ function App() {
     await dispatch(deleteUser(id));
   };
 
+  const colors = [
+    "bg-red-500", // أحمر
+    "bg-blue-500", // أزرق
+    "bg-green-500", // أخضر
+    "bg-yellow-500", // أصفر
+    "bg-purple-500", // بنفسجي
+    "bg-orange-500", // برتقالي
+    "bg-pink-500", // وردي
+    "bg-black", // تركوازي
+    "bg-red-900", // ليموني
+    "bg-cyan-500", // سماوي
+    "bg-amber-500", // كهرماني
+  ];
+
   return (
     <>
       {isLoading === "Pending" ? (
@@ -57,7 +71,8 @@ function App() {
           )}
 
           <h1 className="flex justify-center mb-7 text-4xl">
-            عمرة <span className="mx-2  text-[#FF8D4C]/90 font-bold">{omra}</span>
+            عمرة{" "}
+            <span className="mx-2  text-[#FF8D4C]/90 font-bold">{omra}</span>
           </h1>
 
           <h1
@@ -78,7 +93,9 @@ function App() {
                     <th className="p-3 text-center">المبلغ المدفوع</th>
                     <th className="p-3 text-center">الغرفة</th>
                     <th className="p-3 text-center">ملاحظات</th>
-                    <th className="p-3 text-center print:hidden">حالة الجواز</th>
+                    <th className="p-3 text-center print:hidden">
+                      حالة الجواز
+                    </th>
                     <th className="p-3 text-center print:hidden">الصور</th>
                     <th className="p-3 text-center print:hidden">التحكم</th>
                   </tr>
@@ -97,8 +114,16 @@ function App() {
                         <td className="p-3 text-center">{ele.name}</td>
                         <td className="p-3 text-center">{ele.phone || "—"}</td>
                         <td className="p-3 text-center">{ele.paidAmount}</td>
-                        <td className="p-3 text-center">{ele.room || "—" }</td>
-                        <td className="p-3 text-center ">{ele.details || "—"}</td>
+                        <td
+                          className={`p-3 text-center ${
+                            colors[ele.room.split(" ")[1] - 1]
+                          } text-white`}
+                        >
+                          {ele.room || "—"}
+                        </td>
+                        <td className="p-3 text-center ">
+                          {ele.details || "—"}
+                        </td>
                         <td className="p-3 text-center print:hidden">
                           <span
                             className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
