@@ -78,7 +78,7 @@ function App() {
                     <th className="p-3 text-center">المبلغ المدفوع</th>
                     <th className="p-3 text-center">الغرفة</th>
                     <th className="p-3 text-center">ملاحظات</th>
-                    <th className="p-3 text-center">حالة الجواز</th>
+                    <th className="p-3 text-center print:hidden">حالة الجواز</th>
                     <th className="p-3 text-center print:hidden">الصور</th>
                     <th className="p-3 text-center print:hidden">التحكم</th>
                   </tr>
@@ -99,7 +99,7 @@ function App() {
                         <td className="p-3 text-center">{ele.paidAmount}</td>
                         <td className="p-3 text-center">{ele.room || "—" }</td>
                         <td className="p-3 text-center ">{ele.details || "—"}</td>
-                        <td className="p-3 text-center">
+                        <td className="p-3 text-center print:hidden">
                           <span
                             className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
                               ele.taslim ? "bg-green-600" : "bg-red-600"
