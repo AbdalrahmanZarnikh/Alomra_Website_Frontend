@@ -30,6 +30,8 @@ function App() {
     }
   }, [omras]);
 
+
+
   const handleDelete = async (id) => {
     await dispatch(deleteUser(id));
   };
@@ -87,7 +89,7 @@ function App() {
               <table className="min-w-[1000px] w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
                 <thead className="bg-gray-800 text-white text-sm md:text-base">
                   <tr>
-                    <th className="p-3">#</th>
+                    <th className="p-3 text-center">#</th>
                     <th className="p-3 text-center">الاسم</th>
                     <th className="p-3 text-center">الهاتف</th>
                     <th className="p-3 text-center">المبلغ المدفوع</th>
@@ -114,13 +116,10 @@ function App() {
                         <td className="p-3 text-center">{ele.name}</td>
                         <td className="p-3 text-center">{ele.phone || "—"}</td>
                         <td className="p-3 text-center">{ele.paidAmount}</td>
-                        <td
-                          className={`p-3 text-center ${
-                            colors[ele.room.split(" ")[1] - 1]
-                          } text-white`}
-                        >
+                        <td className="p-3 text-center text-gray-800 font-bold ">
                           {ele.room || "—"}
                         </td>
+
                         <td className="p-3 text-center ">
                           {ele.details || "—"}
                         </td>
