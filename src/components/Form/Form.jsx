@@ -86,7 +86,7 @@ const Form = () => {
             id="Name"
             type="text"
             placeholder="ادخل اسم ..."
-            {...register("name", { required: "The Name is Required" })}
+            {...register("name", { required: "يرجى ادخال اسم " })}
           />
           {errors.name && (
             <span className="text-red-400">{errors.name.message}</span>
@@ -123,7 +123,7 @@ const Form = () => {
         {omras.length > 0 && (
           <div className="form-group">
             <label htmlFor="Omra">العمرة</label>
-            <select id="Omra" {...register("omra")} className="cursor-pointer">
+            <select id="Omra" {...register("omra",{required:"يرجي تحديد شهر العمرة"})} className="cursor-pointer">
               <option value="">اختر شهر العمرة</option>
               {omras.map((omr) => (
                 <option key={omr._id} value={omr._id}>

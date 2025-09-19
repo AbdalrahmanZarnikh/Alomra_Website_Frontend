@@ -60,7 +60,7 @@ const Header = () => {
       <div className="relative w-1/2 ">
         <input
           type="text"
-          placeholder="ابحث بالاسم او الغرفة"
+          placeholder="ابحث بالاسم أو الغرفة"
           className="p-4 w-full rounded-lg border border-gray-300 bg-white text-[10px] md:text-lg text-right"
           onChange={(e) => {
             handleSearch(e);
