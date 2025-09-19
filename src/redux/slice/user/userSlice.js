@@ -6,6 +6,7 @@ import createUser from "./act/createUser";
 import getUsers from "./act/getUsers";
 import deleteUser from "./act/deleteUser";
 import updateUser from "./act/updateUser";
+import getUsersBySearch from "./act/getUsersBySearch";
 
 import toast from "react-hot-toast";
 
@@ -47,6 +48,20 @@ const userSlice = createSlice({
       state.data = action.payload.data;
     });
     builder.addCase(getUsers.rejected, (state, action) => {
+      state.isLoading = "Fail";
+      state.error = action.payload;
+      toast.error(state.error || "Network Error");
+    });
+    builder.addCase(getUsersBySearch.pending, (state) => {
+      state.isLoading = "Pending";
+      state.error = null;
+    });
+    builder.addCase(getUsersBySearch.fulfilled, (state, action) => {
+      state.isLoading = "Success";
+      state.error = null;
+      state.data = action.payload.data;
+    });
+    builder.addCase(getUsersBySearch.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload;
       toast.error(state.error || "Network Error");
