@@ -24,31 +24,35 @@ function App() {
   const { omras } = useSelector((state) => state.omraSlice);
   const [omra, setOmra] = useState("");
 
+  const [checked, setChecked] = useState({
+    "الاسم": true,
+    "رقم الجوال": true,
+    "المبلغ": true,
+    "الغرفة": true,
+    "ملاحظات": true,
+    "حالة الجواز": false,
+    "الصور": false,
+  });
+
+  const headTable = [
+    "الاسم",
+    "رقم الجوال",
+    "المبلغ",
+    "الغرفة",
+    "ملاحظات",
+    "حالة الجواز",
+    "الصور",
+  ];
+
   useEffect(() => {
     if (omras?.length > 0) {
       setOmra(omras[1].name);
     }
   }, [omras]);
 
-
-
   const handleDelete = async (id) => {
     await dispatch(deleteUser(id));
   };
-
-  const colors = [
-    "bg-red-500", // أحمر
-    "bg-blue-500", // أزرق
-    "bg-green-500", // أخضر
-    "bg-yellow-500", // أصفر
-    "bg-purple-500", // بنفسجي
-    "bg-orange-500", // برتقالي
-    "bg-pink-500", // وردي
-    "bg-black", // تركوازي
-    "bg-red-900", // ليموني
-    "bg-cyan-500", // سماوي
-    "bg-amber-500", // كهرماني
-  ];
 
   return (
     <>
@@ -90,15 +94,30 @@ function App() {
                 <thead className="bg-gray-800 text-white text-sm md:text-base">
                   <tr>
                     <th className="p-3 text-center">#</th>
-                    <th className="p-3 text-center">الاسم</th>
-                    <th className="p-3 text-center">الهاتف</th>
-                    <th className="p-3 text-center">المبلغ المدفوع</th>
-                    <th className="p-3 text-center">الغرفة</th>
-                    <th className="p-3 text-center">ملاحظات</th>
-                    <th className="p-3 text-center print:hidden">
-                      حالة الجواز
-                    </th>
-                    <th className="p-3 text-center print:hidden">الصور</th>
+                    {headTable.map((head, index) => (
+                      <th
+                        key={index}
+                        className={`p-3 text-center ${
+                          checked[head] ? "" : "print:hidden"
+                        }`}
+                      >
+                        <div className="flex justify-center items-center gap-1">
+                          <span className="">{head}</span>
+                          <input
+                            type="checkbox"
+                            className="print:hidden w-5 h-5 accent-green-600 cursor-pointer"
+                            checked={checked[head]}
+                            onChange={(e) => {
+                              console.log(e.target.checked);
+                              setChecked((prev) => ({
+                                ...prev,
+                                [head]: e.target.checked,
+                              }));
+                            }}
+                          />
+                        </div>
+                      </th>
+                    ))}
                     <th className="p-3 text-center print:hidden">التحكم</th>
                   </tr>
                 </thead>
@@ -113,17 +132,47 @@ function App() {
                         <td className="p-3 text-center font-bold">
                           {index + 1}
                         </td>
-                        <td className="p-3 text-center">{ele.name}</td>
-                        <td className="p-3 text-center">{ele.phone || "—"}</td>
-                        <td className="p-3 text-center">{ele.paidAmount}</td>
-                        <td className="p-3 text-center text-gray-800 font-bold ">
+                        <td
+                          className={`p-3 text-center ${
+                            checked.الاسم ? "" : "print:hidden"
+                          }`}
+                        >
+                          {ele.name}
+                        </td>
+                        <td
+                          className={`p-3 text-center ${
+                            checked["رقم الجوال"] ? "" : "print:hidden"
+                          }`}
+                        >
+                          {ele.phone || "—"}
+                        </td>
+                        <td
+                          className={`p-3 text-center ${
+                            checked["المبلغ"] ? "" : "print:hidden"
+                          }`}
+                        >
+                          {ele.paidAmount}
+                        </td>
+                        <td
+                          className={`p-3 text-center text-gray-800 font-bold ${
+                            checked.الغرفة ? "" : "print:hidden"
+                          }`}
+                        >
                           {ele.room || "—"}
                         </td>
 
-                        <td className="p-3 text-center ">
+                        <td
+                          className={`p-3 text-center ${
+                            checked.ملاحظات ? "" : "print:hidden"
+                          }`}
+                        >
                           {ele.details || "—"}
                         </td>
-                        <td className="p-3 text-center print:hidden">
+                        <td
+                          className={`p-3 text-center ${
+                            checked["حالة الجواز"] ? "" : "print:hidden"
+                          }`}
+                        >
                           <span
                             className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
                               ele.taslim ? "bg-green-600" : "bg-red-600"
@@ -135,7 +184,11 @@ function App() {
                           </span>
                         </td>
 
-                        <td className="p-3 print:hidden">
+                        <td
+                          className={`p-3 text-center ${
+                            checked.الصور ? "" : "print:hidden"
+                          }`}
+                        >
                           <div className="flex flex-wrap gap-2 justify-end">
                             {Array.isArray(ele.images) &&
                               ele.images.map((img, i) => (

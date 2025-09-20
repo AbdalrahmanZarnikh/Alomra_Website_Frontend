@@ -26,6 +26,8 @@ const Form = () => {
   const { omras } = useSelector((state) => state.omraSlice);
   const isUpdateMode = typeof id === "string";
 
+
+
   useEffect(() => {
     dispatch(getOmras());
 
@@ -78,6 +80,8 @@ const Form = () => {
       >
         رجوع
       </div>
+
+     
       <form className="student-form-form" onSubmit={handleSubmit(onSubmit)}>
         {/* Form Fields */}
         <div className="form-group">
@@ -123,7 +127,11 @@ const Form = () => {
         {omras.length > 0 && (
           <div className="form-group">
             <label htmlFor="Omra">العمرة</label>
-            <select id="Omra" {...register("omra",{required:"يرجي تحديد شهر العمرة"})} className="cursor-pointer">
+            <select
+              id="Omra"
+              {...register("omra", { required: "يرجي تحديد شهر العمرة" })}
+              className="cursor-pointer"
+            >
               <option value="">اختر شهر العمرة</option>
               {omras.map((omr) => (
                 <option key={omr._id} value={omr._id}>
@@ -186,7 +194,7 @@ const Form = () => {
         <UploadMultipleImages form={form} records={data} />
 
         <button type="submit" className="submit-button m-auto cursor-pointer">
-          {typeof id == "string" ? "تعديل" : "اضافة"}
+          {typeof id == "string" ? "تعديل" : "تسجيل"}
           {isLoading == "Pending" && "....."}
         </button>
       </form>
