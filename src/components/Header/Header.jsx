@@ -84,7 +84,7 @@ const Header = () => {
             handleSearch(e);
           }}
         />
-        <span className={`absolute right-2 top-4  md:top-5   ${!searchTerm.length>0 && "hidden"} bg-gray-300 text-red-500 w-5 h-5 p-4 rounded-full text-center flex justify-center items-center  cursor-pointer hover:bg-gray-200`} onClick={()=>{
+        <span className={`absolute right-2 top-2  md:top-5   ${!searchTerm.length>0 && "hidden"} bg-gray-300 text-red-500 w-2 h-2 md:w-5 md:h-5  p-4 rounded-full text-center flex justify-center items-center  cursor-pointer hover:bg-gray-200`} onClick={()=>{
            input.current.value=""
            setSearchTerm("")
         }} >X</span>
