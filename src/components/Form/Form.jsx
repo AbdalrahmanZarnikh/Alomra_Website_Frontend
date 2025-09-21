@@ -26,7 +26,7 @@ const Form = () => {
   const { omras } = useSelector((state) => state.omraSlice);
   const isUpdateMode = typeof id === "string";
 
-
+  const typeSafar=["جواً","براً"]
 
   useEffect(() => {
     dispatch(getOmras());
@@ -42,6 +42,7 @@ const Form = () => {
           details: found.details,
           room: found.room,
           omra: found.omra?._id || "",
+          safar:found.safar
         });
       }
     }
@@ -55,6 +56,7 @@ const Form = () => {
     form.append("phone", data.phone);
     form.append("details", data.details);
     form.append("taslim", data.taslim);
+    form.append("safar",data.safar)
     form.append("room", data.room);
     if (omras.length > 0) {
       form.append("omra", data.omra);
@@ -81,7 +83,6 @@ const Form = () => {
         رجوع
       </div>
 
-     
       <form className="student-form-form" onSubmit={handleSubmit(onSubmit)}>
         {/* Form Fields */}
         <div className="form-group">
@@ -144,6 +145,25 @@ const Form = () => {
             )}
           </div>
         )}
+
+        <div className="form-group">
+          <label htmlFor="Safar">السفر</label>
+          <select
+            id="Safar"
+            {...register("safar")}
+            className="cursor-pointer"
+          >
+            <option value="">اختر طريقة السفر</option>
+            {typeSafar.map((ele) => (
+              <option key={ele} value={ele}>
+                {ele}
+              </option>
+            ))}
+          </select>
+          {errors.omra && (
+            <span className="text-red-400">{errors.safar.message}</span>
+          )}
+        </div>
 
         <div className="form-group">
           <label htmlFor="Details">ملاحظات </label>

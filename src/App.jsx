@@ -25,13 +25,14 @@ function App() {
   const [omra, setOmra] = useState("");
 
   const [checked, setChecked] = useState({
-    "الاسم": true,
+    الاسم: true,
     "رقم الجوال": true,
-    "المبلغ": true,
-    "الغرفة": true,
-    "ملاحظات": true,
+    المبلغ: true,
+    الغرفة: true,
+    ملاحظات: true,
     "حالة الجواز": false,
-    "الصور": false,
+    السفر: true,
+    الصور: false,
   });
 
   const headTable = [
@@ -41,6 +42,7 @@ function App() {
     "الغرفة",
     "ملاحظات",
     "حالة الجواز",
+    "السفر",
     "الصور",
   ];
 
@@ -182,6 +184,13 @@ function App() {
                               ? "تم تسليم الجواز"
                               : "لم يتم تسليم الجواز"}
                           </span>
+                        </td>
+                        <td
+                          className={`p-3 text-center ${
+                            checked.السفر ? "" : "print:hidden"
+                          }`}
+                        >
+                          {ele.safar || "—"}
                         </td>
 
                         <td
