@@ -64,12 +64,17 @@ const FormOmra = () => {
               }}
             />
           </div>
-          <button
-            className="submit-button m-auto mt-5 cursor-pointer "
-            onClick={handleDelete}
-          >
-            إدخال
-          </button>
+          <div className="flex  gap-2">
+            <button
+              className="submit-button m-auto mt-5 cursor-pointer "
+              onClick={handleDelete}
+            >
+              إدخال
+            </button>
+            <button className="submit-button m-auto mt-5  cursor-pointer " onClick={()=>{setShow(false)}}>
+              إلغاء
+            </button>
+          </div>
         </PopUp>
       )}
       <form
