@@ -1,4 +1,4 @@
-import { get, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   addOmra,
@@ -28,7 +28,6 @@ const FormOmra = () => {
   }, [dispatch]);
 
   const [show, setShow] = useState(false);
-  const [pass, setPass] = useState("");
 
   // Function To Handle Submit
   const onSubmit = async (data) => {
@@ -42,41 +41,18 @@ const FormOmra = () => {
     setNewId(id);
   };
 
-  const handleDelete = async () => {
-    if (pass == "3415") {
-      await dispatch(deleteOmra(newId));
-      setShow(false);
-    } else {
-      alert("الرمز السري خاطئ");
-    }
-  };
+
   return (
     <div className="p-10">
-      {show && (
-        <PopUp msg={"هل أنت متأكد من الحذف ؟"}>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="ادخل الرمز السري للحذف"
-              className="rounded-lg p-2"
-              onChange={(e) => {
-                setPass(e.target.value);
-              }}
-            />
-          </div>
-          <div className="flex  gap-2">
-            <button
-              className="submit-button m-auto mt-5 cursor-pointer "
-              onClick={handleDelete}
-            >
-              إدخال
-            </button>
-            <button className="submit-button m-auto mt-5  cursor-pointer " onClick={()=>{setShow(false)}}>
-              إلغاء
-            </button>
-          </div>
-        </PopUp>
-      )}
+      <PopUp
+        msg={"هل أنت متأكد من الحذف ؟"}
+        id={newId}
+        thunk={deleteOmra}
+        showVar={show}
+        onClose={() => {
+          setShow(false);
+        }}
+      />
       <form
         className="student-form-form mb-5"
         onSubmit={handleSubmit(onSubmit)}

@@ -26,7 +26,6 @@ function App() {
   const [omra, setOmra] = useState("");
   const [Filter, setFilter] = useState("الكل");
   const [show, setShow] = useState(false);
-  const [pass, setPass] = useState("");
   const [newId, setNewId] = useState("");
 
   const CheckPass = (id) => {
@@ -34,14 +33,7 @@ function App() {
     setNewId(id);
   };
 
-  const handleDelete = async () => {
-    if (pass == "3415") {
-      await dispatch(deleteUser(newId));
-      setShow(false);
-    } else {
-      alert("الرمز السري خاطئ");
-    }
-  };
+
 
   const [checked, setChecked] = useState({
     الاسم: true,
@@ -97,36 +89,15 @@ function App() {
         </div>
       ) : (
         <div className="p-5 overflow-x-auto">
-          {show && (
-            <PopUp msg={"هل أنت متأكد من الحذف ؟"}>
-              <div className="form-group">
-                <input
-                  type="text"
-                  placeholder="ادخل الرمز السري للحذف"
-                  className="rounded-lg p-2"
-                  onChange={(e) => {
-                    setPass(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="flex  gap-2">
-                <button
-                  className="submit-button m-auto mt-5 cursor-pointer "
-                  onClick={handleDelete}
-                >
-                  إدخال
-                </button>
-                <button
-                  className="submit-button m-auto mt-5  cursor-pointer "
-                  onClick={() => {
-                    setShow(false);
-                  }}
-                >
-                  إلغاء
-                </button>
-              </div>
-            </PopUp>
-          )}
+          <PopUp
+            msg={"هل أنت متأكد من الحذف ؟"}
+            id={newId}
+            thunk={deleteUser}
+            showVar={show}
+            onClose={() => {
+              setShow(false);
+            }}
+          />
 
           <div className="flex justify-between">
             <div>
