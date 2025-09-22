@@ -23,6 +23,7 @@ function App() {
   const { isLoading, data } = useSelector((state) => state.userSlice);
   const { omras } = useSelector((state) => state.omraSlice);
   const [omra, setOmra] = useState("");
+  const [Filter, setFilter] = useState("الكل");
 
   const [checked, setChecked] = useState({
     الاسم: true,
@@ -46,6 +47,24 @@ function App() {
     "الصور",
   ];
 
+  const keywords = [
+    "الكل",
+    "براً",
+    "جواً",
+    "غرفة 1",
+    "غرفة 2",
+    "غرفة 3",
+    "غرفة 4",
+    "غرفة 5",
+    "غرفة 6",
+    "غرفة 7",
+    "غرفة 8",
+    "غرفة 9",
+    "غرفة 10",
+    "غرفة 11",
+    "غرفة 12",
+  ];
+
   useEffect(() => {
     if (omras?.length > 0) {
       setOmra(omras[0]?.name);
@@ -64,19 +83,38 @@ function App() {
         </div>
       ) : (
         <div className="p-5 overflow-x-auto">
-          {omras?.length > 0 && (
-            <select
-              className="mb-5 p-2 rounded-lg bg-gray-800 text-white cursor-pointer"
-              value={omra}
-              onChange={(e) => setOmra(e.target.value)}
-            >
-              {omras.map((omra) => (
-                <option key={omra.name} value={omra.name}>
-                  {omra.name}
-                </option>
-              ))}
-            </select>
-          )}
+          <div className="flex justify-between">
+            <div>
+              {omras?.length > 0 && (
+                <select
+                  className="mb-5 p-2 rounded-lg bg-gray-800 text-white cursor-pointer"
+                  value={omra}
+                  onChange={(e) => setOmra(e.target.value)}
+                >
+                  {omras.map((omra) => (
+                    <option key={omra.name} value={omra.name}>
+                      {omra.name}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+            <div>
+              {keywords?.length > 0 && (
+                <select
+                  className="mb-5 p-2 rounded-lg bg-gray-800 text-white cursor-pointer"
+                  value={Filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                >
+                  {keywords.map((ele) => (
+                    <option key={ele} value={ele}>
+                      {ele}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+          </div>
 
           <h1 className="flex justify-center mb-7 text-4xl">
             عمرة{" "}
@@ -91,6 +129,9 @@ function App() {
           </h1>
 
           <div id="print-area" className="w-full">
+            <h1 className="flex justify-center items-center mb-5 text-5xl text-[#FF8D4C]/90">
+              {Filter}
+            </h1>
             <div className="container mx-auto overflow-x-auto">
               <table className="min-w-[1000px] w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
                 <thead className="bg-gray-800 text-white text-sm md:text-base">
@@ -126,6 +167,19 @@ function App() {
                 <tbody className="text-sm md:text-base bg-yellow-50">
                   {data
                     ?.filter((ele) => ele.omra?.name === omra)
+                    .filter((ele) => {
+                      if (
+                        Filter !== "الكل" &&
+                        Filter !== "جواً" &&
+                        Filter != "براً"
+                      ) {
+                        return ele.room == Filter;
+                      } else if (Filter == "براً" || Filter == "جواً") {
+                        return ele.safar == Filter;
+                      } else {
+                        return ele;
+                      }
+                    })
                     .map((ele, index) => (
                       <tr
                         key={ele._id}
