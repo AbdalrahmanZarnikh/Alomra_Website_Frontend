@@ -13,6 +13,8 @@ const Form = () => {
 
   const navigate = useNavigate();
 
+  
+
   const {
     register,
     handleSubmit,
@@ -26,7 +28,7 @@ const Form = () => {
   const { omras } = useSelector((state) => state.omraSlice);
   const isUpdateMode = typeof id === "string";
 
-  const typeSafar=["جواً","براً"]
+  const typeSafar = ["جواً", "براً"];
 
   useEffect(() => {
     dispatch(getOmras());
@@ -42,7 +44,7 @@ const Form = () => {
           details: found.details,
           room: found.room,
           omra: found.omra?._id || "",
-          safar:found.safar
+          safar: found.safar,
         });
       }
     }
@@ -56,7 +58,7 @@ const Form = () => {
     form.append("phone", data.phone);
     form.append("details", data.details);
     form.append("taslim", data.taslim);
-    form.append("safar",data.safar)
+    form.append("safar", data.safar);
     form.append("room", data.room);
     if (omras.length > 0) {
       form.append("omra", data.omra);
@@ -74,6 +76,7 @@ const Form = () => {
   };
   return (
     <div className="p-10">
+  
       <div
         className="mb-4  bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
         onClick={() => {
@@ -148,11 +151,7 @@ const Form = () => {
 
         <div className="form-group">
           <label htmlFor="Safar">السفر</label>
-          <select
-            id="Safar"
-            {...register("safar")}
-            className="cursor-pointer"
-          >
+          <select id="Safar" {...register("safar")} className="cursor-pointer">
             <option value="">اختر طريقة السفر</option>
             {typeSafar.map((ele) => (
               <option key={ele} value={ele}>

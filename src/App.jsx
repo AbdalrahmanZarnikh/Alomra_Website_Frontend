@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import loading from "./utils/loading.json";
 import { useNavigate } from "react-router-dom";
 import Image from "./components/Image/Image";
+import PopUp from "./components/PopUp/PopUp";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,23 @@ function App() {
   const { omras } = useSelector((state) => state.omraSlice);
   const [omra, setOmra] = useState("");
   const [Filter, setFilter] = useState("الكل");
+  const [show, setShow] = useState(false);
+  const [pass, setPass] = useState("");
+  const [newId, setNewId] = useState("");
+
+  const CheckPass = (id) => {
+    setShow(true);
+    setNewId(id);
+  };
+
+  const handleDelete = async () => {
+    if (pass == "3415") {
+      await dispatch(deleteUser(newId));
+      setShow(false);
+    } else {
+      alert("الرمز السري خاطئ");
+    }
+  };
 
   const [checked, setChecked] = useState({
     الاسم: true,
@@ -71,10 +89,6 @@ function App() {
     }
   }, [omras]);
 
-  const handleDelete = async (id) => {
-    await dispatch(deleteUser(id));
-  };
-
   return (
     <>
       {isLoading === "Pending" ? (
@@ -83,6 +97,37 @@ function App() {
         </div>
       ) : (
         <div className="p-5 overflow-x-auto">
+          {show && (
+            <PopUp msg={"هل أنت متأكد من الحذف ؟"}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="ادخل الرمز السري للحذف"
+                  className="rounded-lg p-2"
+                  onChange={(e) => {
+                    setPass(e.target.value);
+                  }}
+                />
+              </div>
+              <div className="flex  gap-2">
+                <button
+                  className="submit-button m-auto mt-5 cursor-pointer "
+                  onClick={handleDelete}
+                >
+                  إدخال
+                </button>
+                <button
+                  className="submit-button m-auto mt-5  cursor-pointer "
+                  onClick={() => {
+                    setShow(false);
+                  }}
+                >
+                  إلغاء
+                </button>
+              </div>
+            </PopUp>
+          )}
+
           <div className="flex justify-between">
             <div>
               {omras?.length > 0 && (
@@ -272,7 +317,7 @@ function App() {
                               تعديل
                             </button>
                             <button
-                              onClick={() => handleDelete(ele._id)}
+                              onClick={() => CheckPass(ele._id)}
                               className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-400 text-xs md:text-sm"
                             >
                               حذف
