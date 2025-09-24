@@ -33,8 +33,6 @@ function App() {
     setNewId(id);
   };
 
-
-
   const [checked, setChecked] = useState({
     الاسم: true,
     "رقم الجوال": true,
@@ -49,7 +47,8 @@ function App() {
   const headTable = [
     "الاسم",
     "رقم الجوال",
-    "المبلغ",
+    "المبلغ المدفوع",
+    "المبلغ المتبقي",
     "الغرفة",
     "ملاحظات",
     "حالة الجواز",
@@ -220,10 +219,17 @@ function App() {
                         </td>
                         <td
                           className={`p-3 text-center ${
-                            checked["المبلغ"] ? "" : "print:hidden"
-                          }`}
+                            checked["المبلغ المدفوع"] ? "" : "print:hidden"
+                          } text-green-700`}
                         >
                           {ele.paidAmount}
+                        </td>
+                        <td
+                          className={`p-3 text-center ${
+                            checked["المبلغ المتبقي"] ? "" : "print:hidden"
+                          } text-red-700`}
+                        >
+                          {(550-ele.paidAmount) >0 ?(550-ele.paidAmount):"—"}
                         </td>
                         <td
                           className={`p-3 text-center text-gray-800 font-bold ${
