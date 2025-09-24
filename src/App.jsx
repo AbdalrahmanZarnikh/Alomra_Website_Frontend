@@ -229,7 +229,9 @@ function App() {
                             checked["المبلغ المتبقي"] ? "" : "print:hidden"
                           } text-red-700`}
                         >
-                          {(550-ele.paidAmount) >0 ?(550-ele.paidAmount):"—"}
+                          {ele.totalAmount - ele.paidAmount > 0
+                            ? ele.totalAmount - ele.paidAmount
+                            : "—"}
                         </td>
                         <td
                           className={`p-3 text-center text-gray-800 font-bold ${

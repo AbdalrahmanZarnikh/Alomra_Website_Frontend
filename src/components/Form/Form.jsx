@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import UploadImage from "../uploadImage/UploadImage";
 import UploadMultipleImages from "../UploadMultipleImages/UploadMultipleImages";
 import "./Forms.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,8 +11,6 @@ const Form = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-
-  
 
   const {
     register,
@@ -41,6 +38,7 @@ const Form = () => {
           phone: found.phone,
           paidAmount: found.paidAmount,
           taslim: found.taslim,
+          totalAmount: found.totalAmount,
           details: found.details,
           room: found.room,
           omra: found.omra?._id || "",
@@ -55,11 +53,13 @@ const Form = () => {
   const onSubmit = (data) => {
     form.append("name", data.name);
     form.append("paidAmount", +data.paidAmount);
+    form.append("totalAmount", +data.totalAmount);
     form.append("phone", data.phone);
     form.append("details", data.details);
     form.append("taslim", data.taslim);
     form.append("safar", data.safar);
     form.append("room", data.room);
+
     if (omras.length > 0) {
       form.append("omra", data.omra);
     }
@@ -76,7 +76,6 @@ const Form = () => {
   };
   return (
     <div className="p-10">
-  
       <div
         className="mb-4  bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
         onClick={() => {
@@ -125,6 +124,20 @@ const Form = () => {
           />
           {errors.paidAmount && (
             <span className="text-red-400">{errors.paidAmount.message}</span>
+          )}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="TotalAmount">التكلفة الإجمالية</label>
+          <input
+            id="TotalAmount"
+            type="number"
+            min={"0"}
+            placeholder="ادخل التكلفة الإجمالية  ..."
+            {...register("totalAmount")}
+          />
+          {errors.paidAmount && (
+            <span className="text-red-400">{errors.totalAmount.message}</span>
           )}
         </div>
 
