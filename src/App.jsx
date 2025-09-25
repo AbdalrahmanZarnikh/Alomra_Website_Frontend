@@ -276,7 +276,7 @@ function App() {
                             checked.الصور ? "" : "print:hidden"
                           }`}
                         >
-                          <div className="grid grid-cols-3 place-items-center ">
+                          <div className="grid grid-cols-3 place-items-center gap-2">
                             {Array.isArray(ele.images) &&
                               ele.images.map((img, i) => (
                                 <Image

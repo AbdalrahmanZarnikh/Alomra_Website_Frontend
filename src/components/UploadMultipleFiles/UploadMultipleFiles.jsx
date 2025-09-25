@@ -50,7 +50,7 @@ const UploadMultipleFiles = ({ form, records }) => {
       >
         <div className="flex flex-col items-center">
           <AiOutlineCloudUpload size={60} />
-          <p>اضغط هنا لإدراج الصور أو ملفات PDF</p>
+          <p>اضغط هنا لإدراج الصور</p>
         </div>
       </div>
 
