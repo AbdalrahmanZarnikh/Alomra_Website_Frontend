@@ -1,6 +1,7 @@
 import { saveAs } from "file-saver";
+import { ArrowDownCircleIcon, DownloadIcon } from "lucide-react";
 
-const DownloadFile = ({ url, name, text = "اضغط لتحميل الملف" }) => {
+const DownloadFile = ({ url, name }) => {
   const handleDownload = async () => {
     try {
       const response = await fetch(url, {
@@ -20,9 +21,9 @@ const DownloadFile = ({ url, name, text = "اضغط لتحميل الملف" }) 
     <div>
       <button
         onClick={handleDownload}
-        className="text-sm bg-white p-2 rounded-lg hover:bg-white/50 cursor-pointer print:hidden"
+        className="text-sm bg-gray-700 text-white p-1 rounded-lg hover:bg-gray-400 cursor-pointer print:hidden"
       >
-        {text}
+        <DownloadIcon/>
       </button>
     </div>
   );

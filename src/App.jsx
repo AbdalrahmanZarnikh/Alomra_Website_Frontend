@@ -231,7 +231,7 @@ function App() {
                         >
                           {ele.totalAmount - ele.paidAmount > 0
                             ? ele.totalAmount - ele.paidAmount
-                            : "—"}
+                            : <p className="text-green-700">تم الدفع</p>}
                         </td>
                         <td
                           className={`p-3 text-center text-gray-800 font-bold ${
@@ -276,7 +276,7 @@ function App() {
                             checked.الصور ? "" : "print:hidden"
                           }`}
                         >
-                          <div className="grid grid-cols-3 place-items-center gap-2">
+                          <div className="grid grid-cols-1 md:grid-cols-4 place-items-center gap-2">
                             {Array.isArray(ele.images) &&
                               ele.images.map((img, i) => (
                                 <Image
