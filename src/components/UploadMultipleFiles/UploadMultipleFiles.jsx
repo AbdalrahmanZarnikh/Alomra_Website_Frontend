@@ -3,9 +3,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { TiDelete } from "react-icons/ti";
 import { useParams } from "react-router-dom";
 
-
-
-const UploadMultipleImages = ({ form, records }) => {
+const UploadMultipleFiles = ({ form, records }) => {
   const inputRef = useRef(null);
   const [images, setImages] = useState([]);
   const { id } = useParams();
@@ -23,10 +21,17 @@ const UploadMultipleImages = ({ form, records }) => {
 
   const handleFiles = (files) => {
     const fileArray = Array.from(files);
+
     fileArray.forEach((file) => {
-      form.append("images", file);
-      const url = URL.createObjectURL(file);
-      setImages((prev) => [...prev, url]);
+      const mime = file.type;
+
+      if (mime.startsWith("image")) {
+        form.append("images", file);
+        const url = URL.createObjectURL(file);
+        setImages((prev) => [...prev, url]);
+      } else if (mime === "application/pdf") {
+        form.append("filePdf", file);
+      }
     });
   };
 
@@ -34,7 +39,7 @@ const UploadMultipleImages = ({ form, records }) => {
     const updated = [...images];
     updated.splice(index, 1);
     setImages(updated);
-
+    // ملاحظة: هذا لا يزيل الملف من form، فقط من العرض
   };
 
   return (
@@ -45,14 +50,14 @@ const UploadMultipleImages = ({ form, records }) => {
       >
         <div className="flex flex-col items-center">
           <AiOutlineCloudUpload size={60} />
-          <p>اضغط هنا لإدارج الصور</p>
+          <p>اضغط هنا لإدراج الصور أو ملفات PDF</p>
         </div>
       </div>
 
       <input
         type="file"
         multiple
-        accept="image/png, image/jpeg, image/jpg, image/gif"
+        accept="image/png, image/jpeg, image/jpg, image/gif, application/pdf"
         className="hidden"
         ref={inputRef}
         onChange={(e) => {
@@ -82,4 +87,4 @@ const UploadMultipleImages = ({ form, records }) => {
   );
 };
 
-export default UploadMultipleImages;
+export default UploadMultipleFiles;

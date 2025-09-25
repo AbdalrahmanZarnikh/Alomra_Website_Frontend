@@ -9,6 +9,8 @@ const createUser = createAsyncThunk(
     try {
       const res = await axios.post("/api/users",data);
 
+      console.log(res.data)
+
       return res.data;
     } catch (error) {
       toast.error(error.response.data.message);

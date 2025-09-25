@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import UploadMultipleImages from "../UploadMultipleImages/UploadMultipleImages";
 import "./Forms.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { createUser, updateUser } from "../../redux/slice/user/userSlice";
 import { getOmras } from "../../redux/slice/category/omraSlice";
+import UploadMultipleFiles from "../UploadMultipleFiles/UploadMultipleFiles";
 const Form = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -223,8 +223,9 @@ const Form = () => {
           )}
         </div>
 
-        <UploadMultipleImages form={form} records={data} />
+        <UploadMultipleFiles form={form} records={data} />
 
+ 
         <button type="submit" className="submit-button m-auto cursor-pointer">
           {typeof id == "string" ? "تعديل" : "تسجيل"}
           {isLoading == "Pending" && "....."}
