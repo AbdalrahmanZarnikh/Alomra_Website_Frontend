@@ -172,7 +172,7 @@ const Form = () => {
               </option>
             ))}
           </select>
-          {errors.omra && (
+          {errors.safar && (
             <span className="text-red-400">{errors.safar.message}</span>
           )}
         </div>

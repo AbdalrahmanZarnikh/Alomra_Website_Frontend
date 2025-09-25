@@ -1,12 +1,15 @@
 import { saveAs } from "file-saver";
 
-const DownloadFile = ({ url, name, text = "اضغط لتحميل الصورة" }) => {
+const DownloadFile = ({ url, name, text = "اضغط لتحميل الملف" }) => {
   const handleDownload = async () => {
     try {
-      const response = await fetch(url, { mode: "cors" });
+      const response = await fetch(url, {
+        mode: "cors",
+      });
+
       if (!response.ok) throw new Error("فشل التحميل");
 
-      const blob = await response.blob();
+      const blob = await response.blob(); // نحصل على النوع الحقيقي من السيرفر
       saveAs(blob, name);
     } catch (error) {
       console.error("خطأ أثناء التحميل:", error);

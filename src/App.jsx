@@ -8,7 +8,6 @@ import loading from "./utils/loading.json";
 import { useNavigate } from "react-router-dom";
 import Image from "./components/Image/Image";
 import PopUp from "./components/PopUp/PopUp";
-import FilePdf from "./components/FilePdf/FilePdf";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,7 +42,6 @@ function App() {
     "حالة الجواز": false,
     السفر: true,
     الصور: false,
-    pdf: false,
   });
 
   const headTable = [
@@ -56,7 +54,6 @@ function App() {
     "حالة الجواز",
     "السفر",
     "الصور",
-    "pdf",
   ];
 
   const keywords = [
@@ -82,8 +79,6 @@ function App() {
       setOmra(omras[0]?.name);
     }
   }, [omras]);
-
-  console.log(data)
 
   return (
     <>
@@ -281,7 +276,7 @@ function App() {
                             checked.الصور ? "" : "print:hidden"
                           }`}
                         >
-                          <div className="flex flex-wrap gap-2 justify-center">
+                          <div className="grid grid-cols-3 place-items-center ">
                             {Array.isArray(ele.images) &&
                               ele.images.map((img, i) => (
                                 <Image
@@ -293,22 +288,6 @@ function App() {
                           </div>
                         </td>
 
-                        <td
-                          className={`p-3 text-center ${
-                            checked.pdf ? "" : "print:hidden"
-                          }`}
-                        >
-                          <div className="flex flex-wrap gap-2 justify-end">
-                            {Array.isArray(ele.filePdf) &&
-                              ele.filePdf.map((file, i) => (
-                                <FilePdf
-                                  key={i}
-                                  url={file.url}
-                                  name={`${ele.name} ${i + 1}`}
-                                />
-                              ))}
-                          </div>
-                        </td>
                         <td className="p-3 print:hidden">
                           <div className="flex gap-2 justify-end flex-wrap">
                             <button
