@@ -105,10 +105,12 @@ function App() {
           {/* Start Head Section  */}
 
           <h1 className="flex justify-center mb-7 text-4xl">
-            عمرة{" "}
+            عمرة
             <span className="mx-2  text-[#FF8D4C]/90 font-bold">{omra}</span>
           </h1>
           {/* End Head Section  */}
+
+          {/* Save Or Print Table */}
 
           <h1
             className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
@@ -116,6 +118,8 @@ function App() {
           >
             حفظ القائمة كملف PDF
           </h1>
+
+          {/* Save Or Print Table */}
 
           {/* Start Table */}
 
