@@ -229,9 +229,11 @@ function App() {
                             checked["المبلغ المتبقي"] ? "" : "print:hidden"
                           } text-red-700`}
                         >
-                          {ele.totalAmount - ele.paidAmount > 0
-                            ? ele.totalAmount - ele.paidAmount
-                            : <p className="text-green-700">تم الدفع</p>}
+                          {ele.totalAmount - ele.paidAmount > 0 ? (
+                            ele.totalAmount - ele.paidAmount
+                          ) : (
+                            <p className="text-green-700">تم الدفع</p>
+                          )}
                         </td>
                         <td
                           className={`p-3 text-center text-gray-800 font-bold ${
@@ -291,14 +293,14 @@ function App() {
                         <td className="p-3 print:hidden">
                           <div className="flex gap-2 justify-end flex-wrap">
                             <button
-                              className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-400 text-xs md:text-sm"
+                              className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-400 text-xs md:text-sm cursor-pointer"
                               onClick={() => navigate(`/edit-user/${ele._id}`)}
                             >
                               تعديل
                             </button>
                             <button
                               onClick={() => CheckPass(ele._id)}
-                              className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-400 text-xs md:text-sm"
+                              className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-400 text-xs md:text-sm cursor-pointer"
                             >
                               حذف
                             </button>
