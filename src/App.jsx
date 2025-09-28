@@ -31,14 +31,14 @@ function App() {
   }, [dispatch]);
 
   const [checked, setChecked] = useState({
-    الاسم: true,
+    "الاسم": true,
     "رقم الجوال": true,
-    المبلغ: true,
-    الغرفة: true,
-    ملاحظات: true,
+    "المبلغ": true,
+    "الغرفة": true,
+    "ملاحظات": true,
     "حالة الجواز": false,
-    السفر: true,
-    الصور: false,
+    "السفر": true,
+    "الصور": false,
   });
 
   const headTable = [
