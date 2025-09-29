@@ -10,8 +10,13 @@ import "../Form/Forms.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import PopUp from "../PopUp/PopUp";
+import Field from "../Field/Field";
+import ButtonFrom from "../ButtonForm/ButtonFrom";
+import { useParams } from "react-router-dom";
 const FormOmra = () => {
   const dispatch = useDispatch();
+
+  const { id } = useParams();
 
   const { omras, isLoading } = useSelector((state) => state.omraSlice);
   const {
@@ -41,7 +46,6 @@ const FormOmra = () => {
     setNewId(id);
   };
 
-
   return (
     <div className="p-10">
       <PopUp
@@ -58,23 +62,16 @@ const FormOmra = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* Form Fields */}
-        <div className="form-group">
-          <label htmlFor="Name">الاسم </label>
-          <input
-            id="Name"
-            type="text"
-            placeholder="ادخل اسم ..."
-            {...register("name", { required: "The Name is Required" })}
-          />
-          {errors.name && (
-            <span className="text-red-400">{errors.name.message}</span>
-          )}
-        </div>
+        <Field
+          label={"الاسم"}
+          type={"text"}
+          register={register}
+          errors={errors.name}
+          placeholder={"ادخل اسم"}
+          nameInDocument={"name"}
+        />
 
-        <button type="submit" className="submit-button m-auto cursor-pointer">
-          {typeof id == "string" ? "تعديل" : "اضافة"}
-          {isLoading === "Pending" ? "..." : ""}
-        </button>
+        <ButtonFrom id={id} isLoading={isLoading} />
       </form>
 
       {omras.length > 0 &&

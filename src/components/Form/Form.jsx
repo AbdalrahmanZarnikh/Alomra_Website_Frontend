@@ -6,6 +6,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { createUser, updateUser } from "../../redux/slice/user/userSlice";
 import { getOmras } from "../../redux/slice/category/omraSlice";
 import UploadMultipleFiles from "../UploadMultipleFiles/UploadMultipleFiles";
+import Field from "../Field/Field";
+import ButtonFrom from "../ButtonForm/ButtonFrom";
+import FieldSelector from "../FieldSelector/FieldSelector";
+import FieldCheckbox from "../FieldCheckbox/FieldCheckbox";
+import ButtonReverse from "../ButtonReverse/ButtonReverse";
 const Form = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -21,12 +26,98 @@ const Form = () => {
     defaultValues: {},
   });
 
-  const { data, isLoading, error } = useSelector((state) => state.userSlice);
+  const { data, isLoading } = useSelector((state) => state.userSlice);
   const { omras } = useSelector((state) => state.omraSlice);
   const isUpdateMode = typeof id === "string";
 
   const typeSafar = ["جواً", "براً"];
 
+  const contentFormFilds = [
+    {
+      type: "text",
+      label: "الاسم",
+      placeholder: "ادخل اسم",
+      register: register,
+      required: true,
+      errors: errors.name,
+      nameInDocument: "name",
+    },
+    {
+      type: "text",
+      label: "رقم الجوّال",
+      placeholder: "ادخل رقم الجوّال",
+      register: register,
+      required: false,
+      errors: errors.phone,
+      nameInDocument: "phone",
+    },
+    {
+      type: "number",
+      label: "المبلغ",
+      placeholder: "ادخل المبلغ المدفوع",
+      register: register,
+      required: false,
+      errors: errors.paidAmount,
+      nameInDocument: "paidAmount",
+    },
+    {
+      type: "number",
+      label: "التكلفة الإجمالية",
+      placeholder: "ادخل التكلفة الإجمالية",
+      register: register,
+      required: false,
+      errors: errors.totalAmount,
+      nameInDocument: "totalAmount",
+    },
+    {
+      type: "text",
+      label: "ملاحظات",
+      placeholder: "ادخل  ملاحظاتك",
+      register: register,
+      required: false,
+      errors: errors.details,
+      nameInDocument: "details",
+    },
+    {
+      type: "text",
+      label: "الغرفة",
+      placeholder: "ادخل  الغرفة",
+      register: register,
+      required: false,
+      errors: errors.room,
+      nameInDocument: "room",
+    },
+  ];
+
+  const contentFormFieldsSelector = [
+    {
+      data: omras,
+      label: "العمرة",
+      register: register,
+      required: true,
+      option: "اختر شهر العمرة",
+      errors: errors.omra,
+      nameInDocument: "omra",
+    },
+    {
+      data: typeSafar,
+      label: "السفر",
+      register: register,
+      required: true,
+      option: "اختر طريقة السفر",
+      errors: errors.safar,
+      nameInDocument: "safar",
+    },
+  ];
+  const contentFormFieldsCheckBox = [
+    {
+      labelOne: "تسليم الجواز",
+      labelTwo: "هل تم تسليم الجواز ؟",
+      register: register,
+      nameInDocument: "taslim",
+      errors: errors.taslim,
+    },
+  ];
   useEffect(() => {
     dispatch(getOmras());
 
@@ -71,165 +162,57 @@ const Form = () => {
     dispatch(action).then(() => {
       navigate("/");
     });
-
-    console.log(data);
   };
   return (
     <div className="p-10">
-      <div
-        className="mb-4  bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        رجوع
-      </div>
+      <ButtonReverse text={"رجوع"} />
 
       <form className="student-form-form" onSubmit={handleSubmit(onSubmit)}>
         {/* Form Fields */}
-        <div className="form-group">
-          <label htmlFor="Name">الاسم </label>
-          <input
-            id="Name"
-            type="text"
-            placeholder="ادخل اسم ..."
-            {...register("name", { required: "يرجى ادخال اسم " })}
-          />
-          {errors.name && (
-            <span className="text-red-400">{errors.name.message}</span>
-          )}
-        </div>
 
-        <div className="form-group">
-          <label htmlFor="Phone">رقم الجوّال </label>
-          <input
-            id="Phone"
-            type="text"
-            placeholder="ادخل رقم الجوّال ..."
-            {...register("phone")}
-          />
-          {errors.phone && (
-            <span className="text-red-400">{errors.phone.message}</span>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="PaidAmount">المبلغ</label>
-          <input
-            id="PaidAmount"
-            type="number"
-            min={"0"}
-            placeholder="ادخل المبلغ المدفوع ..."
-            {...register("paidAmount")}
-          />
-          {errors.paidAmount && (
-            <span className="text-red-400">{errors.paidAmount.message}</span>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="TotalAmount">التكلفة الإجمالية</label>
-          <input
-            id="TotalAmount"
-            type="number"
-            min={"0"}
-            placeholder="ادخل التكلفة الإجمالية  ..."
-            {...register("totalAmount")}
-          />
-          {errors.paidAmount && (
-            <span className="text-red-400">{errors.totalAmount.message}</span>
-          )}
-        </div>
-
-        {omras.length > 0 && (
-          <div className="form-group">
-            <label htmlFor="Omra">العمرة</label>
-            <select
-              id="Omra"
-              {...register("omra", { required: "يرجي تحديد شهر العمرة" })}
-              className="cursor-pointer"
-            >
-              <option value="">اختر شهر العمرة</option>
-              {omras.map((omr) => (
-                <option key={omr._id} value={omr._id}>
-                  {omr.name}
-                </option>
-              ))}
-            </select>
-            {errors.omra && (
-              <span className="text-red-400">{errors.omra.message}</span>
-            )}
-          </div>
-        )}
-
-        <div className="form-group">
-          <label htmlFor="Safar">السفر</label>
-          <select id="Safar" {...register("safar")} className="cursor-pointer">
-            <option value="">اختر طريقة السفر</option>
-            {typeSafar.map((ele) => (
-              <option key={ele} value={ele}>
-                {ele}
-              </option>
-            ))}
-          </select>
-          {errors.safar && (
-            <span className="text-red-400">{errors.safar.message}</span>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="Details">ملاحظات </label>
-          <input
-            id="Details"
-            type="text"
-            placeholder="ادخل ملاحظاتك ..."
-            {...register("details")}
-          />
-          {errors.details && (
-            <span className="text-red-400">{errors.details.message}</span>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="Room">الغرفة </label>
-          <input
-            id="Room"
-            type="text"
-            placeholder="ادخل الغرفة ..."
-            {...register("room")}
-          />
-          {errors.room && (
-            <span className="text-red-400">{errors.room.message}</span>
-          )}
-        </div>
-
-        <div className="form-group flex flex-col gap-2 mb-4">
-          <label htmlFor="Taslim" className="text-lg font-medium text-gray-700">
-            تسليم الجواز
-          </label>
-          <div className="flex items-center gap-3">
-            <input
-              id="Taslim"
-              type="checkbox"
-              {...register("taslim")}
-              className="w-6 h-6 accent-green-600 cursor-pointer"
+        {contentFormFilds.map((ele) => {
+          return (
+            <Field
+              type={ele.type}
+              label={ele.label}
+              placeholder={ele.placeholder}
+              register={ele.register}
+              required={ele.required}
+              errors={ele.errors}
+              nameInDocument={ele.nameInDocument}
             />
-            <span className="text-sm text-gray-600">هل تم تسليم الجواز؟</span>
-          </div>
-          {errors.taslim && (
-            <span className="text-sm text-red-500 mt-1">
-              {errors.taslim.message}
-            </span>
-          )}
-        </div>
+          );
+        })}
+
+        {contentFormFieldsSelector.map((ele) => {
+          return (
+            <FieldSelector
+              data={ele.data}
+              errors={ele.errors}
+              option={ele.option}
+              register={ele.register}
+              label={ele.label}
+              required={ele.required}
+              nameInDocument={ele.nameInDocument}
+            />
+          );
+        })}
+
+        {contentFormFieldsCheckBox.map((ele) => {
+          return (
+            <FieldCheckbox
+              labelOne={ele.labelOne}
+              labelTwo={ele.labelTwo}
+              register={ele.register}
+              nameInDocument={ele.nameInDocument}
+              errors={ele.errors}
+            />
+          );
+        })}
 
         <UploadMultipleFiles form={form} records={data} />
 
- 
-        <button type="submit" className="submit-button m-auto cursor-pointer">
-          {typeof id == "string" ? "تعديل" : "تسجيل"}
-          {isLoading == "Pending" && "....."}
-        </button>
+        <ButtonFrom id={id} isLoading={isLoading} />
       </form>
     </div>
   );
