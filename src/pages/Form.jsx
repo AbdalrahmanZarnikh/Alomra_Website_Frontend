@@ -1,12 +1,13 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import "./Forms.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { createUser, updateUser } from "../../redux/slice/user/userSlice";
-import { getOmras } from "../../redux/slice/category/omraSlice";
-import ButtonReverse from "../ButtonReverse/ButtonReverse";
-import FormLayout from "../FormLayout/FormLayout";
+import { getOmras } from "../redux/slice/category/omraSlice";
+import { createUser, updateUser } from "../redux/slice/user/userSlice";
+import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
+import FormLayout from "../components/FormLayout/FormLayout";
+import { useEffect } from "react";
+// import "../Forms.css"
+
 const Form = () => {
   const dispatch = useDispatch();
   const { id } = useParams();

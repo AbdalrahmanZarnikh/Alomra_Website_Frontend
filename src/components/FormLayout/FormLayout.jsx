@@ -1,4 +1,4 @@
-import React from "react";
+
 import Field from "../FormCommon/Field/Field";
 import FieldSelector from "../FormCommon/FieldSelector/FieldSelector";
 import FieldCheckbox from "../FormCommon/FieldCheckbox/FieldCheckbox";

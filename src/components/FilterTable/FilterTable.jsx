@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const FilterTable = ({ data, setFunction, value }) => {
   return (

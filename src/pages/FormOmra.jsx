@@ -1,17 +1,11 @@
-import { useForm } from "react-hook-form";
-
-import {
-  addOmra,
-  deleteOmra,
-  getOmras,
-} from "../../redux/slice/category/omraSlice";
-
-import "../Form/Forms.css";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import PopUp from "../PopUp/PopUp";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import FormLayout from "../FormLayout/FormLayout";
+import { addOmra, deleteOmra, getOmras } from "../redux/slice/category/omraSlice";
+import PopUp from "../components/PopUp/PopUp";
+import FormLayout from "../components/FormLayout/FormLayout";
+
 const FormOmra = () => {
   const dispatch = useDispatch();
 
