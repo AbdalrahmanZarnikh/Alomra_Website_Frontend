@@ -5,12 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { createUser, updateUser } from "../../redux/slice/user/userSlice";
 import { getOmras } from "../../redux/slice/category/omraSlice";
-import UploadMultipleFiles from "../UploadMultipleFiles/UploadMultipleFiles";
-import Field from "../Field/Field";
-import ButtonFrom from "../ButtonForm/ButtonFrom";
-import FieldSelector from "../FieldSelector/FieldSelector";
-import FieldCheckbox from "../FieldCheckbox/FieldCheckbox";
 import ButtonReverse from "../ButtonReverse/ButtonReverse";
+import FormLayout from "../FormLayout/FormLayout";
 const Form = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -103,7 +99,7 @@ const Form = () => {
       data: typeSafar,
       label: "السفر",
       register: register,
-      required: true,
+      required: false,
       option: "اختر طريقة السفر",
       errors: errors.safar,
       nameInDocument: "safar",
@@ -167,53 +163,17 @@ const Form = () => {
     <div className="p-10">
       <ButtonReverse text={"رجوع"} />
 
-      <form className="student-form-form" onSubmit={handleSubmit(onSubmit)}>
-        {/* Form Fields */}
-
-        {contentFormFilds.map((ele) => {
-          return (
-            <Field
-              type={ele.type}
-              label={ele.label}
-              placeholder={ele.placeholder}
-              register={ele.register}
-              required={ele.required}
-              errors={ele.errors}
-              nameInDocument={ele.nameInDocument}
-            />
-          );
-        })}
-
-        {contentFormFieldsSelector.map((ele) => {
-          return (
-            <FieldSelector
-              data={ele.data}
-              errors={ele.errors}
-              option={ele.option}
-              register={ele.register}
-              label={ele.label}
-              required={ele.required}
-              nameInDocument={ele.nameInDocument}
-            />
-          );
-        })}
-
-        {contentFormFieldsCheckBox.map((ele) => {
-          return (
-            <FieldCheckbox
-              labelOne={ele.labelOne}
-              labelTwo={ele.labelTwo}
-              register={ele.register}
-              nameInDocument={ele.nameInDocument}
-              errors={ele.errors}
-            />
-          );
-        })}
-
-        <UploadMultipleFiles form={form} records={data} />
-
-        <ButtonFrom id={id} isLoading={isLoading} />
-      </form>
+      <FormLayout
+        data={data}
+        id={id}
+        isLoading={isLoading}
+        Submit={handleSubmit(onSubmit)}
+        contentFormFilds={contentFormFilds}
+        contentFormFieldsCheckBox={contentFormFieldsCheckBox}
+        contentFormFieldsSelector={contentFormFieldsSelector}
+        multipleImages={true}
+        form={form}
+      />
     </div>
   );
 };

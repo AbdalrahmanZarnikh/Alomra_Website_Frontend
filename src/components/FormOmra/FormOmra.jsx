@@ -10,9 +10,8 @@ import "../Form/Forms.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import PopUp from "../PopUp/PopUp";
-import Field from "../Field/Field";
-import ButtonFrom from "../ButtonForm/ButtonFrom";
 import { useParams } from "react-router-dom";
+import FormLayout from "../FormLayout/FormLayout";
 const FormOmra = () => {
   const dispatch = useDispatch();
 
@@ -46,6 +45,18 @@ const FormOmra = () => {
     setNewId(id);
   };
 
+  const Fields = [
+    {
+      type: "text",
+      label: "الاسم",
+      placeholder: "ادخل اسم",
+      register: register,
+      required: true,
+      errors: errors.name,
+      nameInDocument: "name",
+    },
+  ];
+
   return (
     <div className="p-10">
       <PopUp
@@ -57,27 +68,17 @@ const FormOmra = () => {
           setShow(false);
         }}
       />
-      <form
-        className="student-form-form mb-5"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        {/* Form Fields */}
-        <Field
-          label={"الاسم"}
-          type={"text"}
-          register={register}
-          errors={errors.name}
-          placeholder={"ادخل اسم"}
-          nameInDocument={"name"}
-        />
-
-        <ButtonFrom id={id} isLoading={isLoading} />
-      </form>
+      <FormLayout
+        id={id}
+        isLoading={isLoading}
+        Submit={handleSubmit(onSubmit)}
+        contentFormFilds={Fields}
+      />
 
       {omras.length > 0 &&
         omras.map((omra) => {
           return (
-            <div className="flex  items-center gap-2 bg-gray-400 w-fit p-2 mb-2 rounded-lg ">
+            <div className="flex  items-center gap-2 bg-gray-400 w-fit p-2 mb-2 rounded-lg mt-5">
               <h1 key={omra._id} className="text-xl">
                 {omra.name}
               </h1>
