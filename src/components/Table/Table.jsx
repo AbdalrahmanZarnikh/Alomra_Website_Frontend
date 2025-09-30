@@ -2,15 +2,21 @@ import { useSelector } from "react-redux";
 import Image from "../Image/Image";
 import { useNavigate } from "react-router-dom";
 
-const Table = ({ Filter , headTable , checked, setChecked , setShow , setNewId , omra }) => {
-
+const Table = ({
+  Filter,
+  headTable,
+  checked,
+  setChecked,
+  setShow,
+  setNewId,
+  omra,
+}) => {
   const navigate = useNavigate();
   const CheckPass = (id) => {
     setShow(true);
     setNewId(id);
   };
-  
-  
+
   const { data } = useSelector((state) => state.userSlice);
 
   return (
@@ -137,6 +143,31 @@ const Table = ({ Filter , headTable , checked, setChecked , setShow , setNewId ,
                     }`}
                   >
                     {ele.safar || "—"}
+                  </td>
+                  <td
+                    className={`p-3 text-center ${
+                      checked["نوع الغرفة"] ? "" : "print:hidden"
+                    }`}
+                  >
+                    {/* {ele.totalAmount == 550
+                      ? "رباعية"
+                      : ele.totalAmount == 625
+                      ? "ثلاثية"
+                      : ele.totalAmount == 675
+                      ? "ثنائية"
+                      : "—"} */}
+
+                    <span
+                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap  ${
+                        ele.roomType == "رباعية"
+                          ? "bg-green-600"
+                          : ele.roomType == "ثلاثية"
+                          ? "bg-blue-600"
+                          : "bg-red-600"
+                      }`}
+                    >
+                      {ele.roomType}
+                    </span>
                   </td>
 
                   <td

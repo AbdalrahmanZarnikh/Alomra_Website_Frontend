@@ -45,6 +45,7 @@ const FormLayout = ({
             label={ele.label}
             required={ele.required}
             nameInDocument={ele.nameInDocument}
+            setFunction={ele.setFunction}
           />
         );
       })}

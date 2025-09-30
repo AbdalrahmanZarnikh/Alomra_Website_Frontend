@@ -5,8 +5,8 @@ import { getOmras } from "../redux/slice/category/omraSlice";
 import { createUser, updateUser } from "../redux/slice/user/userSlice";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 import FormLayout from "../components/FormLayout/FormLayout";
-import { useEffect } from "react";
-// import "../Forms.css"
+import { useEffect, useState } from "react";
+import { typeRoom, typeSafar } from "../constants/data";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const Form = () => {
   const { omras } = useSelector((state) => state.omraSlice);
   const isUpdateMode = typeof id === "string";
 
-  const typeSafar = ["جواً", "براً"];
+  const [total, setTotal] = useState(0);
 
   const contentFormFilds = [
     {
@@ -56,15 +56,6 @@ const Form = () => {
       required: false,
       errors: errors.paidAmount,
       nameInDocument: "paidAmount",
-    },
-    {
-      type: "number",
-      label: "التكلفة الإجمالية",
-      placeholder: "ادخل التكلفة الإجمالية",
-      register: register,
-      required: false,
-      errors: errors.totalAmount,
-      nameInDocument: "totalAmount",
     },
     {
       type: "text",
@@ -105,6 +96,16 @@ const Form = () => {
       errors: errors.safar,
       nameInDocument: "safar",
     },
+    {
+      data: typeRoom,
+      label: "نوع الغرفة",
+      register: register,
+      required: false,
+      option: "اختر نوع الغرفة",
+      errors: errors.roomType,
+      nameInDocument: "roomType",
+      setFunction: setTotal,
+    },
   ];
   const contentFormFieldsCheckBox = [
     {
@@ -115,6 +116,7 @@ const Form = () => {
       errors: errors.taslim,
     },
   ];
+
   useEffect(() => {
     dispatch(getOmras());
 
@@ -129,6 +131,7 @@ const Form = () => {
           totalAmount: found.totalAmount,
           details: found.details,
           room: found.room,
+          roomType: found.roomType,
           omra: found.omra?._id || "",
           safar: found.safar,
         });
@@ -141,12 +144,13 @@ const Form = () => {
   const onSubmit = (data) => {
     form.append("name", data.name);
     form.append("paidAmount", +data.paidAmount);
-    form.append("totalAmount", +data.totalAmount);
+    form.append("totalAmount", +total);
     form.append("phone", data.phone);
     form.append("details", data.details);
     form.append("taslim", data.taslim);
     form.append("safar", data.safar);
     form.append("room", data.room);
+    form.append("roomType", data.roomType);
 
     if (omras.length > 0) {
       form.append("omra", data.omra);
@@ -159,6 +163,8 @@ const Form = () => {
     dispatch(action).then(() => {
       navigate("/");
     });
+
+    console.log(data, total);
   };
   return (
     <div className="p-10">
