@@ -1,16 +1,16 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import Image from "../Image/Image";
 import { useNavigate } from "react-router-dom";
 
-const Table = ({ Filter, headTable, checked, setChecked,setShow,setNewId ,omra }) => {
-  const navigate = useNavigate();
+const Table = ({ Filter , headTable , checked, setChecked , setShow , setNewId , omra }) => {
 
+  const navigate = useNavigate();
   const CheckPass = (id) => {
     setShow(true);
     setNewId(id);
   };
-
+  
+  
   const { data } = useSelector((state) => state.userSlice);
 
   return (
