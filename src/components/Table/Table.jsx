@@ -19,7 +19,7 @@ const Table = ({ Filter, headTable, checked, setChecked,setShow,setNewId ,omra }
         {Filter}
       </h1>
       <div className="container mx-auto overflow-x-auto">
-        <table className="min-w-[1000px] w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
+        <table className=" w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
           <thead className="bg-gray-800 text-white text-sm md:text-base">
             <tr>
               <th className="p-3 text-center">#</th>
