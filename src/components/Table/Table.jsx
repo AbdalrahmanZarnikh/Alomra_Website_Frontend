@@ -149,14 +149,6 @@ const Table = ({
                       checked["نوع الغرفة"] ? "" : "print:hidden"
                     }`}
                   >
-                    {/* {ele.totalAmount == 550
-                      ? "رباعية"
-                      : ele.totalAmount == 625
-                      ? "ثلاثية"
-                      : ele.totalAmount == 675
-                      ? "ثنائية"
-                      : "—"} */}
-
                     <span
                       className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap  ${
                         ele.roomType == "رباعية"
