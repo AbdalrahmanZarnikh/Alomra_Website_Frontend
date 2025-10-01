@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addOmra, deleteOmra, getOmras } from "../redux/slice/category/omraSlice";
+import {
+  addOmra,
+  deleteOmra,
+  getOmras,
+} from "../redux/slice/category/omraSlice";
 import PopUp from "../components/PopUp/PopUp";
 import FormLayout from "../components/FormLayout/FormLayout";
 
@@ -46,8 +50,35 @@ const FormOmra = () => {
       placeholder: "ادخل اسم",
       register: register,
       required: true,
-      errors: errors.name,
+      errors: errors,
       nameInDocument: "name",
+    },
+    {
+      type: "number",
+      label: "الغرفة الثنائية",
+      placeholder: "ادخل تكلفة الغرفة الثنائية",
+      register: register,
+      required: true,
+      errors: errors,
+      nameInDocument: "ثنائية",
+    },
+    {
+      type: "number",
+      label: "الغرفة الثلاثية",
+      placeholder: "ادخل تكلفة الغرفة الثلاثية",
+      register: register,
+      required: true,
+      errors: errors,
+      nameInDocument: "الثلاثية",
+    },
+    {
+      type: "number",
+      label: "الغرفة الرباعية",
+      placeholder: "ادخل تكلفة الغرفة الرباعية",
+      register: register,
+      required: true,
+      errors: errors,
+      nameInDocument: "الرباعية",
     },
   ];
 
