@@ -8,32 +8,11 @@ const FieldSelector = ({
   nameInDocument,
   errors,
   required,
-  setFunction, 
 }) => {
   if (!Array.isArray(data) || data.length === 0) return null;
 
 
-  const {omras}=useSelector((state)=>state.omraSlice)
-
   const validationRules = required ? { required: "يرجى الاختيار" } : {};
-
-  const handleChange = (e) => {
-    const selectedValue = e.target.value;
-
-    const selectedItem = data.find((ele) => {
-      const value =
-        typeof ele === "object" ? ele._id || ele.name || ele.type : ele;
-      return value === selectedValue;
-    });
-
-    if (
-      selectedItem &&
-      typeof setFunction === "function"
-    ) {
-      // setFunction(selectedItem.amount);
-      console.log(selectedItem)
-    }
-  };
 
   return (
     <div className="form-group">
@@ -42,18 +21,11 @@ const FieldSelector = ({
         id={nameInDocument}
         {...register(nameInDocument, validationRules)}
         className="cursor-pointer"
-        onChange={handleChange}
       >
-        <option value="" > {option}</option>
-        {data.map((ele, idx) => {
-          const value =
-            typeof ele === "object"
-              ? ele._id || ele.type 
-              : ele;
-          const label =
-            typeof ele === "object"
-              ? ele.name || ele.type || "خيار"
-              : ele;
+        <option value=""> {option}</option>
+        {data.map((ele) => {
+          const value = typeof ele === "object" ? ele._id : ele;
+          const label = typeof ele === "object" ? ele.name || "خيار" : ele;
 
           return (
             <option key={value} value={value} className="font-bold text-xl">

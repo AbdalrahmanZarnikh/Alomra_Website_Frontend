@@ -27,7 +27,6 @@ const Form = () => {
   const { omras } = useSelector((state) => state.omraSlice);
   const isUpdateMode = typeof id === "string";
 
-  const [total, setTotal] = useState(0);
 
   const contentFormFilds = [
     {
@@ -104,7 +103,6 @@ const Form = () => {
       option: "اختر نوع الغرفة",
       errors: errors,
       nameInDocument: "roomType",
-      setFunction: setTotal,
     },
   ];
   const contentFormFieldsCheckBox = [
