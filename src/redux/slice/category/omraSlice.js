@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import addOmra from "./act/addOmra";
 import getOmras from "./act/getOmras";
 import deleteOmra from "./act/deleteOmra";
+import updateOmra from "./act/updateOmra";
 
 import toast from "react-hot-toast";
 
@@ -26,7 +27,7 @@ const omraSlice = createSlice({
     builder.addCase(getOmras.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.omras = action.payload.data;
+      state.omras = action.payload;
     });
     builder.addCase(getOmras.rejected, (state, action) => {
       state.isLoading = "Fail";
@@ -61,9 +62,26 @@ const omraSlice = createSlice({
       state.error = action.payload;
       toast.error(state.error || "Network Error");
     });
+    builder.addCase(updateOmra.pending, (state) => {
+      state.isLoading = "Pending";
+      state.error = null;
+    });
+    builder.addCase(updateOmra.fulfilled, (state, action) => {
+      state.isLoading = "Success";
+      state.error = null;
+      state.omras = state.omras.map((item) =>
+        item._id === action.payload._id ? action.payload : item
+      );
+    });
+
+    builder.addCase(updateOmra.rejected, (state, action) => {
+      state.isLoading = "Fail";
+      state.error = action.payload;
+      toast.error(state.error || "Network Error");
+    });
   },
 });
 
 export default omraSlice.reducer;
 
-export { addOmra, getOmras ,deleteOmra};
+export { addOmra, getOmras, deleteOmra,updateOmra };

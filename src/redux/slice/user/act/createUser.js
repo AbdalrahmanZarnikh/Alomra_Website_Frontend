@@ -11,7 +11,7 @@ const createUser = createAsyncThunk(
      
       toast.success("تم التسجيل بنجاح")
 
-      return res.data;
+      return res.data.data;
     } catch (error) {
       toast.error(error.response.data.message);
       if (axios.isAxiosError(error)) {

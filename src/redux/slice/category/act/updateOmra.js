@@ -2,15 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../api/configAxios";
 import toast from "react-hot-toast";
 
-const updateUser = createAsyncThunk(
-  "user/updateUser",
+const updateOmra = createAsyncThunk(
+  "omra/updateOmra",
   async (info, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await axios.put(
-        `/api/users/${info.id}`,
-        info.data
-      );
+      const res = await axios.put(`/api/omras/${info.id}`, info.data);
 
       toast.success("تمت العملية بنجاح");
 
@@ -24,4 +21,4 @@ const updateUser = createAsyncThunk(
   }
 );
 
-export default updateUser;
+export default updateOmra;

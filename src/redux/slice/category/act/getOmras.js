@@ -10,7 +10,7 @@ const getOmras = createAsyncThunk(
           "/api/omras"
         );
 
-        return res.data;
+           return res.data.data;
         
       } catch (error) {
         if (axios.isAxiosError(error)) {

@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addOmra,
   deleteOmra,
   getOmras,
+  updateOmra,
 } from "../redux/slice/category/omraSlice";
 import PopUp from "../components/PopUp/PopUp";
 import FormLayout from "../components/FormLayout/FormLayout";
+import { Edit2, Trash2 } from "lucide-react";
+import { FcDeleteColumn } from "react-icons/fc";
 
 const FormOmra = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -29,11 +33,30 @@ const FormOmra = () => {
     dispatch(getOmras());
   }, [dispatch]);
 
+  const isUpdateMode = typeof id === "string";
+  useEffect(() => {
+    if (isUpdateMode && omras.length > 0) {
+      const found = omras.find((item) => item._id === id);
+      if (found) {
+        reset({
+          name: found.name,
+          ثنائية: found.ثنائية,
+          ثلاثية: found.ثلاثية,
+          رباعية: found.رباعية,
+        });
+      }
+    }
+  }, [id, isUpdateMode, omras, reset]);
+
   const [show, setShow] = useState(false);
 
   // Function To Handle Submit
   const onSubmit = async (data) => {
-    await dispatch(addOmra(data));
+    const action = isUpdateMode
+      ? updateOmra({ id: id, data: data })
+      : addOmra(data);
+
+    await dispatch(action);
   };
 
   const [newId, setNewId] = useState("");
@@ -103,17 +126,26 @@ const FormOmra = () => {
       {omras.length > 0 &&
         omras.map((omra) => {
           return (
-            <div className="flex  items-center gap-2 bg-gray-400 w-fit p-2 mb-2 rounded-lg mt-5">
+            <div className="flex   items-center gap-2 bg-gray-200 w-fit p-2 mb-2 rounded-lg mt-5">
               <h1 key={omra._id} className="text-xl">
                 {omra.name}
               </h1>
+
+              <span
+                className="text-blue-600 cursor-pointer hover:text-red-400 "
+                onClick={() => {
+                  navigate(`/edit-omra/${omra._id}`);
+                }}
+              >
+                <Edit2/>
+              </span>
               <span
                 className="text-red-600 cursor-pointer hover:text-red-400"
                 onClick={() => {
                   CheckPass(omra._id);
                 }}
               >
-                X
+              <Trash2/>
               </span>
             </div>
           );

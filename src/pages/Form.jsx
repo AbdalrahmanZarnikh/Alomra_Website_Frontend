@@ -25,8 +25,6 @@ const Form = () => {
 
   const { data, isLoading } = useSelector((state) => state.userSlice);
   const { omras } = useSelector((state) => state.omraSlice);
-  const isUpdateMode = typeof id === "string";
-
 
   const contentFormFilds = [
     {
@@ -115,6 +113,7 @@ const Form = () => {
     },
   ];
 
+  const isUpdateMode = typeof id === "string";
   useEffect(() => {
     dispatch(getOmras());
 

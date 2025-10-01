@@ -14,7 +14,7 @@ const getUsers = createAsyncThunk(
 
 
 
-      return res.data;
+      return res.data.data;
     } catch (error) {
       toast.error(error.response.data.message);
       if (axios.isAxiosError(error)) {

@@ -45,7 +45,7 @@ const userSlice = createSlice({
     builder.addCase(getUsers.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.data = action.payload.data;
+      state.data = action.payload;
     });
     builder.addCase(getUsers.rejected, (state, action) => {
       state.isLoading = "Fail";
@@ -59,7 +59,7 @@ const userSlice = createSlice({
     builder.addCase(getUsersBySearch.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.data = action.payload.data;
+      state.data = action.payload;
     });
     builder.addCase(getUsersBySearch.rejected, (state, action) => {
       state.isLoading = "Fail";

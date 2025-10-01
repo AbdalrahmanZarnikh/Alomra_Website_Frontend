@@ -19,6 +19,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/add-user" element={<Form />} />
         <Route path="/add-omra" element={<FormOmra />} />
         <Route path="/edit-user/:id" element={<Form />} />
+        <Route path="/edit-omra/:id" element={<FormOmra />} />
       </Routes>
     </Provider>
   </BrowserRouter>
