@@ -10,8 +10,8 @@ const Field = ({label,type,register,errors,placeholder,nameInDocument ,required}
         placeholder={` ${placeholder} ...`}
         {...register(nameInDocument, required && { required: `هذا الحقل مطلوب` })}
       />
-      {errors && (
-        <span className="text-red-400">{errors.message}</span>
+      {errors?.[nameInDocument] && (
+        <span className="text-red-400">{errors[nameInDocument].message}</span>
       )}
     </div>
   );

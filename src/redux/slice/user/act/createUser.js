@@ -8,8 +8,8 @@ const createUser = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const res = await axios.post("/api/users",data);
-
-      console.log(res.data)
+     
+      toast.success("تم التسجيل بنجاح")
 
       return res.data;
     } catch (error) {

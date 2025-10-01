@@ -36,7 +36,7 @@ const Form = () => {
       placeholder: "ادخل اسم",
       register: register,
       required: true,
-      errors: errors.name,
+      errors: errors,
       nameInDocument: "name",
     },
     {
@@ -45,7 +45,7 @@ const Form = () => {
       placeholder: "ادخل رقم الجوّال",
       register: register,
       required: false,
-      errors: errors.phone,
+      errors: errors,
       nameInDocument: "phone",
     },
     {
@@ -54,7 +54,7 @@ const Form = () => {
       placeholder: "ادخل المبلغ المدفوع",
       register: register,
       required: false,
-      errors: errors.paidAmount,
+      errors: errors,
       nameInDocument: "paidAmount",
     },
     {
@@ -63,7 +63,7 @@ const Form = () => {
       placeholder: "ادخل  ملاحظاتك",
       register: register,
       required: false,
-      errors: errors.details,
+      errors: errors,
       nameInDocument: "details",
     },
     {
@@ -72,7 +72,7 @@ const Form = () => {
       placeholder: "ادخل  الغرفة",
       register: register,
       required: false,
-      errors: errors.room,
+      errors: errors,
       nameInDocument: "room",
     },
   ];
@@ -84,7 +84,7 @@ const Form = () => {
       register: register,
       required: true,
       option: "اختر شهر العمرة",
-      errors: errors.omra,
+      errors: errors,
       nameInDocument: "omra",
     },
     {
@@ -93,7 +93,7 @@ const Form = () => {
       register: register,
       required: false,
       option: "اختر طريقة السفر",
-      errors: errors.safar,
+      errors: errors,
       nameInDocument: "safar",
     },
     {
@@ -102,7 +102,7 @@ const Form = () => {
       register: register,
       required: false,
       option: "اختر نوع الغرفة",
-      errors: errors.roomType,
+      errors: errors,
       nameInDocument: "roomType",
       setFunction: setTotal,
     },
@@ -113,7 +113,7 @@ const Form = () => {
       labelTwo: "هل تم تسليم الجواز ؟",
       register: register,
       nameInDocument: "taslim",
-      errors: errors.taslim,
+      errors: errors,
     },
   ];
 

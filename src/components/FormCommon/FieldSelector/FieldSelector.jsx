@@ -1,3 +1,4 @@
+
 const FieldSelector = ({
   data,
   label,
@@ -40,7 +41,7 @@ const FieldSelector = ({
         className="cursor-pointer"
         onChange={handleChange}
       >
-        <option value="">{option}</option>
+        <option value="" > {option}</option>
         {data.map((ele, idx) => {
           const value =
             typeof ele === "object"
@@ -52,7 +53,7 @@ const FieldSelector = ({
               : ele;
 
           return (
-            <option key={value} value={value}>
+            <option key={value} value={value} className="font-bold text-xl">
               {label}
             </option>
           );

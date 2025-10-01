@@ -11,7 +11,6 @@ const getUsersBySearch = createAsyncThunk(
         `/api/users?keyword=${search}`
       );
 
-       toast.success("تمت العملية بنجاح")
 
 
 

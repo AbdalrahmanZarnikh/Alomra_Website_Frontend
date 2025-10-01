@@ -17,7 +17,7 @@ const FieldCheckbox = ({labelOne,labelTwo,register,errors,nameInDocument}) => {
       </div>
       {errors && (
         <span className="text-sm text-red-500 mt-1">
-          {errors.message}
+          {errors[nameInDocument]?.message}
         </span>
       )}
     </div>

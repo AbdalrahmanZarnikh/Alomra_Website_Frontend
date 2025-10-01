@@ -11,7 +11,6 @@ const getUsers = createAsyncThunk(
         "/api/users?sort=createdAt"
       );
 
-       toast.success("تمت العملية بنجاح")
 
 
 

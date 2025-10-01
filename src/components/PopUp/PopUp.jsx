@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const PopUp = ({ msg, id, thunk, showVar,onClose }) => {
 
   const dispatch=useDispatch()
   const [pass, setPass] = useState("");
+  const {data}=useSelector((state)=>state.userSlice)
 
 
 
   const handleDelete = async () => {
+    const found = data.find((item) => item._id === id);
     if (pass == "3415") {
       await dispatch(thunk(id));
+      if(found){
+        toast.success(`تم حذف بيانات ${found.name}`)
+      }
+      else{
+        toast.success(`تم حذف العمرة بنجاح`)
+      }
+      
       onClose();
     } else {
-      alert("الرمز السري خاطئ");
+      toast.error("الرمز السري خاطئ");
     }
   };
 
