@@ -12,6 +12,7 @@ import PopUp from "../components/PopUp/PopUp";
 import FormLayout from "../components/FormLayout/FormLayout";
 import { Edit2, Trash2 } from "lucide-react";
 import { FcDeleteColumn } from "react-icons/fc";
+import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 
 const FormOmra = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,12 @@ const FormOmra = () => {
     formState: { errors },
     reset,
   } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      name: "",
+      ثنائية: "",
+      ثلاثية: "",
+      رباعية: "",
+    },
   });
 
   useEffect(() => {
@@ -34,7 +40,16 @@ const FormOmra = () => {
   }, [dispatch]);
 
   const isUpdateMode = typeof id === "string";
+
   useEffect(() => {
+    if (!isUpdateMode) {
+      reset({
+        name: "",
+        ثنائية: "",
+        ثلاثية: "",
+        رباعية: "",
+      });
+    }
     if (isUpdateMode && omras.length > 0) {
       const found = omras.find((item) => item._id === id);
       if (found) {
@@ -116,6 +131,10 @@ const FormOmra = () => {
           setShow(false);
         }}
       />
+      {isUpdateMode && (
+        <ButtonReverse text={"العودة لإنشاء عمرة "} to={"/add-omra"} />
+      )}
+
       <FormLayout
         id={id}
         isLoading={isLoading}
@@ -137,7 +156,7 @@ const FormOmra = () => {
                   navigate(`/edit-omra/${omra._id}`);
                 }}
               >
-                <Edit2/>
+                <Edit2 />
               </span>
               <span
                 className="text-red-600 cursor-pointer hover:text-red-400"
@@ -145,7 +164,7 @@ const FormOmra = () => {
                   CheckPass(omra._id);
                 }}
               >
-              <Trash2/>
+                <Trash2 />
               </span>
             </div>
           );
