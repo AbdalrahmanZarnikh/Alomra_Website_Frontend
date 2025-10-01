@@ -144,7 +144,9 @@ const Form = () => {
   const onSubmit = (data) => {
     form.append("name", data.name);
     form.append("paidAmount", +data.paidAmount);
-    form.append("totalAmount", +total);
+    if (!isUpdateMode) {
+      form.append("totalAmount", +total);
+    }
     form.append("phone", data.phone);
     form.append("details", data.details);
     form.append("taslim", data.taslim);

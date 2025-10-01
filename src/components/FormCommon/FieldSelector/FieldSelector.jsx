@@ -45,11 +45,11 @@ const FieldSelector = ({
         {data.map((ele, idx) => {
           const value =
             typeof ele === "object"
-              ? ele._id || ele.name || ele.type || idx
+              ? ele._id || ele.type 
               : ele;
           const label =
             typeof ele === "object"
-              ? ele.name || ele._id || ele.type || "خيار"
+              ? ele.name || ele.type || "خيار"
               : ele;
 
           return (
