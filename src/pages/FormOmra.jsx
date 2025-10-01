@@ -47,7 +47,7 @@ const FormOmra = () => {
     {
       type: "text",
       label: "الاسم",
-      placeholder: "ادخل اسم",
+      placeholder: "ادخل اسم للعمرة",
       register: register,
       required: true,
       errors: errors,
@@ -60,7 +60,7 @@ const FormOmra = () => {
       register: register,
       required: true,
       errors: errors,
-      nameInDocument: "ثنائية",
+      nameInDocument: "الثنائية",
     },
     {
       type: "number",
