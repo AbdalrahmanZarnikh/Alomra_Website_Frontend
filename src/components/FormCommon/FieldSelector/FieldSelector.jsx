@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 
 const FieldSelector = ({
   data,
@@ -10,6 +11,9 @@ const FieldSelector = ({
   setFunction, 
 }) => {
   if (!Array.isArray(data) || data.length === 0) return null;
+
+
+  const {omras}=useSelector((state)=>state.omraSlice)
 
   const validationRules = required ? { required: "يرجى الاختيار" } : {};
 
@@ -24,11 +28,10 @@ const FieldSelector = ({
 
     if (
       selectedItem &&
-      typeof selectedItem === "object" &&
-      selectedItem.type &&
       typeof setFunction === "function"
     ) {
-      setFunction(selectedItem.amount);
+      // setFunction(selectedItem.amount);
+      console.log(selectedItem)
     }
   };
 

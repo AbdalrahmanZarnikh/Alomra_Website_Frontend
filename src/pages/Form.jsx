@@ -144,9 +144,6 @@ const Form = () => {
   const onSubmit = (data) => {
     form.append("name", data.name);
     form.append("paidAmount", +data.paidAmount);
-    if (!isUpdateMode) {
-      form.append("totalAmount", +total);
-    }
     form.append("phone", data.phone);
     form.append("details", data.details);
     form.append("taslim", data.taslim);
@@ -156,6 +153,8 @@ const Form = () => {
 
     if (omras.length > 0) {
       form.append("omra", data.omra);
+      const found = omras.find((item) => item._id === data.omra);
+      form.append("totalAmount", found[data.roomType]);
     }
 
     const action = isUpdateMode
@@ -165,8 +164,6 @@ const Form = () => {
     dispatch(action).then(() => {
       navigate("/");
     });
-
-    console.log(data, total);
   };
   return (
     <div className="p-10">

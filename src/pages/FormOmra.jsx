@@ -60,7 +60,7 @@ const FormOmra = () => {
       register: register,
       required: true,
       errors: errors,
-      nameInDocument: "الثنائية",
+      nameInDocument: "ثنائية",
     },
     {
       type: "number",
@@ -69,7 +69,7 @@ const FormOmra = () => {
       register: register,
       required: true,
       errors: errors,
-      nameInDocument: "الثلاثية",
+      nameInDocument: "ثلاثية",
     },
     {
       type: "number",
@@ -78,7 +78,7 @@ const FormOmra = () => {
       register: register,
       required: true,
       errors: errors,
-      nameInDocument: "الرباعية",
+      nameInDocument: "رباعية",
     },
   ];
 
