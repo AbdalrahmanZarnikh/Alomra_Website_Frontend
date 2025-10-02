@@ -97,7 +97,7 @@ const Header = () => {
         to={"/add-user"}
         className="md:hidden bg-white rounded-lg p-4 text-centerة m-2 hover:bg-white/50 hover:text-white cursor-pointer text-sm font-bold"
       >
-        أضف معمترين
+        أضف معتمرين
       </Link>
     </div>
   );
