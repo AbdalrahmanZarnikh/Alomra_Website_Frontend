@@ -68,7 +68,7 @@ const FormLayout = ({
         {multipleImages && <UploadMultipleFiles form={form} records={data} />}
 
         <ButtonFrom id={id} isLoading={isLoading} />
-        {total > 0 && <h1 className="m-auto font-bold">التكلفة الإجمالية : <span className="text-red-600 font-bold text-xl">{total}</span></h1>}
+        {total > 0 && <h1 className="m-auto font-bold">التكلفة الإجمالية : <span className="text-red-600 font-bold text-xl">{total} </span>$</h1>}
       </form>
     </>
   );
