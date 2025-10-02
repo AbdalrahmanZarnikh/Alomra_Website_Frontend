@@ -78,7 +78,7 @@ const Header = () => {
         <input
           type="text"
           ref={input}
-          placeholder="ابحث بالاسم أو رقم الهاتف"
+          placeholder="ابحث عن معتمر"
           className="p-4 w-full rounded-lg border border-gray-300 bg-white text-[10px] md:text-lg text-center"
           onChange={(e) => {
             handleSearch(e);
