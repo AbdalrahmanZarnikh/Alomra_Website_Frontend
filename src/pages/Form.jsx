@@ -19,6 +19,7 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     defaultValues: {},
   });
@@ -132,9 +133,25 @@ const Form = () => {
           omra: found.omra?._id || "",
           safar: found.safar,
         });
+
+        const omraFound = omras.find((item) => item._id === found.omra?._id);
+        if (omraFound && found.roomType) {
+          setTotal(omraFound[found.roomType]);
+        }
       }
     }
-  }, [id, isUpdateMode, data, reset]);
+  }, [id, isUpdateMode, data, reset, omras]);
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      const found = omras.find((item) => item._id === value.omra);
+      setTotal(found[value.roomType]);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  const [total, setTotal] = useState(0);
 
   // Function To Handle Submit
   const form = new FormData();
@@ -176,6 +193,7 @@ const Form = () => {
         contentFormFieldsSelector={contentFormFieldsSelector}
         multipleImages={true}
         form={form}
+        total={total}
       />
     </div>
   );
