@@ -164,6 +164,18 @@ const Table = ({
 
                   <td
                     className={`p-3 text-center ${
+                      checked["التكلفة الإجمالية"] ? "" : "print:hidden"
+                    }`}
+                  >
+                    <span
+                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-zinc-700`}
+                    >
+                      {ele.totalAmount}
+                    </span>
+                  </td>
+
+                  <td
+                    className={`p-3 text-center ${
                       checked.الصور ? "" : "print:hidden"
                     }`}
                   >
