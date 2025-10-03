@@ -16,7 +16,7 @@ const CardUser = ({
   return (
     <div className="bg-white shadow-md rounded-xl p-4 border border-gray-200 mb-4">
       {/* العنوان + الاسم */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-3 flex-row-reverse">
         <span className="text-red-600 font-bold text-lg">{index + 1}</span>
         <h2 className="text-gray-800 font-bold text-lg">{name}</h2>
       </div>
