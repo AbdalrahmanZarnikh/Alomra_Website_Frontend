@@ -31,7 +31,7 @@ const Table = ({
       </h1>
 
       {/* نسخة الديسكتوب */}
-      <div className="w-full overflow-x-auto hidden md:block">
+      <div className="w-full overflow-x-auto hidden md:block print:block">
         <table className="w-full bg-white rounded-lg shadow-md border border-gray-300 text-right ">
           <thead className="bg-gray-800 text-white text-sm md:text-base">
             <tr>
