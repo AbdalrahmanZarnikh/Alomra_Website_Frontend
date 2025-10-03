@@ -14,6 +14,7 @@ const Table = ({
   omra,
 }) => {
   const navigate = useNavigate();
+  
   const CheckPass = (id) => {
     setShow(true);
     setNewId(id);
