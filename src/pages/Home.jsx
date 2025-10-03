@@ -110,7 +110,7 @@ function Home() {
 
           {/* Start Head Section  */}
 
-          <h1 className="flex justify-center mb-7 text-4xl">
+          <h1 className="flex justify-center mb-7 text-3xl md:text-4xl ">
             عمرة
             <span className="mx-2  text-[#FF8D4C]/90 font-bold">{omra}</span>
           </h1>
