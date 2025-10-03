@@ -220,7 +220,7 @@ const Table = ({
 
       {/* نسخة الموبايل: كروت */}
       <div className="grid gap-4 md:hidden">
-        <div className="relative inline-block text-left">
+        <div className="relative inline-block text-right">
           <button
             type="button"
             className="inline-flex justify-between w-64 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
