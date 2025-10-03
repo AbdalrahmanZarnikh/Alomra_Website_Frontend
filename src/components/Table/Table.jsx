@@ -168,7 +168,7 @@ const Table = ({
                     }`}
                   >
                     <span
-                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-zinc-700`}
+                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-orange-500`}
                     >
                       {ele.totalAmount}
                     </span>
