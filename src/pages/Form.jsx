@@ -115,9 +115,12 @@ const Form = () => {
   ];
 
   const isUpdateMode = typeof id === "string";
-  useEffect(() => {
-    dispatch(getOmras());
 
+  useEffect(()=>{
+    dispatch(getOmras());
+  },[])
+
+  useEffect(() => {
     if (isUpdateMode && data.length > 0) {
       const found = data.find((item) => item._id === id);
       if (found) {
@@ -134,22 +137,29 @@ const Form = () => {
           safar: found.safar,
         });
 
-        const omraFound = omras.find((item) => item._id === found.omra?._id);
-        if (omraFound && found.roomType) {
-          setTotal(omraFound[found.roomType]);
-        }
+        // const omraFound = omras.find((item) => item._id === found.omra?._id);
+        // if (omraFound && found.roomType) {
+        //   setTotal(omraFound[found.roomType]);
+        // }
       }
     }
-  }, [id, isUpdateMode, data, reset, omras]);
+  }, [id, isUpdateMode, reset, omras,data]);
+
+
+
 
   useEffect(() => {
     const subscription = watch((value) => {
-      const found = omras.find((item) => item._id === value.omra);
-      setTotal(found[value.roomType]);
+      const foundOmra = omras.find((item) => item._id === value.omra);
+      if (foundOmra && value.roomType) {
+        setTotal(foundOmra[value.roomType]);
+      } else {
+        setTotal(0);
+      }
     });
 
     return () => subscription.unsubscribe();
-  }, [watch]);
+  }, [watch, omras]);
 
   const [total, setTotal] = useState(0);
 
