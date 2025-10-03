@@ -22,7 +22,6 @@ const Table = ({
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-
   const { data } = useSelector((state) => state.userSlice);
 
   return (
@@ -30,20 +29,20 @@ const Table = ({
       <h1 className="flex justify-center items-center mb-5 text-5xl text-[#FF8D4C]/90">
         {Filter}
       </h1>
-      <div className="w-full overflow-x-auto hidden md:block ">
-        <table className=" w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
+
+      {/* نسخة الديسكتوب */}
+      <div className="w-full overflow-x-auto hidden md:block">
+        <table className="w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
           <thead className="bg-gray-800 text-white text-sm md:text-base">
             <tr>
               <th className="p-3 text-center">#</th>
               {headTable.map((head, index) => (
                 <th
                   key={index}
-                  className={`p-3 text-center ${
-                    checked[head] ? "" : "print:hidden"
-                  }`}
+                  className={`p-3 text-center ${!checked[head] && "print:hidden"}`}
                 >
                   <div className="flex justify-center items-center gap-1">
-                    <span className="">{head}</span>
+                    <span>{head}</span>
                     <input
                       type="checkbox"
                       className="print:hidden w-5 h-5 accent-green-600 cursor-pointer"
@@ -61,18 +60,15 @@ const Table = ({
               <th className="p-3 text-center print:hidden">التحكم</th>
             </tr>
           </thead>
+
           <tbody className="text-sm md:text-base bg-yellow-50">
             {data
               ?.filter((ele) => ele.omra?.name === omra)
               .filter((ele) => {
-                if (
-                  Filter !== "الكل" &&
-                  Filter !== "جواً" &&
-                  Filter != "براً"
-                ) {
-                  return ele.room == Filter;
-                } else if (Filter == "براً" || Filter == "جواً") {
-                  return ele.safar == Filter;
+                if (Filter !== "الكل" && Filter !== "جواً" && Filter !== "براً") {
+                  return ele.room === Filter;
+                } else if (Filter === "براً" || Filter === "جواً") {
+                  return ele.safar === Filter;
                 } else {
                   return ele;
                 }
@@ -83,31 +79,29 @@ const Table = ({
                   className="border-t border-gray-500 hover:bg-yellow-100 transition"
                 >
                   <td className="p-3 text-center font-bold">{index + 1}</td>
-                  <td
-                    className={`p-3 text-center ${
-                      checked.الاسم ? "" : "print:hidden"
-                    }`}
-                  >
+
+                  <td className={`p-3 text-center ${!checked.الاسم && "print:hidden"}`}>
                     {ele.name}
                   </td>
+
                   <td
-                    className={`p-3 text-center ${
-                      checked["رقم الجوال"] ? "" : "print:hidden"
-                    }`}
+                    className={`p-3 text-center ${!checked["رقم الجوال"] && "print:hidden"}`}
                   >
                     {ele.phone || "—"}
                   </td>
+
                   <td
-                    className={`p-3 text-center ${
-                      checked["المبلغ المدفوع"] ? "" : "print:hidden"
-                    } text-green-700`}
+                    className={`p-3 text-center text-green-700 ${
+                      !checked["المبلغ المدفوع"] && "print:hidden"
+                    }`}
                   >
                     {ele.paidAmount}
                   </td>
+
                   <td
-                    className={`p-3 text-center ${
-                      checked["المبلغ المتبقي"] ? "" : "print:hidden"
-                    } text-red-700`}
+                    className={`p-3 text-center text-red-700 ${
+                      !checked["المبلغ المتبقي"] && "print:hidden"
+                    }`}
                   >
                     {ele.totalAmount - ele.paidAmount > 0 ? (
                       ele.totalAmount - ele.paidAmount
@@ -115,25 +109,21 @@ const Table = ({
                       <p className="text-green-700">تم الدفع</p>
                     )}
                   </td>
+
                   <td
                     className={`p-3 text-center text-gray-800 font-bold ${
-                      checked.الغرفة ? "" : "print:hidden"
+                      !checked.الغرفة && "print:hidden"
                     }`}
                   >
                     {ele.room || "—"}
                   </td>
 
-                  <td
-                    className={`p-3 text-center ${
-                      checked.ملاحظات ? "" : "print:hidden"
-                    }`}
-                  >
+                  <td className={`p-3 text-center ${!checked.ملاحظات && "print:hidden"}`}>
                     {ele.details || "—"}
                   </td>
+
                   <td
-                    className={`p-3 text-center ${
-                      checked["حالة الجواز"] ? "" : "print:hidden"
-                    }`}
+                    className={`p-3 text-center ${!checked["حالة الجواز"] && "print:hidden"}`}
                   >
                     <span
                       className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
@@ -143,23 +133,21 @@ const Table = ({
                       {ele.taslim ? "تم تسليم الجواز" : "لم يتم تسليم الجواز"}
                     </span>
                   </td>
-                  <td
-                    className={`p-3 text-center ${
-                      checked.السفر ? "" : "print:hidden"
-                    }`}
-                  >
+
+                  <td className={`p-3 text-center ${!checked.السفر && "print:hidden"}`}>
                     {ele.safar || "—"}
                   </td>
+
                   <td
                     className={`p-3 text-center ${
-                      checked["نوع الغرفة"] ? "" : "print:hidden"
+                      !checked["نوع الغرفة"] && "print:hidden"
                     }`}
                   >
                     <span
                       className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap  ${
-                        ele.roomType == "رباعية"
+                        ele.roomType === "رباعية"
                           ? "bg-green-600"
-                          : ele.roomType == "ثلاثية"
+                          : ele.roomType === "ثلاثية"
                           ? "bg-blue-600"
                           : "bg-red-600"
                       }`}
@@ -169,22 +157,14 @@ const Table = ({
                   </td>
 
                   <td
-                    className={`p-3 text-center ${
-                      checked["التكلفة الإجمالية"] ? "" : "print:hidden"
-                    }`}
+                    className={`p-3 text-center ${!checked["التكلفة الإجمالية"] && "print:hidden"}`}
                   >
-                    <span
-                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-yellow-500`}
-                    >
+                    <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-yellow-500">
                       {ele.totalAmount}
                     </span>
                   </td>
 
-                  <td
-                    className={`p-3 text-center ${
-                      checked.الصور ? "" : "print:hidden"
-                    }`}
-                  >
+                  <td className={`p-3 text-center ${!checked.الصور && "print:hidden"}`}>
                     <div className="grid grid-cols-1 md:grid-cols-4 place-items-center gap-2">
                       {Array.isArray(ele.images) &&
                         ele.images.map((img, i) => (
@@ -219,7 +199,7 @@ const Table = ({
         </table>
       </div>
 
-      {/* نسخة الموبايل: كروت */}
+      {/* نسخة الموبايل */}
       <div className="grid gap-4 md:hidden">
         <div className="relative inline-block text-right">
           <button
@@ -227,7 +207,7 @@ const Table = ({
             className="inline-flex justify-between w-64 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-             حدد ماتريد طباعته
+            حدد ماتريد طباعته
             <svg
               className="w-5 h-5 ml-2"
               fill="none"
@@ -273,10 +253,10 @@ const Table = ({
         {data
           ?.filter((ele) => ele.omra?.name === omra)
           .filter((ele) => {
-            if (Filter !== "الكل" && Filter !== "جواً" && Filter != "براً") {
-              return ele.room == Filter;
-            } else if (Filter == "براً" || Filter == "جواً") {
-              return ele.safar == Filter;
+            if (Filter !== "الكل" && Filter !== "جواً" && Filter !== "براً") {
+              return ele.room === Filter;
+            } else if (Filter === "براً" || Filter === "جواً") {
+              return ele.safar === Filter;
             } else {
               return ele;
             }
