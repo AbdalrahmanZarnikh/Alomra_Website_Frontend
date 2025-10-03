@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import Image from "../Image/Image";
 import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
+import { useState } from "react";
 
 const Table = ({
   Filter,
@@ -18,6 +19,9 @@ const Table = ({
     setNewId(id);
   };
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+
   const { data } = useSelector((state) => state.userSlice);
 
   return (
@@ -25,7 +29,7 @@ const Table = ({
       <h1 className="flex justify-center items-center mb-5 text-5xl text-[#FF8D4C]/90">
         {Filter}
       </h1>
-      <div className="container mx-auto overflow-x-auto hidden md:block ">
+      <div className="w-full overflow-x-auto hidden md:block ">
         <table className=" w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
           <thead className="bg-gray-800 text-white text-sm md:text-base">
             <tr>
@@ -216,6 +220,55 @@ const Table = ({
 
       {/* نسخة الموبايل: كروت */}
       <div className="grid gap-4 md:hidden">
+        <div className="relative inline-block text-left">
+          <button
+            type="button"
+            className="inline-flex justify-between w-64 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+             حدد ماتريد طباعته
+            <svg
+              className="w-5 h-5 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          {dropdownOpen && (
+            <div className="absolute z-10 mt-2 w-64 rounded-md bg-white shadow-lg border border-gray-200 max-h-60 overflow-y-auto">
+              <div className="p-2 space-y-2">
+                {headTable.map((head) => (
+                  <label
+                    key={head}
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      className="accent-green-600"
+                      checked={checked[head]}
+                      onChange={(e) => {
+                        setChecked((prev) => ({
+                          ...prev,
+                          [head]: e.target.checked,
+                        }));
+                      }}
+                    />
+                    <span>{head}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
         {data
           ?.filter((ele) => ele.omra?.name === omra)
           .filter((ele) => {

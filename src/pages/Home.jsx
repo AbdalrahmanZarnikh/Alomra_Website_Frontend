@@ -118,12 +118,14 @@ function Home() {
 
           {/* Save Or Print Table */}
 
-          <h1
-            className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
-            onClick={() => window.print()}
-          >
-            حفظ القائمة كملف PDF
-          </h1>
+            <h1
+              className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
+              onClick={() => window.print()}
+            >
+              حفظ القائمة كملف PDF
+            </h1>
+
+       
 
           {/* Save Or Print Table */}
 
