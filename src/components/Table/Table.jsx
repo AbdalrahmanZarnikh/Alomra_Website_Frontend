@@ -277,6 +277,7 @@ const Table = ({
                 images={ele.images}
                 roomType={ele.roomType}
                 taslim={ele.taslim}
+                details={ele.details}
               />
               <div className="flex gap-2 mt-3">
                 <button
