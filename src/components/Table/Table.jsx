@@ -224,7 +224,7 @@ const Table = ({
           </button>
 
           {dropdownOpen && (
-            <div className="absolute z-10 mt-2 w-64 rounded-md bg-white shadow-lg border border-gray-200 max-h-60 overflow-y-auto">
+            <div className="absolute z-10 mt-2 w-64 rounded-md bg-white shadow-lg border border-gray-200 max-h-60 overflow-y-auto ">
               <div className="p-2 space-y-2">
                 {headTable.map((head) => (
                   <label
@@ -264,7 +264,7 @@ const Table = ({
           .map((ele, index) => (
             <div
               key={ele._id}
-              className="bg-white rounded-lg shadow p-3 border border-gray-200 print:hidden"
+              className="bg-gray-500 rounded-lg shadow p-3 border border-gray-200 print:hidden"
             >
               <CardUser
                 name={ele.name}
