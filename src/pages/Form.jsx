@@ -6,7 +6,7 @@ import { createUser, updateUser } from "../redux/slice/user/userSlice";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 import FormLayout from "../components/FormLayout/FormLayout";
 import { useEffect, useState } from "react";
-import { typeRoom, typeSafar } from "../constants/data";
+import { typeRoom, typeSafar, rooms } from "../constants/data";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -64,15 +64,6 @@ const Form = () => {
       errors: errors,
       nameInDocument: "details",
     },
-    {
-      type: "text",
-      label: "الغرفة",
-      placeholder: "ادخل  الغرفة",
-      register: register,
-      required: false,
-      errors: errors,
-      nameInDocument: "room",
-    },
   ];
 
   const contentFormFieldsSelector = [
@@ -84,6 +75,15 @@ const Form = () => {
       option: "اختر شهر العمرة",
       errors: errors,
       nameInDocument: "omra",
+    },
+    {
+      data: rooms,
+      label: "رقم الغرفة",
+      register: register,
+      required: false,
+      option: "اختر رقم الغرفة",
+      errors: errors,
+      nameInDocument: "room",
     },
     {
       data: typeSafar,
@@ -116,9 +116,9 @@ const Form = () => {
 
   const isUpdateMode = typeof id === "string";
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getOmras());
-  },[])
+  }, []);
 
   useEffect(() => {
     if (isUpdateMode && data.length > 0) {
@@ -143,10 +143,7 @@ const Form = () => {
         // }
       }
     }
-  }, [id, isUpdateMode, reset, omras,data]);
-
-
-
+  }, [id, isUpdateMode, reset, omras, data]);
 
   useEffect(() => {
     const subscription = watch((value) => {
