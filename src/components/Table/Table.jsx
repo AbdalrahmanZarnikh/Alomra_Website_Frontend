@@ -45,6 +45,7 @@ const Table = ({
       <h1 className="flex justify-center items-center mb-5 text-5xl text-[#FF8D4C]/90">
         {Filter}
       </h1>
+
       <div className=" m-5  font-bold">
         {filteredData.length > 0 ? (
           <p>
@@ -184,7 +185,9 @@ const Table = ({
                         ? "bg-green-600"
                         : ele.roomType === "ثلاثية"
                         ? "bg-blue-600"
-                        : "bg-red-600"
+                        : ele.roomType === "ثنائية"
+                        ? "bg-red-600"
+                        : "bg-zinc-800"
                     }`}
                   >
                     {ele.roomType}

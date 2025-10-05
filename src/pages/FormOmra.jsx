@@ -32,6 +32,7 @@ const FormOmra = () => {
       ثنائية: "",
       ثلاثية: "",
       رباعية: "",
+      خماسية: "",
     },
   });
 
@@ -48,6 +49,8 @@ const FormOmra = () => {
         ثنائية: "",
         ثلاثية: "",
         رباعية: "",
+        خماسية: "",
+
       });
     }
     if (isUpdateMode && omras.length > 0) {
@@ -58,6 +61,7 @@ const FormOmra = () => {
           ثنائية: found.ثنائية,
           ثلاثية: found.ثلاثية,
           رباعية: found.رباعية,
+          خماسية: found.خماسية,
         });
       }
     }
@@ -117,6 +121,15 @@ const FormOmra = () => {
       required: true,
       errors: errors,
       nameInDocument: "رباعية",
+    },
+    {
+      type: "number",
+      label: "الغرفة الخماسية",
+      placeholder: "ادخل تكلفة الغرفة الخماسية",
+      register: register,
+      required: true,
+      errors: errors,
+      nameInDocument: "خماسية",
     },
   ];
 

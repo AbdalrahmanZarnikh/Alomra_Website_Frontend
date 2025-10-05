@@ -55,7 +55,9 @@ const CardUser = ({
         </p>
 
         <p>
-          <span className="font-semibold text-gray-900">التكلفة الإجمالية:</span>{" "}
+          <span className="font-semibold text-gray-900">
+            التكلفة الإجمالية:
+          </span>{" "}
           <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
             {totalAmount}
           </span>
@@ -68,9 +70,11 @@ const CardUser = ({
           className={`px-3 py-1 rounded-full text-white text-xs font-bold ${
             roomType === "رباعية"
               ? "bg-green-600"
-              : roomType === "ثلاثية"
+              :roomType === "ثلاثية"
               ? "bg-blue-600"
-              : "bg-red-600"
+              :roomType === "ثنائية"
+              ? "bg-red-600"
+              : "bg-zinc-800"
           }`}
         >
           {roomType}

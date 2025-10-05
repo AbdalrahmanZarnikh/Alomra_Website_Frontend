@@ -1,5 +1,5 @@
 export const typeSafar = ["جواً", "براً"];
-export const typeRoom = ["ثنائية", "ثلاثية", "رباعية"];
+export const typeRoom = ["ثنائية", "ثلاثية", "رباعية","خماسية"];
 export const rooms = [
   "غرفة 1",
   "غرفة 2",
