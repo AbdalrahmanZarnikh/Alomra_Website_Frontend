@@ -209,7 +209,7 @@ const Table = ({
                     !checked.الصور && "print:hidden"
                   }`}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-4 place-items-center gap-2">
+                  <div className="grid grid-cols-3 place-items-center gap-2">
                     {Array.isArray(ele.images) &&
                       ele.images.map((img, i) => (
                         <Image
