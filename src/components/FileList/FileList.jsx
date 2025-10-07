@@ -27,13 +27,13 @@ export default function FileList({ refreshFlag, onDelete }) {
 
     try {
       await storage.deleteFile("68e3f68b0010d81f0045", fileId);
-      toast.success("✅ تم حذف الملف بنجاح!");
+      toast.success(" تم حذف الملف بنجاح!");
       setFiles(files.filter((f) => f.$id !== fileId));
 
       if (onDelete) onDelete(); // لإعادة تحميل القائمة إذا أردت
     } catch (err) {
-      console.error("❌ خطأ عند حذف الملف:", err);
-      toast.error("❌ حدث خطأ أثناء حذف الملف");
+      console.error(" خطأ عند حذف الملف:", err);
+      toast.error("حدث خطأ أثناء حذف الملف");
     }
   };
 
