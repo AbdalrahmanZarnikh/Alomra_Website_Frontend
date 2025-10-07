@@ -3,6 +3,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { TiDelete } from "react-icons/ti";
 import { useParams } from "react-router-dom";
 import { storage } from "../../utils/appwriteClient";
+import toast from "react-hot-toast";
 
 const UploadMultipleFiles = ({ form, records }) => {
   const inputRef = useRef(null);
