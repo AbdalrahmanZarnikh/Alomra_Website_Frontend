@@ -46,6 +46,8 @@ export default function FileList({ refreshFlag, onDelete }) {
           const viewUrl = storage.getFileView("68e3f68b0010d81f0045", f.$id);
           const downloadUrl = storage.getFileDownload("68e3f68b0010d81f0045", f.$id);
 
+          
+          
           return (
             <li
               key={f.$id}
