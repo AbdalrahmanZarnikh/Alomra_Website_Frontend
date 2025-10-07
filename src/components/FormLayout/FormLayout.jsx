@@ -3,7 +3,6 @@ import FieldSelector from "../FormCommon/FieldSelector/FieldSelector";
 import FieldCheckbox from "../FormCommon/FieldCheckbox/FieldCheckbox";
 import ButtonFrom from "../FormCommon/ButtonForm/ButtonFrom";
 import UploadMultipleFiles from "../UploadMultipleFiles/UploadMultipleFiles";
-import UploadPDF from "../UploadPDF/UploadPDF";
 
 const FormLayout = ({
   contentFormFilds,
@@ -69,7 +68,7 @@ const FormLayout = ({
 
         {multipleImages && <UploadMultipleFiles form={form} records={data} />}
 
-        {pdf &&  <UploadPDF/>}
+
 
         <ButtonFrom id={id} isLoading={isLoading} />
         {total > 0 && <h1 className="m-auto font-bold">التكلفة الإجمالية : <span className="text-red-600 font-bold text-xl">{total} </span>$</h1>}

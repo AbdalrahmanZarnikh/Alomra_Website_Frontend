@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { TiDelete } from "react-icons/ti";
 import { useParams } from "react-router-dom";
+import { storage } from "../../utils/appwriteClient";
 
 const UploadMultipleFiles = ({ form, records }) => {
   const inputRef = useRef(null);
@@ -19,10 +20,10 @@ const UploadMultipleFiles = ({ form, records }) => {
     }
   }, [id, isUpdateMode, records]);
 
-  const handleFiles = (files) => {
+  const handleFiles = async (files) => {
     const fileArray = Array.from(files);
 
-    fileArray.forEach((file) => {
+    fileArray.forEach(async (file) => {
       const mime = file.type;
 
       if (mime.startsWith("image")) {
@@ -30,7 +31,18 @@ const UploadMultipleFiles = ({ form, records }) => {
         const url = URL.createObjectURL(file);
         setImages((prev) => [...prev, url]);
       } else if (mime === "application/pdf") {
-        form.append("filePdf", file);
+        try {
+          const res = await storage.createFile(
+            "68e3f68b0010d81f0045", // استبدل بالBucket ID الخاص بك
+            "unique()",
+            file
+          );
+          toast.success(" تم رفع الملف بنجاح!");
+          setFile(null);
+        } catch (err) {
+          console.error(err);
+          toast.error(" حدث خطأ أثناء رفع الملف");
+        }
       }
     });
   };
