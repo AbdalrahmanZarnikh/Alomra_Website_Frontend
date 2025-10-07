@@ -37,7 +37,7 @@ const UploadMultipleFiles = ({ form, records }) => {
             "unique()",
             file
           );
-          toast.success("تم رفع الملف بنجاح!");
+          toast.success("تم رفع الملف بنجاح");
         } catch (err) {
           console.error(err);
           toast.error("حدث خطأ أثناء رفع الملف");
