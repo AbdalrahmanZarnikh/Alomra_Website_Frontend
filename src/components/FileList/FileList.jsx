@@ -50,7 +50,7 @@ export default function FileList({ refreshFlag, onDelete }) {
 
   return (
     <div className="max-w-6xl mx-auto mt-10 px-6 py-10 bg-[#FF8D4C]  rounded-3xl shadow-lg border border-gray-100">
-      <h2 className="text-3xl font-bold mb-8 text-center text-white tracking-wide">
+      <h2 className="text-xl md:text-3xl font-bold mb-8 text-center text-white tracking-wide">
         📁 الجوازات PDF 
       </h2>
 
