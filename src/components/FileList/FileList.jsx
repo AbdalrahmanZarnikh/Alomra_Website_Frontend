@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { storage } from "../../utils/appwriteClient";
-import {Query} from "appwrite"
+import { Query } from "appwrite";
 import toast from "react-hot-toast";
+import {
+  AiOutlineEye,
+  AiOutlineDownload,
+  AiOutlineDelete,
+  AiOutlineFilePdf,
+} from "react-icons/ai";
+import { motion } from "framer-motion";
 
 export default function FileList({ refreshFlag, onDelete }) {
   const [files, setFiles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchFiles = async () => {
+      setLoading(true);
       try {
         const response = await storage.listFiles("68e3f68b0010d81f0045", [
           Query.limit(100),
@@ -15,7 +24,10 @@ export default function FileList({ refreshFlag, onDelete }) {
         ]);
         if (response.files) setFiles(response.files);
       } catch (err) {
-        console.error(" خطأ عند جلب الملفات:", err);
+        console.error("خطأ عند جلب الملفات:", err);
+        toast.error("حدث خطأ أثناء تحميل الملفات");
+      } finally {
+        setLoading(false);
       }
     };
     fetchFiles();
@@ -27,63 +39,90 @@ export default function FileList({ refreshFlag, onDelete }) {
 
     try {
       await storage.deleteFile("68e3f68b0010d81f0045", fileId);
-      toast.success(" تم حذف الملف بنجاح!");
-      setFiles(files.filter((f) => f.$id !== fileId));
-
-      if (onDelete) onDelete(); // لإعادة تحميل القائمة إذا أردت
+      toast.success("تم حذف الملف بنجاح!");
+      setFiles((prev) => prev.filter((f) => f.$id !== fileId));
+      if (onDelete) onDelete();
     } catch (err) {
-      console.error(" خطأ عند حذف الملف:", err);
+      console.error("خطأ عند حذف الملف:", err);
       toast.error("حدث خطأ أثناء حذف الملف");
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-2xl shadow-md">
-      <h2 className="text-xl font-semibold mb-4 text-center">📚 الملفات المرفوعة</h2>
-      {files.length === 0 && <p className="text-center text-gray-500">لا توجد ملفات بعد</p>}
-      <ul className="space-y-4 text-left">
-        {files.map((f) => {
-          const viewUrl = storage.getFileView("68e3f68b0010d81f0045", f.$id);
-          const downloadUrl = storage.getFileDownload("68e3f68b0010d81f0045", f.$id);
+    <div className="max-w-6xl mx-auto mt-10 px-6 py-10 bg-[#FF8D4C]  rounded-3xl shadow-lg border border-gray-100">
+      <h2 className="text-3xl font-bold mb-8 text-center text-white tracking-wide">
+        📁 الجوازات PDF 
+      </h2>
 
-          
-          
-          return (
-            <li
-              key={f.$id}
-              className="flex justify-between items-center p-3 border rounded-lg hover:shadow-sm transition-shadow"
-            >
-              <div>
-                <p className="font-medium">📄 {f.name}</p>
-                <div className="mt-1 space-x-4">
+      {/* حالة التحميل */}
+      {loading ? (
+        <div className="flex flex-col items-center justify-center py-20 text-white">
+          <div className="w-12 h-12 border-4 border-gray-300 border-t-[#FF8D4C] rounded-full animate-spin mb-4"></div>
+          <p>جاري تحميل الملفات...</p>
+        </div>
+      ) : files.length === 0 ? (
+        <p className="text-center text-gray-500 italic py-16">
+          لا توجد ملفات بعد 📭
+        </p>
+      ) : (
+        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {files.map((f, index) => {
+            const viewUrl = storage.getFileView("68e3f68b0010d81f0045", f.$id);
+            const downloadUrl = storage.getFileDownload(
+              "68e3f68b0010d81f0045",
+              f.$id
+            );
+
+            return (
+              <motion.div
+                key={f.$id}
+                layout
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all p-5 flex flex-col items-center text-center"
+              >
+                <div className="w-16 h-16 flex items-center justify-center bg-[#FFF3EB] text-[#FF8D4C] rounded-full mb-4">
+                  <AiOutlineFilePdf size={36} />
+                </div>
+                <h3 className="font-semibold text-gray-800 truncate w-full">
+                  {f.name}
+                </h3>
+                <p className="text-sm text-gray-500 mt-1">
+                  {new Date(f.$createdAt).toLocaleDateString("ar-SY")}
+                </p>
+
+                <div className="flex justify-center gap-3 mt-4">
                   <a
                     href={viewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline font-medium"
+                    title="عرض الملف"
+                    className="p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
                   >
-                    عرض الملف
+                    <AiOutlineEye size={22} />
                   </a>
                   <a
                     href={downloadUrl}
                     download
-                    className="text-green-600 hover:underline font-medium"
+                    title="تحميل الملف"
+                    className="p-2 rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition"
                   >
-                    تحميل
+                    <AiOutlineDownload size={22} />
                   </a>
+                  <button
+                    onClick={() => handleDelete(f.$id)}
+                    title="حذف الملف"
+                    className="p-2 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition"
+                  >
+                    <AiOutlineDelete size={22} />
+                  </button>
                 </div>
-              </div>
-              <button
-                onClick={() => handleDelete(f.$id)}
-                className="text-red-600 text-3xl font-bold hover:text-red-800 ml-4 cursor-pointer"
-                title="حذف الملف"
-              >
-                ×
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      )}
     </div>
   );
 }
