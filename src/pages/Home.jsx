@@ -8,10 +8,11 @@ import { deleteUser, getUsers } from "../redux/slice/user/userSlice";
 import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
 import { useNavigate } from "react-router-dom";
+import { fetchFiles } from "../utils/fetchFiles";
 
 function Home() {
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const { isLoading } = useSelector((state) => state.userSlice);
   const { omras } = useSelector((state) => state.omraSlice);
@@ -20,8 +21,11 @@ function Home() {
   const [show, setShow] = useState(false);
   const [newId, setNewId] = useState("");
 
+
+
   useEffect(() => {
     const fn = async () => {
+      fetchFiles();
       await dispatch(getUsers());
       await dispatch(getOmras());
     };
@@ -120,22 +124,21 @@ function Home() {
 
           {/* Save Or Print Table */}
 
-            <h1
-              className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
-              onClick={() => window.print()}
-            >
-              حفظ القائمة كملف PDF
-            </h1>
+          <h1
+            className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
+            onClick={() => window.print()}
+          >
+            حفظ القائمة كملف PDF
+          </h1>
 
-
-         <h1
-              className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
-              onClick={() => {navigate("/pdf")}}
-            >
+          <h1
+            className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
+            onClick={() => {
+              navigate("/pdf");
+            }}
+          >
             ملفات pdf
-            </h1>
-
-       
+          </h1>
 
           {/* Save Or Print Table */}
 

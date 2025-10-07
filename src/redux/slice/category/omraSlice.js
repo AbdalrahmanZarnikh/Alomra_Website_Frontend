@@ -12,6 +12,8 @@ import toast from "react-hot-toast";
 const initialState = {
   omras: [],
   isLoading: "Idle",
+  allFiles:[],
+  files: [],
   error: null,
 };
 
@@ -19,6 +21,22 @@ const initialState = {
 const omraSlice = createSlice({
   name: "omra",
   initialState,
+  reducers: {
+    saveFiles: (state, action) => {
+      state.allFiles = action.payload; // تخزين الملفات الأصلية
+      state.files = action.payload; // عرض الملفات مباشرة
+    },
+    searchFile: (state, action) => {
+      const query = action.payload.toLowerCase();
+      if (!query) {
+        state.files = state.allFiles; // إذا البحث فارغ، اعرض كل الملفات
+      } else {
+        state.files = state.allFiles.filter((f) =>
+          f.name.toLowerCase().includes(query)
+        );
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getOmras.pending, (state) => {
       state.isLoading = "Pending";
@@ -84,4 +102,6 @@ const omraSlice = createSlice({
 
 export default omraSlice.reducer;
 
-export { addOmra, getOmras, deleteOmra,updateOmra };
+export const { saveFiles, searchFile } = omraSlice.actions;
+
+export { addOmra, getOmras, deleteOmra, updateOmra };
