@@ -22,10 +22,9 @@ function Home() {
   const [newId, setNewId] = useState("");
 
 
-
   useEffect(() => {
     const fn = async () => {
-      fetchFiles();
+      fetchFiles(dispatch);
       await dispatch(getUsers());
       await dispatch(getOmras());
     };
