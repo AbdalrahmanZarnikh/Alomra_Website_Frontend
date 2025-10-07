@@ -7,9 +7,11 @@ import Table from "../components/Table/Table";
 import { deleteUser, getUsers } from "../redux/slice/user/userSlice";
 import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const dispatch = useDispatch();
+  const navigate=useNavigate()
 
   const { isLoading } = useSelector((state) => state.userSlice);
   const { omras } = useSelector((state) => state.omraSlice);
@@ -123,6 +125,14 @@ function Home() {
               onClick={() => window.print()}
             >
               حفظ القائمة كملف PDF
+            </h1>
+
+
+         <h1
+              className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
+              onClick={() => {navigate("/pdf")}}
+            >
+            ملفات pdf
             </h1>
 
        

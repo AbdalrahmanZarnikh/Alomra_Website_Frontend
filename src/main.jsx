@@ -8,6 +8,7 @@ import Home from "./pages/Home.jsx";
 import Form from "./pages/Form.jsx";
 import FormOmra from "./pages/FormOmra.jsx";
 import { Toaster } from "react-hot-toast";
+import PDF from "./pages/PDF.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -20,6 +21,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/add-omra" element={<FormOmra />} />
         <Route path="/edit-user/:id" element={<Form />} />
         <Route path="/edit-omra/:id" element={<FormOmra />} />
+        <Route path="/pdf" element={<PDF />} />
       </Routes>
     </Provider>
   </BrowserRouter>

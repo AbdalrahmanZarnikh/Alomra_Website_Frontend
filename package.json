@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.0",
     "@tailwindcss/vite": "^4.1.13",
+    "appwrite": "^21.0.0",
     "axios": "^1.12.1",
     "file-saver": "^2.0.5",
     "lottie-react": "^2.4.1",

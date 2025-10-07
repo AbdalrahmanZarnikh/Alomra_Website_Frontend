@@ -201,6 +201,7 @@ const Form = () => {
         multipleImages={true}
         form={form}
         total={total}
+        pdf={true}
       />
     </div>
   );
