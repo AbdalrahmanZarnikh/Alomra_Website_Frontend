@@ -23,7 +23,7 @@ const UploadMultipleFiles = ({ form, records }) => {
   const handleFiles = async (files) => {
     const fileArray = Array.from(files);
 
-    fileArray.forEach(async (file) => {
+    for (const file of fileArray) {
       const mime = file.type;
 
       if (mime.startsWith("image")) {
@@ -33,18 +33,17 @@ const UploadMultipleFiles = ({ form, records }) => {
       } else if (mime === "application/pdf") {
         try {
           const res = await storage.createFile(
-            "68e3f68b0010d81f0045", // استبدل بالBucket ID الخاص بك
+            "68e3f68b0010d81f0045", // Bucket ID
             "unique()",
             file
           );
-          toast.success(" تم رفع الملف بنجاح!");
-          setFile(null);
+          toast.success("تم رفع الملف بنجاح!");
         } catch (err) {
           console.error(err);
-          toast.error(" حدث خطأ أثناء رفع الملف");
+          toast.error("حدث خطأ أثناء رفع الملف");
         }
       }
-    });
+    }
   };
 
   const removeImage = (index) => {
