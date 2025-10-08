@@ -5,7 +5,7 @@ const FilterTable = ({ data, setFunction, value }) => {
     <div>
       {data?.length > 0 && (
         <select
-          className="mb-5 p-2 rounded-lg bg-gray-800 text-white cursor-pointer"
+          className="mb-5 p-2 rounded-lg bg-primary text-white cursor-pointer"
           value={value}
           onChange={(e) => setFunction(e.target.value)}
         >
