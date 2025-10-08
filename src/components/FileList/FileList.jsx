@@ -47,9 +47,9 @@ export default function FileList({ onDelete }) {
         <span>📁 الجوازات PDF</span>
       </h2>
 
-      <span className="text-black text-xl md:text-3xl font-bold ">
+      <span className="text-white text-xl md:text-3xl font-bold ">
         {" "}
-        العدد الكلي :<span className="text-white"> {files.length} </span>
+        العدد الكلي :<span className="text-zinc-800"> {files.length} </span>
       </span>
 
       {/* حقل البحث */}
