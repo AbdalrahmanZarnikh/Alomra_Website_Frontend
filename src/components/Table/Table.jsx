@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
 import { useState } from "react";
 
-
 const Table = ({
   Filter,
   headTable,
@@ -39,10 +38,15 @@ const Table = ({
 
   const lastNumber = filteredData.length;
 
+  if (Filter !== "الكل" && Filter !== "جواً" && Filter !== "براً") {
+    var room =filteredData[0].roomType
+  }
+
   return (
     <div id="print-area" className="w-full">
-      <h1 className="flex justify-center items-center mb-5 text-5xl text-primary/90">
-        {Filter}
+      <h1 className={`flex ${room ?"justify-center gap-10":"justify-center"} items-center mb-5 text-5xl text-primary/90`}>
+        <span>{Filter}</span>
+        {room && <span className="text-black font-bold">{room}</span>}
       </h1>
 
       <div className=" m-5  font-bold">
@@ -93,7 +97,6 @@ const Table = ({
 
           <tbody className="text-sm md:text-base bg-yellow-50">
             {filteredData.map((ele, index) => {
-
               return (
                 <tr
                   key={ele._id}
@@ -221,8 +224,6 @@ const Table = ({
                         ))}
                     </div>
                   </td>
-
-           
 
                   <td className="p-3 print:hidden">
                     <div className="flex gap-2 justify-end flex-wrap">
