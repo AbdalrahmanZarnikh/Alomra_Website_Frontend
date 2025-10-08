@@ -123,7 +123,7 @@ const Header = () => {
             }`
           }
         >
-          جوازات
+          جوازات السفر
         </NavLink>
       </div>
 
@@ -156,7 +156,7 @@ const Header = () => {
             className="w-full py-2 hover:bg-gray-100 font-bold"
             onClick={() => setMenuOpen(false)}
           >
-            جوازات
+            جوازات السفر
           </NavLink>
         </div>
       )}
