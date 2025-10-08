@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { storage } from "../../utils/appwriteClient";
 import toast from "react-hot-toast";
 import {
@@ -14,7 +14,7 @@ import { saveFiles, searchFile } from "../../redux/slice/category/omraSlice";
 export default function FileList({ onDelete }) {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
-  const {files} =useSelector((state)=>state.omraSlice)
+  const { files } = useSelector((state) => state.omraSlice);
 
   const bucketId = "68e3f68b0010d81f0045";
 
@@ -36,27 +36,35 @@ export default function FileList({ onDelete }) {
 
   const handleSearch = (e) => {
     const query = e.target.value;
-    setSearchQuery(query)
-    dispatch(searchFile(query))
+    setSearchQuery(query);
+    dispatch(searchFile(query));
   };
 
   return (
     <div className="w-full mx-auto mt-10 px-6 py-10 bg-primary rounded-3xl shadow-lg border border-gray-100">
-      <h2 className="text-xl md:text-3xl font-bold mb-8 text-center text-white tracking-wide">
-        📁 الجوازات PDF
+      <h2 className="text-xl md:text-3xl font-bold mb-8 text-center text-white tracking-wide  ">
+        {" "}
+        <span>📁 الجوازات PDF</span>
       </h2>
+
+      <span className="text-black text-xl md:text-3xl font-bold ">
+        {" "}
+        العدد الكلي :<span className="text-white"> {files.length} </span>
+      </span>
 
       {/* حقل البحث */}
       <input
         type="text"
         placeholder="ابحث عن ملف..."
         value={searchQuery}
-        onChange={(e)=>{handleSearch(e)}}
-        className="w-full p-3 mb-6 font-bold rounded-lg border border-gray-100 focus:outline-none  focus:ring-2 focus:ring-primary bg-white  placeholder:font-bold"
+        onChange={(e) => {
+          handleSearch(e);
+        }}
+        className="w-full p-3 mb-6 font-bold rounded-lg border border-gray-100 focus:outline-none  focus:ring-2 focus:ring-primary bg-white  placeholder:font-bold mt-4"
       />
 
       {/* حالة التحميل */}
-       {files.length === 0 ? (
+      {files.length === 0 ? (
         <p className="text-center text-gray-500 italic py-16">لا توجد ملفات</p>
       ) : (
         <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
