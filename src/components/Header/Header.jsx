@@ -39,7 +39,7 @@ const Header = () => {
 
       {/* زر القائمة للموبايل */}
       <button
-        className="text-white text-3xl md:hidden"
+        className="text-white text-3xl md:hidden cursor-pointer"
         onClick={() => setMenuOpen(!menuOpen)}
       >
         {menuOpen ? <BiX /> : <BiMenu />}
@@ -129,7 +129,7 @@ const Header = () => {
 
       {/* قائمة الموبايل المنسدلة */}
       {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center text-center py-3 space-y-2 md:hidden z-50">
+        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center text-center py-3 space-y-2 md:hidden z-50 ">
           <NavLink
             to="/"
             className="w-full py-2 hover:bg-gray-100 font-bold"

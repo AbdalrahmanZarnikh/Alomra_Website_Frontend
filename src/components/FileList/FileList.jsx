@@ -52,7 +52,7 @@ export default function FileList({ onDelete }) {
         placeholder="ابحث عن ملف..."
         value={searchQuery}
         onChange={(e)=>{handleSearch(e)}}
-        className="w-full p-3 mb-6 font-bold rounded-lg border border-gray-100 focus:outline-none  focus:ring-2 focus:ring-primary text-white placeholder:text-white placeholder:font-bold"
+        className="w-full p-3 mb-6 font-bold rounded-lg border border-gray-100 focus:outline-none  focus:ring-2 focus:ring-primary bg-white  placeholder:font-bold"
       />
 
       {/* حالة التحميل */}
