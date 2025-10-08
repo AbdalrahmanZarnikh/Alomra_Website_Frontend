@@ -41,7 +41,7 @@ const Table = ({
 
   return (
     <div id="print-area" className="w-full">
-      <h1 className="flex justify-center items-center mb-5 text-5xl text-[#FF8D4C]/90">
+      <h1 className="flex justify-center items-center mb-5 text-5xl text-primary/90">
         {Filter}
       </h1>
 
@@ -49,7 +49,7 @@ const Table = ({
         {filteredData.length > 0 ? (
           <p>
             العدد الكلي في الجدول هو:{" "}
-            <span className="text-2xl md:text-3xl text-[#FF8D4C]/90 m-2 ">
+            <span className="text-2xl md:text-3xl text-primary/90 m-2 ">
               {lastNumber}
             </span>{" "}
           </p>

@@ -117,19 +117,20 @@ function Home() {
 
           <h1 className="flex justify-center mb-10 text-2xl md:text-4xl mt-5 ">
             عمرة
-            <span className="mx-2  text-[#FF8D4C]/90 font-bold">{omra}</span>
+            <span className="mx-2  text-primary/90 font-bold">{omra}</span>
           </h1>
           {/* End Head Section  */}
 
           {/* Save Or Print Table */}
 
           <h1
-            className="mb-4 bg-[#FF8D4C]/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-[#FF8D4C]/50"
+            className="mb-4 bg-primary/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-primary/50"
             onClick={() => window.print()}
           >
             حفظ القائمة كملف PDF
           </h1>
           {/* Save Or Print Table */}
+
 
           {/* Start Table */}
 

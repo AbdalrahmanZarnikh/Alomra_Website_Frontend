@@ -41,7 +41,7 @@ export default function FileList({ onDelete }) {
   };
 
   return (
-    <div className="w-full mx-auto mt-10 px-6 py-10 bg-[#FF8D4C] rounded-3xl shadow-lg border border-gray-100">
+    <div className="w-full mx-auto mt-10 px-6 py-10 bg-primary rounded-3xl shadow-lg border border-gray-100">
       <h2 className="text-xl md:text-3xl font-bold mb-8 text-center text-white tracking-wide">
         📁 الجوازات PDF
       </h2>
@@ -52,7 +52,7 @@ export default function FileList({ onDelete }) {
         placeholder="ابحث عن ملف..."
         value={searchQuery}
         onChange={(e)=>{handleSearch(e)}}
-        className="w-full p-3 mb-6 rounded-lg border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#FF8D4C] text-white placeholder:text-white"
+        className="w-full p-3 mb-6 font-bold rounded-lg border border-gray-100 focus:outline-none  focus:ring-2 focus:ring-primary text-white placeholder:text-white placeholder:font-bold"
       />
 
       {/* حالة التحميل */}
@@ -73,7 +73,7 @@ export default function FileList({ onDelete }) {
                 transition={{ delay: index * 0.05 }}
                 className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all p-5 flex flex-col items-center text-center"
               >
-                <div className="w-16 h-16 flex items-center justify-center bg-[#FFF3EB] text-[#FF8D4C] rounded-full mb-4">
+                <div className="w-16 h-16 flex items-center justify-center bg-[#FFF3EB] text-primary rounded-full mb-4">
                   <AiOutlineFilePdf size={36} />
                 </div>
                 <h3 className="font-semibold text-gray-800 truncate w-full">

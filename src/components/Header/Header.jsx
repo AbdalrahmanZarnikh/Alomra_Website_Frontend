@@ -30,7 +30,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center bg-[#FF8D4C]/90 p-5 ">
+    <div className="flex justify-between items-center bg-primary/90 p-5 ">
       <div className="flex justify-center items-center   ">
         <img src="image.png" className="w-25 h-25" alt="" />
       </div>
