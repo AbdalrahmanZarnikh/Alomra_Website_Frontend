@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { BiSearch } from "react-icons/bi";
+import { BiSearch, BiMenu, BiX } from "react-icons/bi";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import getUsersBySearch from "../../redux/slice/user/act/getUsersBySearch";
 import { getUsers } from "../../redux/slice/user/userSlice";
 
@@ -10,6 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
   const location = window.location;
   const [searchTerm, setSearchTerm] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const input = useRef(null);
 
   useEffect(() => {
@@ -21,24 +22,35 @@ const Header = () => {
         dispatch(getUsers());
       }
     }, 500);
-
     return () => clearTimeout(delayDebounce);
   }, [searchTerm, dispatch, navigate]);
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const handleSearch = (e) => setSearchTerm(e.target.value);
 
   return (
-    <div className="flex justify-between items-center bg-primary/90 p-5 ">
-      <div className="flex justify-center items-center   ">
-        <img src="image.png" className="w-25 h-25" alt="" />
+    <header className="bg-primary/90 p-3 md:p-5 flex flex-wrap justify-between items-center gap-3 relative">
+      {/* الشعار */}
+      <div className="flex items-center gap-2">
+        <img src="image.png" alt="logo" className="w-12 h-12 md:w-16 md:h-16" />
+        <h1 className="text-white font-bold text-lg md:text-2xl hidden sm:block">
+          نظام العمرة
+        </h1>
       </div>
-      <div className="hidden md:flex justify-center gap-4 text-lg font-bold">
+
+      {/* زر القائمة للموبايل */}
+      <button
+        className="text-white text-3xl md:hidden"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        {menuOpen ? <BiX /> : <BiMenu />}
+      </button>
+
+      {/* روابط التنقل (للحاسوب) */}
+      <nav className="hidden md:flex gap-4 text-lg font-bold">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `rounded-lg p-4 cursor-pointer ${
+            `rounded-lg p-3 ${
               isActive
                 ? "bg-black text-white"
                 : "bg-white hover:bg-white/50 hover:text-white"
@@ -47,11 +59,10 @@ const Header = () => {
         >
           قائمة المعتمرين
         </NavLink>
-
         <NavLink
           to="/add-user"
           className={({ isActive }) =>
-            `rounded-lg p-4 cursor-pointer ${
+            `rounded-lg p-3 ${
               isActive
                 ? "bg-black text-white"
                 : "bg-white hover:bg-white/50 hover:text-white"
@@ -60,11 +71,10 @@ const Header = () => {
         >
           تسجيل معتمرين
         </NavLink>
-
         <NavLink
           to="/add-omra"
           className={({ isActive }) =>
-            `rounded-lg p-4 cursor-pointer  ${
+            `rounded-lg p-3 ${
               isActive
                 ? "bg-black text-white"
                 : "bg-white hover:bg-white/50 hover:text-white"
@@ -73,69 +83,84 @@ const Header = () => {
         >
           إنشاء عمرة جديدة
         </NavLink>
-      </div>
-      <div className=" relative w-1/2 ">
+      </nav>
+
+      {/* شريط البحث */}
+      <div className="relative w-full md:w-1/3">
         <input
           type="text"
           ref={input}
           placeholder="ابحث عن معتمر"
-          className="p-4 w-full rounded-lg border border-gray-300 bg-white text-[10px] md:text-lg text-center"
-          onChange={(e) => {
-            handleSearch(e);
-          }}
+          className="p-3 w-full rounded-lg border border-gray-300 bg-white text-sm md:text-lg text-center"
+          onChange={handleSearch}
         />
-        <span
-          className={`absolute right-2 top-2  md:top-5   ${
-            !searchTerm.length > 0 && "hidden"
-          } bg-gray-300 text-red-500 w-2 h-2 md:w-5 md:h-5  p-4 rounded-full text-center flex justify-center items-center  cursor-pointer hover:bg-gray-200`}
-          onClick={() => {
-            input.current.value = "";
-            setSearchTerm("");
-          }}
-        >
-          X
-        </span>
+        {searchTerm.length > 0 && (
+          <span
+            onClick={() => {
+              input.current.value = "";
+              setSearchTerm("");
+            }}
+            className="absolute right-3 top-2 md:top-3 bg-gray-300 text-red-500 w-6 h-6 md:w-7 md:h-7 flex justify-center items-center rounded-full cursor-pointer"
+          >
+            X
+          </span>
+        )}
         <BiSearch
-          className="absolute left-2 top-4 md:top-5  text-gray-500 "
+          className="absolute left-3 top-2.5 md:top-3 text-gray-500"
           size={21}
         />
       </div>
 
+      {/* روابط صغيرة على اليمين */}
+      <div className="hidden md:flex gap-3 items-center">
+        <NavLink
+          to="/pdf"
+          className={({ isActive }) =>
+            `rounded-lg p-3 font-bold ${
+              isActive
+                ? "bg-black text-white"
+                : "bg-white hover:bg-white/50 hover:text-white"
+            }`
+          }
+        >
+          جوازات
+        </NavLink>
+      </div>
 
-
-      <NavLink
-        to="/pdf"
-        className={({ isActive }) =>
-          `rounded-lg p-4 cursor-pointer font-bold text-sm m-2 md:text-lg ${
-            isActive
-              ? "bg-black text-white"
-              : "bg-white hover:bg-white/50 hover:text-white"
-          }`
-        }
-      >
-        جوازات
-      </NavLink>
-
-      <NavLink
-        to="/add-user"
-        className={({ isActive }) =>
-          `md:hidden rounded-lg p-4 cursor-pointer font-bold text-sm m-2 md:text-lg ${
-            isActive
-              ? "bg-black text-white"
-              : "bg-white hover:bg-white/50 hover:text-white"
-          }`
-        }
-      >
-        تسجيل
-      </NavLink>
-
-      {/* <Link
-        to={"/add-user"}
-        className="md:hidden bg-white rounded-lg p-4 text-center m-2 hover:bg-white/50 hover:text-white cursor-pointer text-sm font-bold"
-      >
-        
-      </Link> */}
-    </div>
+      {/* قائمة الموبايل المنسدلة */}
+      {menuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center text-center py-3 space-y-2 md:hidden z-50">
+          <NavLink
+            to="/"
+            className="w-full py-2 hover:bg-gray-100 font-bold"
+            onClick={() => setMenuOpen(false)}
+          >
+            قائمة المعتمرين
+          </NavLink>
+          <NavLink
+            to="/add-user"
+            className="w-full py-2 hover:bg-gray-100 font-bold"
+            onClick={() => setMenuOpen(false)}
+          >
+            تسجيل معتمرين
+          </NavLink>
+          <NavLink
+            to="/add-omra"
+            className="w-full py-2 hover:bg-gray-100 font-bold"
+            onClick={() => setMenuOpen(false)}
+          >
+            إنشاء عمرة جديدة
+          </NavLink>
+          <NavLink
+            to="/pdf"
+            className="w-full py-2 hover:bg-gray-100 font-bold"
+            onClick={() => setMenuOpen(false)}
+          >
+            جوازات
+          </NavLink>
+        </div>
+      )}
+    </header>
   );
 };
 
