@@ -39,14 +39,32 @@ const Table = ({
   const lastNumber = filteredData.length;
 
   if (Filter !== "الكل" && Filter !== "جواً" && Filter !== "براً") {
-    var room =filteredData[0].roomType
+    var room = filteredData[0].roomType;
   }
 
   return (
     <div id="print-area" className="w-full">
-      <h1 className={`flex ${room ?"justify-center gap-10":"justify-center"} items-center mb-5 text-5xl text-primary/90`}>
+      <h1
+        className={`flex ${
+          room ? "justify-evenly gap-10" : "justify-center"
+        } items-center mb-5 text-5xl text-primary/90`}
+      >
         <span>{Filter}</span>
-        {room && <span className="text-black font-bold">{room}</span>}
+        {room && (
+          <span
+            className={`inline-block px-4 py-1 rounded-full text-white font-bold text-3xl whitespace-nowrap  ${
+              room === "رباعية"
+                ? "bg-green-600"
+                : room === "ثلاثية"
+                ? "bg-blue-600"
+                : room === "ثنائية"
+                ? "bg-red-600"
+                : "bg-zinc-800"
+            }`}
+          >
+            {room}
+          </span>
+        )}
       </h1>
 
       <div className=" m-5  font-bold">
