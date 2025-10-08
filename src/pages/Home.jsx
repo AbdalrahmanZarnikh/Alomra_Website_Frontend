@@ -21,7 +21,6 @@ function Home() {
   const [show, setShow] = useState(false);
   const [newId, setNewId] = useState("");
 
-
   useEffect(() => {
     const fn = async () => {
       fetchFiles(dispatch);
@@ -130,7 +129,6 @@ function Home() {
             حفظ القائمة كملف PDF
           </h1>
           {/* Save Or Print Table */}
-
 
           {/* Start Table */}
 
