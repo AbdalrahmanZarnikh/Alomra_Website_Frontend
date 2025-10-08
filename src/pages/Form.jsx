@@ -188,7 +188,7 @@ const Form = () => {
   };
   return (
     <div className="p-10">
-      <ButtonReverse text={"رجوع"} />
+      <ButtonReverse text={"رجوع"} to={"/"}/>
 
       <FormLayout
         data={data}

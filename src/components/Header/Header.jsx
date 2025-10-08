@@ -10,7 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
   const location = window.location;
   const [searchTerm, setSearchTerm] = useState("");
-  const input=useRef(null)
+  const input = useRef(null);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -64,7 +64,7 @@ const Header = () => {
         <NavLink
           to="/add-omra"
           className={({ isActive }) =>
-            `rounded-lg p-4 cursor-pointer ${
+            `rounded-lg p-4 cursor-pointer  ${
               isActive
                 ? "bg-black text-white"
                 : "bg-white hover:bg-white/50 hover:text-white"
@@ -74,7 +74,7 @@ const Header = () => {
           إنشاء عمرة جديدة
         </NavLink>
       </div>
-      <div className="relative w-1/2 ">
+      <div className=" relative w-1/2 ">
         <input
           type="text"
           ref={input}
@@ -84,21 +84,57 @@ const Header = () => {
             handleSearch(e);
           }}
         />
-        <span className={`absolute right-2 top-2  md:top-5   ${!searchTerm.length>0 && "hidden"} bg-gray-300 text-red-500 w-2 h-2 md:w-5 md:h-5  p-4 rounded-full text-center flex justify-center items-center  cursor-pointer hover:bg-gray-200`} onClick={()=>{
-           input.current.value=""
-           setSearchTerm("")
-        }} >X</span>
+        <span
+          className={`absolute right-2 top-2  md:top-5   ${
+            !searchTerm.length > 0 && "hidden"
+          } bg-gray-300 text-red-500 w-2 h-2 md:w-5 md:h-5  p-4 rounded-full text-center flex justify-center items-center  cursor-pointer hover:bg-gray-200`}
+          onClick={() => {
+            input.current.value = "";
+            setSearchTerm("");
+          }}
+        >
+          X
+        </span>
         <BiSearch
           className="absolute left-2 top-4 md:top-5  text-gray-500 "
           size={21}
         />
       </div>
-      <Link
-        to={"/add-user"}
-        className="md:hidden bg-white rounded-lg p-4 text-centerة m-2 hover:bg-white/50 hover:text-white cursor-pointer text-sm font-bold"
+
+
+
+      <NavLink
+        to="/pdf"
+        className={({ isActive }) =>
+          `rounded-lg p-4 cursor-pointer font-bold text-sm m-2 md:text-lg ${
+            isActive
+              ? "bg-black text-white"
+              : "bg-white hover:bg-white/50 hover:text-white"
+          }`
+        }
       >
-         تسجيل
-      </Link>
+        جوازات
+      </NavLink>
+
+      <NavLink
+        to="/add-user"
+        className={({ isActive }) =>
+          `md:hidden rounded-lg p-4 cursor-pointer font-bold text-sm m-2 md:text-lg ${
+            isActive
+              ? "bg-black text-white"
+              : "bg-white hover:bg-white/50 hover:text-white"
+          }`
+        }
+      >
+        تسجيل
+      </NavLink>
+
+      {/* <Link
+        to={"/add-user"}
+        className="md:hidden bg-white rounded-lg p-4 text-center m-2 hover:bg-white/50 hover:text-white cursor-pointer text-sm font-bold"
+      >
+        
+      </Link> */}
     </div>
   );
 };

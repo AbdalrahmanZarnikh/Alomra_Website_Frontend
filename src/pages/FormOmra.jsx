@@ -50,7 +50,6 @@ const FormOmra = () => {
         ثلاثية: "",
         رباعية: "",
         خماسية: "",
-
       });
     }
     if (isUpdateMode && omras.length > 0) {
@@ -135,6 +134,7 @@ const FormOmra = () => {
 
   return (
     <div className="p-10">
+      <ButtonReverse text={"رجوع"} to={"/"} />
       <PopUp
         msg={"هل أنت متأكد من الحذف ؟"}
         id={newId}
