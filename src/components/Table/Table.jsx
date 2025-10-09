@@ -59,7 +59,11 @@ const Table = ({
     return acc + ele.paidAmount;
   }, 0);
 
-  console.log(totalPaid);
+  const totalAmountPred = filteredData.reduce((acc, ele) => {
+    return acc + ele.totalAmount;
+  }, 0);
+
+  console.log(totalAmountPred);
 
   return (
     <div id="print-area" className="w-full">
@@ -97,9 +101,9 @@ const Table = ({
             </span>
 
             <span>
-                  إجمالي المدفوعات:{" "}
+              إجمالي المدفوعات:{" "}
               <span className="text-2xl md:text-3xl text-primary/90 m-2 ">
-                {totalPaid} $
+                {totalPaid} $ / <span className="text-green-600">{totalAmountPred} $</span>
               </span>{" "}
             </span>
           </p>
