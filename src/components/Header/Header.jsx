@@ -129,31 +129,55 @@ const Header = () => {
 
       {/* قائمة الموبايل المنسدلة */}
       {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center text-center py-3 space-y-2 md:hidden z-50 ">
+        <div className="absolute top-full left-0 w-full bg-primary/70 shadow-md flex flex-col items-center text-center py-3 px-4 space-y-2 md:hidden z-50 ">
           <NavLink
             to="/"
-            className="w-full py-2 hover:bg-gray-100 font-bold"
+            className={({ isActive }) =>
+              `rounded-lg p-3 w-full ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }
             onClick={() => setMenuOpen(false)}
           >
             قائمة المعتمرين
           </NavLink>
           <NavLink
             to="/add-user"
-            className="w-full py-2 hover:bg-gray-100 font-bold"
+            className={({ isActive }) =>
+              `rounded-lg p-3 w-full ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }
             onClick={() => setMenuOpen(false)}
           >
             تسجيل معتمرين
           </NavLink>
           <NavLink
             to="/add-omra"
-            className="w-full py-2 hover:bg-gray-100 font-bold"
+            className={({ isActive }) => 
+              `rounded-lg p-3 w-full ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }
             onClick={() => setMenuOpen(false)}
           >
             إنشاء عمرة جديدة
           </NavLink>
           <NavLink
             to="/pdf"
-            className="w-full py-2 hover:bg-gray-100 font-bold"
+            className={({ isActive }) =>
+              `rounded-lg p-3 w-full ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }
             onClick={() => setMenuOpen(false)}
           >
             جوازات السفر
