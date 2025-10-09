@@ -9,6 +9,7 @@ import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
 import { useNavigate } from "react-router-dom";
 import { fetchFiles } from "../utils/fetchFiles";
+import { headTable, keywords } from "../constants/data";
 
 function Home() {
   const dispatch = useDispatch();
@@ -49,37 +50,7 @@ function Home() {
     الصور: false,
   });
 
-  const headTable = [
-    "الاسم",
-    "رقم الجوال",
-    "المبلغ المدفوع",
-    "المبلغ المتبقي",
-    "الغرفة",
-    "ملاحظات",
-    "حالة الجواز",
-    "السفر",
-    "نوع الغرفة",
-    "التكلفة الإجمالية",
-    "الصور",
-  ];
 
-  const keywords = [
-    "الكل",
-    "براً",
-    "جواً",
-    "غرفة 1",
-    "غرفة 2",
-    "غرفة 3",
-    "غرفة 4",
-    "غرفة 5",
-    "غرفة 6",
-    "غرفة 7",
-    "غرفة 8",
-    "غرفة 9",
-    "غرفة 10",
-    "غرفة 11",
-    "غرفة 12",
-  ];
 
   return (
     <>

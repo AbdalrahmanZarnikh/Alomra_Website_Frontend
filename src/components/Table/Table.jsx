@@ -27,10 +27,18 @@ const Table = ({
     data
       ?.filter((ele) => ele.omra?.name === omra)
       .filter((ele) => {
-        if (Filter !== "الكل" && Filter !== "جواً" && Filter !== "براً") {
+        if (
+          Filter !== "الكل" &&
+          Filter !== "جواً" &&
+          Filter !== "براً" &&
+          Filter !== "لم يسلم الجواز"
+        ) {
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
           return ele.safar === Filter;
+        } else if (Filter === "لم يسلم الجواز") {
+          console.log("hello");
+          return ele.taslim === false;
         } else {
           return ele;
         }
@@ -38,9 +46,20 @@ const Table = ({
 
   const lastNumber = filteredData.length;
 
-  if (Filter !== "الكل" && Filter !== "جواً" && Filter !== "براً") {
-    var room = filteredData[0].roomType;
+  if (
+    Filter !== "الكل" &&
+    Filter !== "جواً" &&
+    Filter !== "براً" &&
+    Filter !== "لم يسلم الجواز"
+  ) {
+    var room = filteredData[0]?.roomType;
   }
+
+  const totalPaid = filteredData.reduce((acc, ele) => {
+    return acc + ele.paidAmount;
+  }, 0);
+
+  console.log(totalPaid);
 
   return (
     <div id="print-area" className="w-full">
@@ -69,11 +88,20 @@ const Table = ({
 
       <div className=" m-5  font-bold">
         {filteredData.length > 0 ? (
-          <p>
-            العدد الكلي في الجدول هو:{" "}
-            <span className="text-2xl md:text-3xl text-primary/90 m-2 ">
-              {lastNumber}
-            </span>{" "}
+          <p className="flex flex-col md:flex-row gap-2 justify-between items-center ">
+            <span>
+              العدد الكلي في الجدول هو:{" "}
+              <span className="text-2xl md:text-3xl text-primary/90 m-2 ">
+                {lastNumber}
+              </span>{" "}
+            </span>
+
+            <span>
+                  إجمالي المدفوعات:{" "}
+              <span className="text-2xl md:text-3xl text-primary/90 m-2 ">
+                {totalPaid} $
+              </span>{" "}
+            </span>
           </p>
         ) : (
           "لا توجد بيانات حالياً"
