@@ -95,14 +95,14 @@ const Table = ({
           <p className="flex flex-col md:flex-row gap-2 justify-between items-center ">
             <span>
               العدد الكلي في الجدول هو:{" "}
-              <span className="text-xl md:text-3xl text-primary/90 m-2 ">
+              <span className="text-sm md:text-3xl text-primary/90 m-2 ">
                 {lastNumber}
               </span>{" "}
             </span>
 
-            <span>
+            <span className="print:hidden">
               إجمالي المدفوعات:{" "}
-              <span className="text-xl md:text-3xl text-primary/90 m-2 ">
+              <span className="text-sm md:text-3xl text-primary/90 m-2 ">
                 {totalPaid} $ / <span className="text-green-600">{totalAmountPred} $</span>
               </span>{" "}
             </span>
