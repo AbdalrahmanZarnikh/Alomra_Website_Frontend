@@ -94,13 +94,13 @@ const CardUser = ({
       </div>
 
       {/* الصور */}
-      {Array.isArray(images) && images.length > 0 && (
+      {/* {Array.isArray(images) && images.length > 0 && (
         <div className="grid grid-cols-4 gap-2 mt-4">
           {images.map((img, i) => (
             <Image key={i} url={img.url} name={`${name} ${i + 1}`} />
           ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

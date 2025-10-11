@@ -258,7 +258,11 @@ const Table = ({
                     </span>
                   </td>
 
-                  <td
+                  {/* الصور */}
+
+
+
+                  {/* <td
                     className={`p-3 text-center ${
                       !checked.الصور && "print:hidden"
                     }`}
@@ -273,7 +277,7 @@ const Table = ({
                           />
                         ))}
                     </div>
-                  </td>
+                  </td> */}
 
                   <td className="p-3 print:hidden">
                     <div className="flex gap-2 justify-end flex-wrap">

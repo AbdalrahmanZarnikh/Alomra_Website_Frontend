@@ -26,7 +26,7 @@ export const headTable = [
   "السفر",
   "نوع الغرفة",
   "التكلفة الإجمالية",
-  "الصور",
+  // "الصور",
 ];
 
 export const keywords = [
