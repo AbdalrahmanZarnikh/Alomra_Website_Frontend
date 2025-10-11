@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { storage } from "../../utils/appwriteClient";
 import toast from "react-hot-toast";
 import {
@@ -11,26 +11,41 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { saveFiles, searchFile } from "../../redux/slice/category/omraSlice";
 
-export default function FileList({ onDelete }) {
+export default function FileList() {
   const dispatch = useDispatch();
-  const [searchQuery, setSearchQuery] = useState("");
   const { files } = useSelector((state) => state.omraSlice);
+  const [filesState, setFilesState] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const bucketId = "68e3f68b0010d81f0045";
 
+  useEffect(() => {
+    setFilesState(files);
+  }, [files]);
+
   const handleDelete = async (fileId) => {
+    if (!fileId) {
+      toast.error("معرف الملف غير صالح");
+      return;
+    }
+
     const confirmDelete = window.confirm("هل أنت متأكد من حذف هذا الملف؟");
     if (!confirmDelete) return;
 
     try {
       await storage.deleteFile(bucketId, fileId);
       toast.success("تم حذف الملف بنجاح!");
-      setFiles((prev) => prev.filter((f) => f.$id !== fileId));
-      dispatch(saveFiles(files));
-      if (onDelete) onDelete();
+
+      const updatedFiles = filesState.filter((f) => f.$id !== fileId);
+      setFilesState(updatedFiles);
+      dispatch(saveFiles(updatedFiles));
     } catch (err) {
-      console.error("خطأ عند حذف الملف:", err);
-      toast.error("حدث خطأ أثناء حذف الملف");
+      console.error("خطأ أثناء حذف الملف:", err);
+      if (err.message.includes("File not found")) {
+        toast.error("الملف غير موجود في التخزين");
+      } else {
+        toast.error("حدث خطأ أثناء حذف الملف");
+      }
     }
   };
 
@@ -42,33 +57,28 @@ export default function FileList({ onDelete }) {
 
   return (
     <div className="w-full mx-auto mt-10 px-6 py-10 bg-primary rounded-3xl shadow-lg border border-gray-100">
-      <h2 className="text-xl md:text-3xl font-bold mb-8 text-center text-white tracking-wide  ">
-        {" "}
+      <h2 className="text-xl md:text-3xl font-bold mb-8 text-center text-white tracking-wide">
         <span>📁 الجوازات PDF</span>
       </h2>
 
-      <span className="text-white text-xl md:text-3xl font-bold ">
-        {" "}
-        العدد الكلي :<span className="text-zinc-800"> {files.length} </span>
+      <span className="text-white text-xl md:text-3xl font-bold">
+        العدد الكلي :
+        <span className="text-zinc-800"> {filesState.length} </span>
       </span>
 
-      {/* حقل البحث */}
       <input
         type="text"
         placeholder="ابحث عن ملف..."
         value={searchQuery}
-        onChange={(e) => {
-          handleSearch(e);
-        }}
-        className="w-full p-3 mb-6 font-bold rounded-lg border border-gray-100 focus:outline-none  focus:ring-2 focus:ring-primary bg-white  placeholder:font-bold mt-4"
+        onChange={handleSearch}
+        className="w-full p-3 mb-6 font-bold rounded-lg border border-gray-100 focus:outline-none focus:ring-2 focus:ring-primary bg-white placeholder:font-bold mt-4"
       />
 
-      {/* حالة التحميل */}
-      {files.length === 0 ? (
+      {filesState.length === 0 ? (
         <p className="text-center text-gray-500 italic py-16">لا توجد ملفات</p>
       ) : (
         <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {files.map((f, index) => {
+          {filesState.map((f, index) => {
             const downloadUrl = storage.getFileDownload(bucketId, f.$id);
             const viewUrl = storage.getFileView(bucketId, f.$id);
 
