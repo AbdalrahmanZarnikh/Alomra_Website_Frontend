@@ -10,7 +10,11 @@ import {
 } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFile, getFiles, searchFile } from "../../redux/slice/category/omraSlice";
+import {
+  deleteFile,
+  getFiles,
+  searchFile,
+} from "../../redux/slice/category/omraSlice";
 
 export default function FileList() {
   const dispatch = useDispatch();
@@ -27,7 +31,9 @@ export default function FileList() {
   };
 
   useEffect(() => {
-    dispatch(getFiles())
+    if (files.length == 0) {
+      dispatch(getFiles());
+    }
   }, []);
 
   const handleSearch = (e) => {
