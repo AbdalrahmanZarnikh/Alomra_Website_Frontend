@@ -5,7 +5,7 @@ import PopUp from "../components/PopUp/PopUp";
 import FilterTable from "../components/FilterTable/FilterTable";
 import Table from "../components/Table/Table";
 import { deleteUser, getUsers } from "../redux/slice/user/userSlice";
-import { getFiles, getOmras } from "../redux/slice/category/omraSlice";
+import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
 import { useNavigate } from "react-router-dom";
 import { headTable, keywords } from "../constants/data";
@@ -14,8 +14,8 @@ function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, data } = useSelector((state) => state.userSlice);
-  const { omras, files } = useSelector((state) => state.omraSlice);
+  const { isLoading } = useSelector((state) => state.userSlice);
+  const { omras } = useSelector((state) => state.omraSlice);
   const [omra, setOmra] = useState("");
   const [Filter, setFilter] = useState("الكل");
   const [show, setShow] = useState(false);
@@ -24,7 +24,6 @@ function Home() {
   useEffect(() => {
     const fn = async () => {
       await dispatch(getUsers());
-      await dispatch(gsetFiles());
       await dispatch(getOmras());
     };
     fn();
