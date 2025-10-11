@@ -14,8 +14,8 @@ function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading } = useSelector((state) => state.userSlice);
-  const { omras } = useSelector((state) => state.omraSlice);
+  const { isLoading, data } = useSelector((state) => state.userSlice);
+  const { omras, files } = useSelector((state) => state.omraSlice);
   const [omra, setOmra] = useState("");
   const [Filter, setFilter] = useState("الكل");
   const [show, setShow] = useState(false);
@@ -23,8 +23,8 @@ function Home() {
 
   useEffect(() => {
     const fn = async () => {
-      // await dispatch(getFiles());
       await dispatch(getUsers());
+      await dispatch(gsetFiles());
       await dispatch(getOmras());
     };
     fn();
@@ -48,8 +48,6 @@ function Home() {
     "التكلفة الإجمالية": false,
     الصور: false,
   });
-
-
 
   return (
     <>
