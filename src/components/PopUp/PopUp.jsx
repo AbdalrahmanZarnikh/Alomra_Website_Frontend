@@ -18,7 +18,7 @@ const PopUp = ({ msg, id, thunk, showVar,onClose }) => {
         toast.success(`تم حذف بيانات ${found.name}`)
       }
       else{
-        toast.success(`تم حذف العمرة بنجاح`)
+        toast.success(`تم الحذف بنجاح`)
       }
       
       onClose();

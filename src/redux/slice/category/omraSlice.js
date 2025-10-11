@@ -5,6 +5,8 @@ import addOmra from "./act/addOmra";
 import getOmras from "./act/getOmras";
 import deleteOmra from "./act/deleteOmra";
 import updateOmra from "./act/updateOmra";
+import deleteFile from "./act/deleteFile";
+import getFiles from "./act/getFiles";
 
 import toast from "react-hot-toast";
 
@@ -12,7 +14,7 @@ import toast from "react-hot-toast";
 const initialState = {
   omras: [],
   isLoading: "Idle",
-  allFiles:[],
+  allFiles: [],
   files: [],
   error: null,
 };
@@ -48,6 +50,22 @@ const omraSlice = createSlice({
       state.omras = action.payload;
     });
     builder.addCase(getOmras.rejected, (state, action) => {
+      state.isLoading = "Fail";
+      state.error = action.payload;
+      toast.error(state.error || "Network Error");
+    });
+
+    builder.addCase(getFiles.pending, (state) => {
+      state.isLoading = "Pending";
+      state.error = null;
+    });
+    builder.addCase(getFiles.fulfilled, (state, action) => {
+      state.isLoading = "Success";
+      state.error = null;
+      state.allFiles = action.payload; // تخزين الملفات الأصلية
+      state.files = action.payload; // عرض الملفات مباشرة
+    });
+    builder.addCase(getFiles.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload;
       toast.error(state.error || "Network Error");
@@ -97,6 +115,22 @@ const omraSlice = createSlice({
       state.error = action.payload;
       toast.error(state.error || "Network Error");
     });
+
+    builder.addCase(deleteFile.pending, (state) => {
+      state.isLoading = "Pending";
+      state.error = null;
+    });
+    builder.addCase(deleteFile.fulfilled, (state, action) => {
+      state.isLoading = "Success";
+      state.error = null;
+      state.files = state.files.filter((f) => f.$id !== action.payload);
+    });
+
+    builder.addCase(deleteFile.rejected, (state, action) => {
+      state.isLoading = "Fail";
+      state.error = action.payload;
+      toast.error(state.error || "Network Error");
+    });
   },
 });
 
@@ -104,4 +138,4 @@ export default omraSlice.reducer;
 
 export const { saveFiles, searchFile } = omraSlice.actions;
 
-export { addOmra, getOmras, deleteOmra, updateOmra };
+export { addOmra, getOmras, deleteOmra, updateOmra, deleteFile,getFiles };

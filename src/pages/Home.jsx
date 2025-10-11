@@ -5,10 +5,9 @@ import PopUp from "../components/PopUp/PopUp";
 import FilterTable from "../components/FilterTable/FilterTable";
 import Table from "../components/Table/Table";
 import { deleteUser, getUsers } from "../redux/slice/user/userSlice";
-import { getOmras } from "../redux/slice/category/omraSlice";
+import { getFiles, getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
 import { useNavigate } from "react-router-dom";
-import { fetchFiles } from "../utils/fetchFiles";
 import { headTable, keywords } from "../constants/data";
 
 function Home() {
@@ -24,7 +23,7 @@ function Home() {
 
   useEffect(() => {
     const fn = async () => {
-      fetchFiles(dispatch);
+      // await dispatch(getFiles());
       await dispatch(getUsers());
       await dispatch(getOmras());
     };

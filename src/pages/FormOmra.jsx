@@ -66,17 +66,17 @@ const FormOmra = () => {
     }
   }, [id, isUpdateMode, omras, reset]);
 
-  const [show, setShow] = useState(false);
-
+  
   // Function To Handle Submit
   const onSubmit = async (data) => {
     const action = isUpdateMode
-      ? updateOmra({ id: id, data: data })
-      : addOmra(data);
-
+    ? updateOmra({ id: id, data: data })
+    : addOmra(data);
+    
     await dispatch(action);
   };
-
+  
+  const [show, setShow] = useState(false);
   const [newId, setNewId] = useState("");
 
   const CheckPass = (id) => {
