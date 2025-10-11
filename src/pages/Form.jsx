@@ -149,7 +149,12 @@ const Form = () => {
     const subscription = watch((value) => {
       const foundOmra = omras.find((item) => item._id === value.omra);
       if (foundOmra && value.roomType) {
-        setTotal(foundOmra[value.roomType]);
+        if(value.safar="جواً"){
+          setTotal(500);
+        }
+        else{
+          setTotal(foundOmra[value.roomType]);
+        }
       } else {
         setTotal(0);
       }
@@ -175,7 +180,11 @@ const Form = () => {
     if (omras.length > 0) {
       form.append("omra", data.omra);
       const found = omras.find((item) => item._id === data.omra);
-      form.append("totalAmount", found[data.roomType]);
+      if ((data.safar = "جواً")) {
+        form.append("totalAmount", 500);
+      } else {
+        form.append("totalAmount", found[data.roomType]);
+      }
     }
 
     const action = isUpdateMode
@@ -188,7 +197,7 @@ const Form = () => {
   };
   return (
     <div className="p-10">
-      <ButtonReverse text={"رجوع"} to={"/"}/>
+      <ButtonReverse text={"رجوع"} to={"/"} />
 
       <FormLayout
         data={data}
