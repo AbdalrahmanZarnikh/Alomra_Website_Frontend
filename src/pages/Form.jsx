@@ -8,9 +8,12 @@ import FormLayout from "../components/FormLayout/FormLayout";
 import { useEffect, useState } from "react";
 import { typeRoom, typeSafar, rooms } from "../constants/data";
 
+
+
 const Form = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+    
 
   const navigate = useNavigate();
 
