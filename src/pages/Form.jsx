@@ -153,7 +153,7 @@ const Form = () => {
       const foundOmra = omras.find((item) => item._id === value.omra);
       if (foundOmra && value.roomType) {
         if(value.safar==="جواً"){
-          setTotal(500);
+          setTotal(foundOmra[value.roomType]-50);
         }
         else{
           setTotal(foundOmra[value.roomType]);
@@ -184,7 +184,7 @@ const Form = () => {
       form.append("omra", data.omra);
       const found = omras.find((item) => item._id === data.omra);
       if ((data.safar === "جواً")) {
-        form.append("totalAmount", 500);
+        form.append("totalAmount", found[data.roomType]-50);
       } else {
         form.append("totalAmount", found[data.roomType]);
       }
