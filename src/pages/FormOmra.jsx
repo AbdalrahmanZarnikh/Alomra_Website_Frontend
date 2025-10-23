@@ -11,7 +11,6 @@ import {
 import PopUp from "../components/PopUp/PopUp";
 import FormLayout from "../components/FormLayout/FormLayout";
 import { Edit2, Trash2 } from "lucide-react";
-import { FcDeleteColumn } from "react-icons/fc";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 
 const FormOmra = () => {
