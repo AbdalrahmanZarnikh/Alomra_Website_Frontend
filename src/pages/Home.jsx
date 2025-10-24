@@ -7,12 +7,10 @@ import Table from "../components/Table/Table";
 import { deleteUser, getUsers } from "../redux/slice/user/userSlice";
 import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
-import { useNavigate } from "react-router-dom";
 import { headTable, keywords } from "../constants/data";
 
 function Home() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { isLoading } = useSelector((state) => state.userSlice);
   const { omras } = useSelector((state) => state.omraSlice);

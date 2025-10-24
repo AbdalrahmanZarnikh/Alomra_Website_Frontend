@@ -8,12 +8,10 @@ import FormLayout from "../components/FormLayout/FormLayout";
 import { useEffect, useState } from "react";
 import { typeRoom, typeSafar, rooms } from "../constants/data";
 
-
-
 const Form = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-    
+
 
   const navigate = useNavigate();
 
@@ -152,10 +150,9 @@ const Form = () => {
     const subscription = watch((value) => {
       const foundOmra = omras.find((item) => item._id === value.omra);
       if (foundOmra && value.roomType) {
-        if(value.safar==="جواً"){
-          setTotal(foundOmra[value.roomType]-50);
-        }
-        else{
+        if (value.safar === "جواً") {
+          setTotal(foundOmra[value.roomType] - 50);
+        } else {
           setTotal(foundOmra[value.roomType]);
         }
       } else {
@@ -183,8 +180,8 @@ const Form = () => {
     if (omras.length > 0) {
       form.append("omra", data.omra);
       const found = omras.find((item) => item._id === data.omra);
-      if ((data.safar === "جواً")) {
-        form.append("totalAmount", found[data.roomType]-50);
+      if (data.safar === "جواً") {
+        form.append("totalAmount", found[data.roomType] - 50);
       } else {
         form.append("totalAmount", found[data.roomType]);
       }
