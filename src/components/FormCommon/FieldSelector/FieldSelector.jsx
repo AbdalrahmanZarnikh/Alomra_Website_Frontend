@@ -20,7 +20,7 @@ const FieldSelector = ({
       <select
         id={nameInDocument}
         {...register(nameInDocument, validationRules)}
-        className="cursor-pointer"
+        className="cursor-pointer "
       >
         <option value=""> {option}</option>
         {data.map((ele) => {

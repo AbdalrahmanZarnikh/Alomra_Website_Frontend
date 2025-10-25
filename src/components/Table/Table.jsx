@@ -70,8 +70,7 @@ const Table = ({
       <h1
         className={`flex ${
           room ? "justify-evenly gap-10" : "justify-center"
-        } items-center mb-5 text-5xl text-primary/90`}
-      >
+        } items-center mb-5 text-5xl text-primary/90`}>
         <span>{Filter}</span>
         {room && (
           <span
@@ -83,8 +82,7 @@ const Table = ({
                 : room === "ثنائية"
                 ? "bg-red-600"
                 : "bg-zinc-800"
-            }`}
-          >
+            }`}>
             {room}
           </span>
         )}
@@ -103,7 +101,8 @@ const Table = ({
             <span className="print:hidden">
               إجمالي المدفوعات:{" "}
               <span className="text-sm md:text-3xl text-primary/90 m-2 ">
-                {totalPaid} $ / <span className="text-green-600">{totalAmountPred} $</span>
+                {totalPaid} $ /{" "}
+                <span className="text-green-600">{totalAmountPred} $</span>
               </span>{" "}
             </span>
           </p>
@@ -123,8 +122,7 @@ const Table = ({
                   key={index}
                   className={`p-3 text-center ${
                     !checked[head] && "print:hidden"
-                  }`}
-                >
+                  }`}>
                   <div className="flex justify-center items-center gap-1">
                     <span>{head}</span>
                     <input
@@ -150,39 +148,34 @@ const Table = ({
               return (
                 <tr
                   key={ele._id}
-                  className="border-t border-gray-500 hover:bg-yellow-100 transition"
-                >
+                  className="border-t border-gray-500 hover:bg-yellow-100 transition">
                   <td className="p-3 text-center font-bold">{index + 1}</td>
 
                   <td
                     className={`p-3 text-center ${
                       !checked.الاسم && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     {ele.name}
                   </td>
 
                   <td
                     className={`p-3 text-center ${
                       !checked["رقم الجوال"] && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     {ele.phone || "—"}
                   </td>
 
                   <td
                     className={`p-3 text-center text-green-700 ${
                       !checked["المبلغ المدفوع"] && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     {ele.paidAmount}
                   </td>
 
                   <td
                     className={`p-3 text-center text-red-700 ${
                       !checked["المبلغ المتبقي"] && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     {ele.totalAmount - ele.paidAmount > 0 ? (
                       ele.totalAmount - ele.paidAmount
                     ) : (
@@ -193,29 +186,25 @@ const Table = ({
                   <td
                     className={`p-3 text-center text-gray-800 font-bold ${
                       !checked.الغرفة && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     {ele.room || "—"}
                   </td>
 
                   <td
                     className={`p-3 text-center ${
                       !checked.ملاحظات && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     {ele.details || "—"}
                   </td>
 
                   <td
                     className={`p-3 text-center ${
                       !checked["حالة الجواز"] && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     <span
                       className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
                         ele.taslim ? "bg-green-600" : "bg-red-600"
-                      }`}
-                    >
+                      }`}>
                       {ele.taslim ? "تم تسليم الجواز" : "لم يتم تسليم الجواز"}
                     </span>
                   </td>
@@ -223,16 +212,14 @@ const Table = ({
                   <td
                     className={`p-3 text-center ${
                       !checked.السفر && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     {ele.safar || "—"}
                   </td>
 
                   <td
                     className={`p-3 text-center ${
                       !checked["نوع الغرفة"] && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     <span
                       className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap  ${
                         ele.roomType === "رباعية"
@@ -242,25 +229,30 @@ const Table = ({
                           : ele.roomType === "ثنائية"
                           ? "bg-red-600"
                           : "bg-zinc-800"
-                      }`}
-                    >
+                      }`}>
                       {ele.roomType}
                     </span>
                   </td>
 
                   <td
                     className={`p-3 text-center ${
+                      !checked["رقم المقعد"] && "print:hidden"
+                    }`}>
+                    <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-gray-800">
+                      {ele.sitNumber || "—"}
+                    </span>
+                  </td>
+
+                  <td
+                    className={`p-3 text-center ${
                       !checked["التكلفة الإجمالية"] && "print:hidden"
-                    }`}
-                  >
+                    }`}>
                     <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-yellow-500">
                       {ele.totalAmount}
                     </span>
                   </td>
 
                   {/* الصور */}
-
-
 
                   {/* <td
                     className={`p-3 text-center ${
@@ -283,14 +275,12 @@ const Table = ({
                     <div className="flex gap-2 justify-end flex-wrap">
                       <button
                         className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-400 text-xs md:text-sm cursor-pointer"
-                        onClick={() => navigate(`/edit-user/${ele._id}`)}
-                      >
+                        onClick={() => navigate(`/edit-user/${ele._id}`)}>
                         تعديل
                       </button>
                       <button
                         onClick={() => CheckPass(ele._id)}
-                        className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-400 text-xs md:text-sm cursor-pointer"
-                      >
+                        className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-400 text-xs md:text-sm cursor-pointer">
                         حذف
                       </button>
                     </div>
@@ -308,15 +298,13 @@ const Table = ({
           <button
             type="button"
             className="inline-flex justify-between w-64 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          >
+            onClick={() => setDropdownOpen(!dropdownOpen)}>
             حدد ماتريد طباعته
             <svg
               className="w-5 h-5 ml-2"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+              viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -332,8 +320,7 @@ const Table = ({
                 {headTable.map((head) => (
                   <label
                     key={head}
-                    className="flex items-center gap-2 cursor-pointer"
-                  >
+                    className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
                       className="accent-green-600"
@@ -356,8 +343,7 @@ const Table = ({
         {filteredData.map((ele, index) => (
           <div
             key={ele._id}
-            className="bg-gray-500 rounded-lg shadow p-3 border border-gray-200 print:hidden"
-          >
+            className="bg-gray-500 rounded-lg shadow p-3 border border-gray-200 print:hidden">
             <CardUser
               name={ele.name}
               phone={ele.phone}
@@ -370,18 +356,17 @@ const Table = ({
               roomType={ele.roomType}
               taslim={ele.taslim}
               details={ele.details}
+              sitNumber={ele.sitNumber}
             />
             <div className="flex gap-2 mt-3">
               <button
                 className="bg-blue-600 cursor-pointer text-white px-3 py-1 rounded text-sm hover:bg-blue-400"
-                onClick={() => navigate(`/edit-user/${ele._id}`)}
-              >
+                onClick={() => navigate(`/edit-user/${ele._id}`)}>
                 تعديل
               </button>
               <button
                 onClick={() => CheckPass(ele._id)}
-                className="bg-red-600 cursor-pointer text-white px-3 py-1 rounded text-sm hover:bg-red-400"
-              >
+                className="bg-red-600 cursor-pointer text-white px-3 py-1 rounded text-sm hover:bg-red-400">
                 حذف
               </button>
             </div>

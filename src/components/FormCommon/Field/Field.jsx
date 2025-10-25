@@ -9,6 +9,7 @@ const Field = ({label,type,register,errors,placeholder,nameInDocument ,required}
         type={type}
         placeholder={` ${placeholder} ...`}
         {...register(nameInDocument, required && { required: `هذا الحقل مطلوب` })}
+        className="placeholder:text-gray-500"
       />
       {errors?.[nameInDocument] && (
         <span className="text-red-400">{errors[nameInDocument].message}</span>

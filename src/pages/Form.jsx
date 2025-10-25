@@ -12,7 +12,6 @@ const Form = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-
   const navigate = useNavigate();
 
   const {
@@ -64,6 +63,15 @@ const Form = () => {
       required: false,
       errors: errors,
       nameInDocument: "details",
+    },
+    {
+      type: "text",
+      label: "رقم المقعد",
+      placeholder: "ادخل  رقم المقعد",
+      register: register,
+      required: false,
+      errors: errors,
+      nameInDocument: "sitNumber",
     },
   ];
 
@@ -136,12 +144,8 @@ const Form = () => {
           roomType: found.roomType,
           omra: found.omra?._id || "",
           safar: found.safar,
+          sitNumber: found.sitNumber,
         });
-
-        // const omraFound = omras.find((item) => item._id === found.omra?._id);
-        // if (omraFound && found.roomType) {
-        //   setTotal(omraFound[found.roomType]);
-        // }
       }
     }
   }, [id, isUpdateMode, reset, omras, data]);
@@ -176,6 +180,7 @@ const Form = () => {
     form.append("safar", data.safar);
     form.append("room", data.room);
     form.append("roomType", data.roomType);
+    form.append("sitNumber", data.sitNumber);
 
     if (omras.length > 0) {
       form.append("omra", data.omra);
@@ -194,6 +199,7 @@ const Form = () => {
     dispatch(action).then(() => {
       navigate("/");
     });
+
   };
   return (
     <div className="p-10">

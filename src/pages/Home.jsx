@@ -33,6 +33,7 @@ function Home() {
     }
   }, [omras]);
 
+
   const [checked, setChecked] = useState({
     الاسم: true,
     "رقم الجوال": true,
@@ -43,8 +44,11 @@ function Home() {
     السفر: true,
     "نوع الغرفة": true,
     "التكلفة الإجمالية": false,
-    الصور: false,
+    "رقم المقعد": false,
+    // الصور: false,
   });
+
+  
 
   return (
     <>
@@ -89,8 +93,7 @@ function Home() {
 
           <h1
             className="mb-4 bg-primary/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-primary/50"
-            onClick={() => window.print()}
-          >
+            onClick={() => window.print()}>
             حفظ القائمة كملف PDF
           </h1>
           {/* Save Or Print Table */}

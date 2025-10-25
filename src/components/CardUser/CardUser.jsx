@@ -10,6 +10,7 @@ const CardUser = ({
   paidAmount,
   taslim,
   images,
+  sitNumber,
   details,
   roomType,
 }) => {
@@ -56,6 +57,15 @@ const CardUser = ({
 
         <p>
           <span className="font-semibold text-gray-900">
+            رقم المقعد:
+          </span>{" "}
+          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
+            {sitNumber}
+          </span>
+        </p>
+
+        <p>
+          <span className="font-semibold text-gray-900">
             التكلفة الإجمالية:
           </span>{" "}
           <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
@@ -70,21 +80,19 @@ const CardUser = ({
           className={`px-3 py-1 rounded-full text-white text-xs font-bold ${
             roomType === "رباعية"
               ? "bg-green-600"
-              :roomType === "ثلاثية"
+              : roomType === "ثلاثية"
               ? "bg-blue-600"
-              :roomType === "ثنائية"
+              : roomType === "ثنائية"
               ? "bg-red-600"
               : "bg-zinc-800"
-          }`}
-        >
+          }`}>
           {roomType}
         </span>
 
         <span
           className={`px-3 py-1 rounded-full text-white text-xs font-bold ${
             taslim ? "bg-green-600" : "bg-red-600"
-          }`}
-        >
+          }`}>
           {taslim ? "تم تسليم الجواز" : "لم يتم تسليم الجواز"}
         </span>
 
