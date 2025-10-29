@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -45,13 +45,13 @@ const PopUp = ({ msg, id, thunk, showVar,onClose }) => {
             </div>
             <div className="flex  gap-2">
               <button
-                className="submit-button m-auto mt-5 cursor-pointer "
+                className="submit-button bg-primary m-auto mt-5 cursor-pointer "
                 onClick={handleDelete}
               >
                 إدخال
               </button>
               <button
-                className="submit-button m-auto mt-5  cursor-pointer "
+                className="submit-button bg-primary m-auto mt-5  cursor-pointer "
                 onClick={() => {
                   onClose();
                 }}
