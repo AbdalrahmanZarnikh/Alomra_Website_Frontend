@@ -9,7 +9,6 @@ const PopUp = ({ msg, id, thunk, showVar,onClose }) => {
   const {data}=useSelector((state)=>state.userSlice)
 
 
-
   const handleDelete = async () => {
     const found = data.find((item) => item._id === id);
     if (pass == "3415") {
@@ -48,7 +47,7 @@ const PopUp = ({ msg, id, thunk, showVar,onClose }) => {
                 className="submit-button bg-primary m-auto mt-5 cursor-pointer "
                 onClick={handleDelete}
               >
-                إدخال
+                إدخال  
               </button>
               <button
                 className="submit-button bg-primary m-auto mt-5  cursor-pointer "
