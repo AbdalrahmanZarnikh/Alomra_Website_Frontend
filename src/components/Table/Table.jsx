@@ -168,14 +168,14 @@ const Table = ({
                   <td
                     className={`p-3 text-center text-green-700 ${
                       !checked["المبلغ المدفوع"] && "print:hidden"
-                    }`}>
+                    } text-lg`}>
                     {ele.paidAmount}
                   </td>
 
                   <td
                     className={`p-3 text-center text-red-700 ${
                       !checked["المبلغ المتبقي"] && "print:hidden"
-                    }`}>
+                    } text-lg`}>
                     {ele.totalAmount - ele.paidAmount > 0 ? (
                       ele.totalAmount - ele.paidAmount
                     ) : (
