@@ -56,11 +56,18 @@ const Table = ({
   }
 
   const totalPaid = filteredData.reduce((acc, ele) => {
-    return acc + ele.paidAmount;
+    if (ele.name !== "عبدالرزاق بيلوني") {
+      return acc + ele.paidAmount;
+    }
+    // return acc + ele.paidAmount;
+    return acc;
   }, 0);
 
   const totalAmountPred = filteredData.reduce((acc, ele) => {
-    return acc + ele.totalAmount;
+    if (ele.name !== "عبدالرزاق بيلوني") {
+      return acc + ele.totalAmount;
+    }
+    return acc;
   }, 0);
 
   console.log(totalAmountPred);
