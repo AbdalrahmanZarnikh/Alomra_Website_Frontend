@@ -17,65 +17,57 @@ const CardUser = ({
   return (
     <div className="bg-white shadow-md rounded-xl p-4 border border-gray-200 mb-4">
       {/* العنوان + الاسم */}
-      <div className="flex items-center justify-between mb-3 ">
-        <span className="text-red-600 font-bold text-lg ">{index + 1}</span>
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-red-600 font-bold text-lg">{index + 1}</span>
         <h2 className="text-gray-800 font-bold text-2xl m-auto mb-4">{name}</h2>
       </div>
 
       {/* التفاصيل الأساسية */}
       <div className="space-y-2 text-sm text-gray-700">
-        <p>
-          <span className="font-semibold text-gray-900">رقم الجوال:</span>{" "}
-          {phone || "—"}
+        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+          <span className="font-semibold text-gray-900">رقم الجوال:</span>
+          <span>{phone || "—"}</span>
         </p>
 
-        <p>
-          <span className="font-semibold text-gray-900">المبلغ المدفوع:</span>{" "}
-          <span className="text-green-600 font-bold">{paidAmount}</span>
+        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+          <span className="font-semibold text-gray-900">المبلغ المدفوع:</span>
+          <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">{paidAmount}</span>
         </p>
 
-        <p>
-          <span className="font-semibold text-gray-900">المبلغ المتبقي:</span>{" "}
+        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+          <span className="font-semibold text-gray-900">المبلغ المتبقي:</span>
           {totalAmount - paidAmount > 0 ? (
-            <span className="text-red-600 font-bold">
+            <span className="text-red-600 font-bold bg-yellow-100 px-2 py-0.5 rounded-md">
               {totalAmount - paidAmount}
             </span>
           ) : (
-            <span className="text-green-600 font-bold">تم الدفع</span>
+            <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">تم الدفع</span>
           )}
         </p>
 
-        <p>
-          <span className="font-semibold text-gray-900">ملاحظات:</span>{" "}
-          {details || "—"}
+        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+          <span className="font-semibold text-gray-900">ملاحظات:</span>
+          <span>{details || "—"}</span>
         </p>
 
-        <p>
-          <span className="font-semibold text-gray-900">رقم الغرفة:</span>{" "}
-          {room || "—"}
+        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+          <span className="font-semibold text-gray-900">رقم الغرفة:</span>
+          <span>{room || "—"}</span>
         </p>
 
-        <p>
-          <span className="font-semibold text-gray-900">
-            رقم المقعد:
-          </span>{" "}
-          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
-            {sitNumber}
-          </span>
+        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+          <span className="font-semibold text-gray-900">رقم المقعد:</span>
+          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">{sitNumber}</span>
         </p>
 
-        <p>
-          <span className="font-semibold text-gray-900">
-            التكلفة الإجمالية:
-          </span>{" "}
-          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
-            {totalAmount}
-          </span>
+        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+          <span className="font-semibold text-gray-900">التكلفة الإجمالية:</span>
+          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">{totalAmount}</span>
         </p>
       </div>
 
       {/* البادجات */}
-      <div className="flex flex-wrap items-center gap-2 mt-4">
+      <div className="flex flex-wrap items-center gap-2 mt-4 justify-center">
         <span
           className={`px-3 py-1 rounded-full text-white text-xs font-bold ${
             roomType === "رباعية"
