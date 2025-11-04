@@ -24,17 +24,17 @@ const CardUser = ({
 
       {/* التفاصيل الأساسية */}
       <div className="space-y-2 text-sm text-gray-700">
-        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+        <p className="flex justify-between bg-zinc-400 shadow-2xl text-gray-900 p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">رقم الجوال:</span>
           <span>{phone || "—"}</span>
         </p>
 
-        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+        <p className="flex justify-between bg-zinc-400 text-white p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">المبلغ المدفوع:</span>
           <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">{paidAmount}</span>
         </p>
 
-        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+        <p className="flex justify-between bg-zinc-400 text-white p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">المبلغ المتبقي:</span>
           {totalAmount - paidAmount > 0 ? (
             <span className="text-red-600 font-bold bg-yellow-100 px-2 py-0.5 rounded-md">
@@ -45,22 +45,22 @@ const CardUser = ({
           )}
         </p>
 
-        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+        <p className="flex justify-between bg-zinc-400 text-gray-900 p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">ملاحظات:</span>
           <span>{details || "—"}</span>
         </p>
 
-        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+        <p className="flex justify-between bg-zinc-400 text-gray-900 p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">رقم الغرفة:</span>
           <span>{room || "—"}</span>
         </p>
 
-        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+        <p className="flex justify-between bg-zinc-400 text-white p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">رقم المقعد:</span>
           <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">{sitNumber}</span>
         </p>
 
-        <p className="flex justify-between bg-primary/90 text-white p-2 rounded-lg w-full">
+        <p className="flex justify-between bg-zinc-400 text-white p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">التكلفة الإجمالية:</span>
           <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">{totalAmount}</span>
         </p>

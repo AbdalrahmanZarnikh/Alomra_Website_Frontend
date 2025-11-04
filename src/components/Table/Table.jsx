@@ -350,7 +350,7 @@ const Table = ({
         {filteredData.map((ele, index) => (
           <div
             key={ele._id}
-            className="bg-gray-500 rounded-lg shadow p-3 border border-gray-200 print:hidden">
+            className="bg-primary/90 rounded-lg shadow p-3 border border-gray-200 print:hidden">
             <CardUser
               name={ele.name}
               phone={ele.phone}
