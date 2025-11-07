@@ -31,14 +31,16 @@ const Table = ({
           Filter !== "الكل" &&
           Filter !== "جواً" &&
           Filter !== "براً" &&
-          Filter !== "لم يسلم الجواز"
+          Filter !== "لم يسلم الجواز" &&
+          Filter !== "لم يكمل الدفع"
         ) {
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
           return ele.safar === Filter;
         } else if (Filter === "لم يسلم الجواز") {
-          console.log("hello");
           return ele.taslim === false;
+        } else if (Filter == "لم يكمل الدفع") {
+          return ele.totalAmount - ele.paidAmount > 0;
         } else {
           return ele;
         }
@@ -50,7 +52,8 @@ const Table = ({
     Filter !== "الكل" &&
     Filter !== "جواً" &&
     Filter !== "براً" &&
-    Filter !== "لم يسلم الجواز"
+    Filter !== "لم يسلم الجواز" &&
+    Filter !=="لم يكمل الدفع"
   ) {
     var room = filteredData[0]?.roomType;
   }
@@ -69,8 +72,6 @@ const Table = ({
     }
     return acc;
   }, 0);
-
-  console.log(totalAmountPred);
 
   return (
     <div id="print-area" className="w-full">
