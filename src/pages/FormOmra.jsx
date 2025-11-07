@@ -87,7 +87,7 @@ const FormOmra = () => {
     {
       type: "text",
       label: "الاسم",
-      placeholder: "ادخل اسم للعمرة",
+      placeholder: "ادخل اسم للحملة",
       register: register,
       required: true,
       errors: errors,

@@ -33,7 +33,7 @@ const Header = () => {
       <div className="flex items-center gap-2">
         <img src="image.png" alt="logo" className="w-12 h-12 md:w-16 md:h-16" />
         <h1 className="text-white font-bold text-lg md:text-2xl hidden sm:block">
-          نظام العمرة
+          نظام العمرة و الحج
         </h1>
       </div>
 
@@ -90,7 +90,7 @@ const Header = () => {
         <input
           type="text"
           ref={input}
-          placeholder="ابحث عن معتمر"
+          placeholder="ابحث عن اسم"
           className="p-3 w-full rounded-lg border border-gray-300 bg-white text-sm md:text-lg text-center"
           onChange={handleSearch}
         />
