@@ -78,10 +78,10 @@ const Form = () => {
   const contentFormFieldsSelector = [
     {
       data: omras,
-      label: "العمرة",
+      label: "الحملة",
       register: register,
       required: true,
-      option: "اختر شهر العمرة",
+      option: "اختر الحملة ",
       errors: errors,
       nameInDocument: "omra",
     },

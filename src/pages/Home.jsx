@@ -33,7 +33,6 @@ function Home() {
     }
   }, [omras]);
 
-
   const [checked, setChecked] = useState({
     الاسم: true,
     "رقم الجوال": true,
@@ -48,7 +47,7 @@ function Home() {
     // الصور: false,
   });
 
-  
+  console.log(omra.split(" ")[0]);
 
   return (
     <>
@@ -84,8 +83,12 @@ function Home() {
           {/* Start Head Section  */}
 
           <h1 className="flex justify-center mb-10 text-2xl md:text-4xl mt-5 ">
-            عمرة
-            <span className="mx-2  text-primary/90 font-bold">{omra}</span>
+            {omra.split(" ")[0]}
+            <span className="mx-2  text-primary/90 font-bold">
+              {omra.split(" ").map((ele, index) => {
+                if (index !== 0) return ele + " ";
+              })}
+            </span>
           </h1>
           {/* End Head Section  */}
 

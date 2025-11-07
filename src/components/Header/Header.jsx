@@ -57,7 +57,7 @@ const Header = () => {
             }`
           }
         >
-          قائمة المعتمرين
+          الجدول 
         </NavLink>
         <NavLink
           to="/add-user"
@@ -69,7 +69,7 @@ const Header = () => {
             }`
           }
         >
-          تسجيل معتمرين
+          تسجيل جديد
         </NavLink>
         <NavLink
           to="/add-omra"
@@ -81,7 +81,7 @@ const Header = () => {
             }`
           }
         >
-          إنشاء عمرة جديدة
+          إنشاء حملة جديدة
         </NavLink>
       </nav>
 
@@ -141,7 +141,7 @@ const Header = () => {
             }
             onClick={() => setMenuOpen(false)}
           >
-            قائمة المعتمرين
+            الجدول
           </NavLink>
           <NavLink
             to="/add-user"
@@ -154,7 +154,7 @@ const Header = () => {
             }
             onClick={() => setMenuOpen(false)}
           >
-            تسجيل معتمرين
+            تسجيل جديد
           </NavLink>
           <NavLink
             to="/add-omra"
@@ -167,7 +167,7 @@ const Header = () => {
             }
             onClick={() => setMenuOpen(false)}
           >
-            إنشاء عمرة جديدة
+            إنشاء حملة جديدة
           </NavLink>
           <NavLink
             to="/pdf"
