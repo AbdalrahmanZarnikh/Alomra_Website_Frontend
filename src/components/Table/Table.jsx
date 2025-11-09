@@ -32,7 +32,10 @@ const Table = ({
           Filter !== "جواً" &&
           Filter !== "براً" &&
           Filter !== "لم يسلم الجواز" &&
-          Filter !== "لم يكمل الدفع"
+          Filter !== "لم يكمل الدفع" &&
+          Filter !== "خالد قوجة" &&
+          Filter !== "أحمد المصري" &&
+          Filter !== "عبد الرزاق بيلوني"
         ) {
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
@@ -41,6 +44,10 @@ const Table = ({
           return ele.taslim === false;
         } else if (Filter == "لم يكمل الدفع") {
           return ele.totalAmount - ele.paidAmount > 0;
+        } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
+          return ele.details == Filter;
+        } else if (Filter == "عبد الرزاق بيلوني") {
+          return ele.details !== "خالد قوجة" && ele.details !== "أحمد المصري";
         } else {
           return ele;
         }
@@ -53,7 +60,10 @@ const Table = ({
     Filter !== "جواً" &&
     Filter !== "براً" &&
     Filter !== "لم يسلم الجواز" &&
-    Filter !=="لم يكمل الدفع"
+    Filter !== "لم يكمل الدفع" &&
+    Filter !== "خالد قوجة" &&
+    Filter !== "أحمد المصري" &&
+    Filter !== "عبد الرزاق بيلوني"
   ) {
     var room = filteredData[0]?.roomType;
   }
