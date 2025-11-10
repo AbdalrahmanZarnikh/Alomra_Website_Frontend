@@ -35,7 +35,9 @@ const Table = ({
           Filter !== "لم يكمل الدفع" &&
           Filter !== "خالد قوجة" &&
           Filter !== "أحمد المصري" &&
-          Filter !== "عبد الرزاق بيلوني"
+          Filter !== "عبد الرزاق بيلوني" &&
+          Filter !== "باص 1" &&
+          Filter !== "باص 2"
         ) {
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
@@ -48,6 +50,8 @@ const Table = ({
           return ele.details == Filter;
         } else if (Filter == "عبد الرزاق بيلوني") {
           return ele.details !== "خالد قوجة" && ele.details !== "أحمد المصري";
+        } else if (Filter == "باص 1" || Filter == "باص 2") {
+          return ele.sitNumber.split(" ")[2] == Filter.split(" ")[1];
         } else {
           return ele;
         }
@@ -63,7 +67,9 @@ const Table = ({
     Filter !== "لم يكمل الدفع" &&
     Filter !== "خالد قوجة" &&
     Filter !== "أحمد المصري" &&
-    Filter !== "عبد الرزاق بيلوني"
+    Filter !== "عبد الرزاق بيلوني" &&
+    Filter !== "باص 1" &&
+    Filter !== "باص 2"
   ) {
     var room = filteredData[0]?.roomType;
   }
@@ -163,6 +169,7 @@ const Table = ({
 
           <tbody className="text-sm md:text-base bg-yellow-50">
             {filteredData.map((ele, index) => {
+              // console.log(ele.sitNumber.split(" ")[2]);
               return (
                 <tr
                   key={ele._id}
@@ -206,13 +213,6 @@ const Table = ({
                       !checked.الغرفة && "print:hidden"
                     }`}>
                     {ele.room || "—"}
-                  </td>
-
-                  <td
-                    className={`p-3 text-center ${
-                      !checked.ملاحظات && "print:hidden"
-                    }`}>
-                    {ele.details || "—"}
                   </td>
 
                   <td
@@ -268,6 +268,13 @@ const Table = ({
                     <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-yellow-500">
                       {ele.totalAmount}
                     </span>
+                  </td>
+
+                  <td
+                    className={`p-3 text-center ${
+                      !checked.ملاحظات && "print:hidden"
+                    }`}>
+                    {ele.details || "—"}
                   </td>
 
                   {/* الصور */}
