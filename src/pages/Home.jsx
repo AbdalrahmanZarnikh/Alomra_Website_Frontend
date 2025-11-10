@@ -69,7 +69,7 @@ function Home() {
 
           {/*Start Filter Section */}
 
-          <div className="flex justify-between">
+          <div className="flex flex-col items-center  md:flex-row justify-between ">
             <FilterTable data={omras} setFunction={setOmra} value={omra} />
 
             <FilterTable
