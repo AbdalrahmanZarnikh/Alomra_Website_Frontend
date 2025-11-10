@@ -47,7 +47,7 @@ const Table = ({
         } else if (Filter == "لم يكمل الدفع") {
           return ele.totalAmount - ele.paidAmount > 0;
         } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
-          return ele.details == Filter;
+          return ele.details.includes(Filter);
         } else if (Filter == "عبد الرزاق بيلوني") {
           return ele.details !== "خالد قوجة" && ele.details !== "أحمد المصري";
         } else if (Filter == "باص 1" || Filter == "باص 2") {
