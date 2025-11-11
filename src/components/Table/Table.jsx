@@ -49,7 +49,7 @@ const Table = ({
         } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
           return ele.details.includes(Filter);
         } else if (Filter == "عبد الرزاق بيلوني") {
-          return ele.details !== "خالد قوجة" && ele.details !== "أحمد المصري";
+          return ele.details.includes("خالد قوجة")  && ele.details.includes("أحمد المصري");
         } else if (Filter == "باص 1" || Filter == "باص 2") {
           return ele.sitNumber.split(" ")[2] == Filter.split(" ")[1];
         } else {
