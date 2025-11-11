@@ -130,7 +130,7 @@ const Table = ({
               <span className="text-sm md:text-3xl text-primary/90 m-2 ">
                 {lastNumber}
               </span>{" "}
-              <div className="flex justify-start mt-2 items-center gap-4">
+              <div className="flex justify-start mt-2 items-center gap-4 print:hidden">
                 <label htmlFor="Order">ترتيب حسب المقاعد</label>
                 <input
                   type="checkbox"
