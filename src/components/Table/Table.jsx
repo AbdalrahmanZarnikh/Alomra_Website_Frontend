@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Image from "../Image/Image";
 import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Table = ({
   Filter,
@@ -15,15 +15,16 @@ const Table = ({
 }) => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { data } = useSelector((state) => state.userSlice);
+  const [order, setOrder] = useState(false);
 
+  const { data } = useSelector((state) => state.userSlice);
   const CheckPass = (id) => {
     setShow(true);
     setNewId(id);
   };
 
   // 🟢 فلترة البيانات
-  const filteredData =
+  let filteredData =
     data
       ?.filter((ele) => ele.omra?.name === omra)
       .filter((ele) => {
@@ -49,13 +50,20 @@ const Table = ({
         } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
           return ele.details.includes(Filter);
         } else if (Filter == "عبد الرزاق بيلوني") {
-          return !ele.details.includes("خالد قوجة")  && !ele.details.includes("أحمد المصري");
+          return (
+            !ele.details.includes("خالد قوجة") &&
+            !ele.details.includes("أحمد المصري")
+          );
         } else if (Filter == "باص 1" || Filter == "باص 2") {
-          return ele.sitNumber.split(" ")[2] == Filter.split(" ")[1];
+          return ele.sitNumber.split(" ")[2] === Filter.split(" ")[1];
         } else {
           return ele;
         }
       }) || [];
+
+      if(order){
+        filteredData.sort((a,b)=>+a.sitNumber.split(" ")[0] - +b.sitNumber.split(" ")[0])
+      }
 
   const lastNumber = filteredData.length;
 
@@ -89,6 +97,8 @@ const Table = ({
     return acc;
   }, 0);
 
+
+
   return (
     <div id="print-area" className="w-full">
       <h1
@@ -120,6 +130,18 @@ const Table = ({
               <span className="text-sm md:text-3xl text-primary/90 m-2 ">
                 {lastNumber}
               </span>{" "}
+              <div className="flex justify-start mt-2 items-center gap-4">
+                <label htmlFor="Order">ترتيب حسب المقاعد</label>
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 accent-green-600 cursor-pointer"
+                  name=""
+                  id="Order"
+                  onChange={(e) => {
+                    setOrder(e.target.checked);
+                  }}
+                />
+              </div>
             </span>
 
             <span className="print:hidden">
@@ -139,7 +161,7 @@ const Table = ({
       <div className="w-full overflow-x-auto hidden md:block print:block">
         <table className="w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
           <thead className="bg-gray-800 text-white text-sm md:text-base">
-            <tr>
+            <tr className="">
               <th className="p-3 text-center">#</th>
               {headTable.map((head, index) => (
                 <th
