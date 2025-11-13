@@ -89,18 +89,26 @@ const Table = ({
   }
 
   const totalPaid = filteredData.reduce((acc, ele) => {
-    if (ele.name !== "عبدالرزاق بيلوني") {
-      return acc + ele.paidAmount;
+    if (
+      ele.name == "عبدالرزاق بيلوني" ||
+      ele.details.includes("خالد قوجة") ||
+      ele.details.includes("أحمد المصري")
+    ) {
+      return acc;
     }
-    // return acc + ele.paidAmount;
-    return acc;
+    return acc + ele.paidAmount;
+
   }, 0);
 
   const totalAmountPred = filteredData.reduce((acc, ele) => {
-    if (ele.name !== "عبدالرزاق بيلوني") {
-      return acc + ele.totalAmount;
+    if (
+      ele.name == "عبدالرزاق بيلوني" ||
+      ele.details.includes("خالد قوجة") ||
+      ele.details.includes("أحمد المصري")
+    ) {
+      return acc;
     }
-    return acc;
+    return acc + ele.totalAmount;
   }, 0);
 
   return (
@@ -139,7 +147,7 @@ const Table = ({
                 <input
                   type="checkbox"
                   className="w-4 h-4 accent-green-600 cursor-pointer"
-                  name=""
+                  name="order"
                   id="Order"
                   onChange={(e) => {
                     setOrder(e.target.checked);
