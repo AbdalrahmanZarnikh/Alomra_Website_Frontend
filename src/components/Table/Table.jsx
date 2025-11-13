@@ -33,6 +33,7 @@ const Table = ({
           Filter !== "جواً" &&
           Filter !== "براً" &&
           Filter !== "لم يسلم الجواز" &&
+          Filter !== "تم تسليم الجواز" &&
           Filter !== "لم يكمل الدفع" &&
           Filter !== "خالد قوجة" &&
           Filter !== "أحمد المصري" &&
@@ -45,6 +46,8 @@ const Table = ({
           return ele.safar === Filter;
         } else if (Filter === "لم يسلم الجواز") {
           return ele.taslim === false;
+        } else if (Filter === "تم تسليم الجواز") {
+          return ele.taslim === true;
         } else if (Filter == "لم يكمل الدفع") {
           return ele.totalAmount - ele.paidAmount > 0;
         } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
@@ -61,9 +64,11 @@ const Table = ({
         }
       }) || [];
 
-      if(order){
-        filteredData.sort((a,b)=>+a.sitNumber.split(" ")[0] - +b.sitNumber.split(" ")[0])
-      }
+  if (order) {
+    filteredData.sort(
+      (a, b) => +a.sitNumber.split(" ")[0] - +b.sitNumber.split(" ")[0]
+    );
+  }
 
   const lastNumber = filteredData.length;
 
@@ -71,6 +76,7 @@ const Table = ({
     Filter !== "الكل" &&
     Filter !== "جواً" &&
     Filter !== "براً" &&
+    Filter !== "تم تسليم الجواز" &&
     Filter !== "لم يسلم الجواز" &&
     Filter !== "لم يكمل الدفع" &&
     Filter !== "خالد قوجة" &&
@@ -96,8 +102,6 @@ const Table = ({
     }
     return acc;
   }, 0);
-
-
 
   return (
     <div id="print-area" className="w-full">
