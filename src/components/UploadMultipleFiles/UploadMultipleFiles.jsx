@@ -4,6 +4,7 @@ import { TiDelete } from "react-icons/ti";
 import { useParams } from "react-router-dom";
 import { storage } from "../../utils/appwriteClient";
 import toast from "react-hot-toast";
+import { playSound } from "../../utils/playSound";
 
 const UploadMultipleFiles = ({ form, records }) => {
   const inputRef = useRef(null);
@@ -39,6 +40,7 @@ const UploadMultipleFiles = ({ form, records }) => {
             file
           );
           toast.success("تم رفع الملف بنجاح");
+          playSound();
         } catch (err) {
           console.error(err);
           toast.error("حدث خطأ أثناء رفع الملف");

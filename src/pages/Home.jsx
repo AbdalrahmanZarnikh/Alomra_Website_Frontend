@@ -8,6 +8,7 @@ import { deleteUser, getUsers } from "../redux/slice/user/userSlice";
 import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
 import { headTable, keywords } from "../constants/data";
+import { playSound } from "../utils/playSound";
 
 function Home() {
   const dispatch = useDispatch();
@@ -47,7 +48,6 @@ function Home() {
     // الصور: false,
   });
 
-  console.log(omra.split(" ")[0]);
 
   return (
     <>

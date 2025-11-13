@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../api/configAxios";
 import toast from "react-hot-toast";
+import { playSound } from "../../../../utils/playSound";
 
 const createUser = createAsyncThunk(
   "user/createUser",
@@ -10,6 +11,7 @@ const createUser = createAsyncThunk(
       const res = await axios.post("/api/users",data);
      
       toast.success("تم التسجيل بنجاح")
+      playSound();
 
       return res.data.data;
     } catch (error) {
