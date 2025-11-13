@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { playSound } from "../../utils/playSound";
 
-const PopUp = ({ msg, id, thunk, showVar,onClose }) => {
-
-  const dispatch=useDispatch()
+const PopUp = ({ msg, id, thunk, showVar, onClose }) => {
+  const dispatch = useDispatch();
   const [pass, setPass] = useState("");
-  const {data}=useSelector((state)=>state.userSlice)
-
+  const { data } = useSelector((state) => state.userSlice);
 
   const handleDelete = async () => {
     const found = data.find((item) => item._id === id);
     if (pass == "3415") {
       await dispatch(thunk(id));
-      if(found){
-        toast.success(`تم حذف بيانات ${found.name}`)
+      if (found) {
+        toast.success(`تم حذف بيانات ${found.name}`);
+        playSound();
+      } else {
+        toast.success(`تم الحذف بنجاح`);
+        playSound();
       }
-      else{
-        toast.success(`تم الحذف بنجاح`)
-      }
-      
+
       onClose();
     } else {
       toast.error("الرمز السري خاطئ");
+      playSound("/error.mp3");
     }
   };
 
@@ -45,16 +46,14 @@ const PopUp = ({ msg, id, thunk, showVar,onClose }) => {
             <div className="flex  gap-2">
               <button
                 className="submit-button bg-primary m-auto mt-5 cursor-pointer "
-                onClick={handleDelete}
-              >
-                إدخال  
+                onClick={handleDelete}>
+                إدخال
               </button>
               <button
                 className="submit-button bg-primary m-auto mt-5  cursor-pointer "
                 onClick={() => {
                   onClose();
-                }}
-              >
+                }}>
                 إلغاء
               </button>
             </div>
