@@ -219,13 +219,6 @@ const Table = ({
                     className={`p-3 text-center ${
                       !checked.الاسم && "print:hidden"
                     } `}>
-                    <button
-                      onClick={() => {
-                        downloadVCard(ele);
-                      }}
-                      className="print:hidden text-2xl text-green-500 ml-2">
-                      +
-                    </button>
                     {ele.name}
                   </td>
 
