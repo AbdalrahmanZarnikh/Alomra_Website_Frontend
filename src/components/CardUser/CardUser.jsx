@@ -102,7 +102,7 @@ const CardUser = ({
           {safar}
         </span>
 
-        <span className="px-3 py-1 cursor-pointer rounded-full text-white text-xs font-bold bg-indigo-600" onClick={()=>{
+        <span className="px-3 py-1 cursor-pointer rounded-full text-white text-xs font-bold bg-yellow-600" onClick={()=>{
           downloadVCard(ele)
         }}>
          إضافة إلى جهات الاتصال
