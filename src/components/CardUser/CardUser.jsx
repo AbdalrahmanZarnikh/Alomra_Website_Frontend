@@ -14,6 +14,8 @@ const CardUser = ({
   ele,
   roomType,
 }) => {
+
+
   return (
     <div className="bg-white shadow-md rounded-xl p-4 border border-gray-200 mb-4">
       {/* العنوان + الاسم */}
@@ -102,10 +104,10 @@ const CardUser = ({
           {safar}
         </span>
 
-        <span className="px-3 py-1 cursor-pointer rounded-full text-white text-xs font-bold bg-yellow-600" onClick={()=>{
+        <span className="px-3 py-1 cursor-pointer rounded-full flex justify-center items-center gap-2 text-white text-xs font-bold bg-yellow-600" onClick={()=>{
           downloadVCard(ele)
         }}>
-         إضافة إلى جهات الاتصال
+          إضافة إلى جهات الاتصال{" "}
         </span>
       </div>
 
