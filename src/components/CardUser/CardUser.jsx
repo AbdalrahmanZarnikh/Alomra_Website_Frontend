@@ -1,3 +1,4 @@
+import { downloadVCard } from "../../utils/contactUtils";
 import Image from "../Image/Image";
 
 const CardUser = ({
@@ -12,6 +13,7 @@ const CardUser = ({
   images,
   sitNumber,
   details,
+  ele,
   roomType,
 }) => {
   return (
@@ -31,7 +33,9 @@ const CardUser = ({
 
         <p className="flex justify-between bg-primary/70 px-4 text-white p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">المبلغ المدفوع:</span>
-          <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">{paidAmount}</span>
+          <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">
+            {paidAmount}
+          </span>
         </p>
 
         <p className="flex justify-between bg-primary/70 px-4 text-white p-2 rounded-lg w-full">
@@ -41,7 +45,9 @@ const CardUser = ({
               {totalAmount - paidAmount}
             </span>
           ) : (
-            <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">تم الدفع</span>
+            <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">
+              تم الدفع
+            </span>
           )}
         </p>
 
@@ -57,12 +63,18 @@ const CardUser = ({
 
         <p className="flex justify-between bg-primary/70 px-4 text-white p-2 rounded-lg w-full">
           <span className="font-semibold text-gray-900">رقم المقعد:</span>
-          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">{sitNumber}</span>
+          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
+            {sitNumber}
+          </span>
         </p>
 
         <p className="flex justify-between bg-primary/70 px-4 text-white p-2 rounded-lg w-full">
-          <span className="font-semibold text-gray-900">التكلفة الإجمالية:</span>
-          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">{totalAmount}</span>
+          <span className="font-semibold text-gray-900">
+            التكلفة الإجمالية:
+          </span>
+          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
+            {totalAmount}
+          </span>
         </p>
       </div>
 
@@ -90,6 +102,12 @@ const CardUser = ({
 
         <span className="px-3 py-1 rounded-full text-white text-xs font-bold bg-indigo-600">
           {safar}
+        </span>
+
+        <span className="px-3 py-1 cursor-pointer rounded-full text-white text-xs font-bold bg-indigo-600" onClick={()=>{
+          downloadVCard(ele)
+        }}>
+         إضافة إلى جهات الاتصال
         </span>
       </div>
 

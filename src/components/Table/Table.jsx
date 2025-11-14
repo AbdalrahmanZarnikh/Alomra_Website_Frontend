@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 import Image from "../Image/Image";
 import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { downloadAllVCards, downloadVCard } from "../../utils/contactUtils";
 
 const Table = ({
   Filter,
@@ -97,7 +98,6 @@ const Table = ({
       return acc;
     }
     return acc + ele.paidAmount;
-
   }, 0);
 
   const totalAmountPred = filteredData.reduce((acc, ele) => {
@@ -154,6 +154,11 @@ const Table = ({
                   }}
                 />
               </div>
+              <p className="bg-primary p-2 rounded-lg text-white mt-2 cursor-pointer hover:bg-primary/70 print:hidden" onClick={()=>{
+                downloadAllVCards(filteredData)
+              }}>
+                إضافة جميع الأسماء إلى جهات الاتصال
+              </p>
             </span>
 
             <span className="print:hidden">
@@ -213,7 +218,14 @@ const Table = ({
                   <td
                     className={`p-3 text-center ${
                       !checked.الاسم && "print:hidden"
-                    }`}>
+                    } `}>
+                    <button
+                      onClick={() => {
+                        downloadVCard(ele);
+                      }}
+                      className="print:hidden text-2xl text-green-500 ml-2">
+                      +
+                    </button>
                     {ele.name}
                   </td>
 
@@ -405,6 +417,7 @@ const Table = ({
             className="bg-primary/90 rounded-lg shadow p-3 border border-gray-200 print:hidden">
             <CardUser
               name={ele.name}
+              ele={ele}
               phone={ele.phone}
               index={index}
               safar={ele.safar}
