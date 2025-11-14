@@ -1,5 +1,4 @@
 import { downloadVCard } from "../../utils/contactUtils";
-import Image from "../Image/Image";
 
 const CardUser = ({
   index,
@@ -10,7 +9,6 @@ const CardUser = ({
   safar,
   paidAmount,
   taslim,
-  images,
   sitNumber,
   details,
   ele,
