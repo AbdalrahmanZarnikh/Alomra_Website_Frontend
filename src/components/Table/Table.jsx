@@ -3,7 +3,7 @@ import Image from "../Image/Image";
 import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
 import { useState } from "react";
-import { downloadAllVCards, downloadVCard } from "../../utils/contactUtils";
+import { downloadAllVCards } from "../../utils/contactUtils";
 
 const Table = ({
   Filter,
@@ -18,7 +18,7 @@ const Table = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [order, setOrder] = useState(false);
 
-  const { data } = useSelector((state) => state.userSlice);
+  const { data, selectedUsers } = useSelector((state) => state.userSlice);
   const CheckPass = (id) => {
     setShow(true);
     setNewId(id);
@@ -154,9 +154,15 @@ const Table = ({
                   }}
                 />
               </div>
-              <p className="bg-primary p-2 rounded-lg text-white mt-2 cursor-pointer hover:bg-primary/70 print:hidden" onClick={()=>{
-                downloadAllVCards(filteredData)
-              }}>
+              <p
+                className="bg-primary p-2 rounded-lg text-white mt-2 cursor-pointer hover:bg-primary/70 print:hidden"
+                onClick={() => {
+                  if (selectedUsers?.length > 0) {
+                    downloadAllVCards(selectedUsers);
+                  } else {
+                    downloadAllVCards(filteredData);
+                  }
+                }}>
                 إضافة جميع الأسماء إلى جهات الاتصال
               </p>
             </span>

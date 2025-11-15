@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 // State
 const initialState = {
   data: [],
+  selectedUsers: [],
   isLoading: "Idle",
   error: null,
 };
@@ -20,7 +21,11 @@ const initialState = {
 // Slice
 const userSlice = createSlice({
   name: "user",
-  reducers: {},
+  reducers: {
+    addUserSelected: (state, action) => {
+      state.selectedUsers = [...state.selectedUsers, action.payload];
+    },
+  },
   initialState,
   extraReducers: (builder) => {
     builder.addCase(createUser.pending, (state) => {
@@ -102,4 +107,6 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
+export const  { addUserSelected } = userSlice.actions
+ 
 export { createUser, deleteUser, updateUser, getUsers };

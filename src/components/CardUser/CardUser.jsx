@@ -1,4 +1,6 @@
+import { useDispatch } from "react-redux";
 import { downloadVCard } from "../../utils/contactUtils";
+import {addUserSelected} from "../../redux/slice/user/userSlice"
 
 const CardUser = ({
   index,
@@ -14,11 +16,26 @@ const CardUser = ({
   ele,
   roomType,
 }) => {
+  const dispatch=useDispatch();
 
+ 
 
   return (
     <div className="bg-white shadow-md rounded-xl p-4 border border-gray-200 mb-4">
       {/* العنوان + الاسم */}
+      <div className="flex items-center gap-3">
+        <input
+          id="VCard"
+          type="checkbox"
+          className="w-4 h-4 accent-green-600 cursor-pointer"
+          onChange={(e)=>{
+               if(e.target.checked){
+                dispatch(addUserSelected(ele));
+               }
+          }}
+        />
+        {/* <span className="text-sm text-gray-600">  </span> */}
+      </div>
       <div className="flex items-center justify-between mb-3">
         <span className="text-red-600 font-bold text-lg">{index + 1}</span>
         <h2 className="text-gray-800 font-bold text-2xl m-auto mb-4">{name}</h2>
@@ -104,9 +121,11 @@ const CardUser = ({
           {safar}
         </span>
 
-        <span className="px-3 py-1 cursor-pointer rounded-full flex justify-center items-center gap-2 text-white text-xs font-bold bg-yellow-600" onClick={()=>{
-          downloadVCard(ele)
-        }}>
+        <span
+          className="px-3 py-1 cursor-pointer rounded-full flex justify-center items-center gap-2 text-white text-xs font-bold bg-yellow-600"
+          onClick={() => {
+            downloadVCard(ele);
+          }}>
           إضافة إلى جهات الاتصال{" "}
         </span>
       </div>
