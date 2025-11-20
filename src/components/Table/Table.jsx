@@ -50,7 +50,11 @@ const Table = ({
         } else if (Filter === "تم تسليم الجواز") {
           return ele.taslim === true;
         } else if (Filter == "لم يكمل الدفع") {
-          return ele.totalAmount - ele.paidAmount > 0;
+          return (
+            ele.totalAmount - ele.paidAmount > 0 &&
+            !ele.details.includes("خالد قوجة") &&
+            !ele.details.includes("أحمد المصري")
+          );
         } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
           return ele.details.includes(Filter);
         } else if (Filter == "عبد الرزاق بيلوني") {
