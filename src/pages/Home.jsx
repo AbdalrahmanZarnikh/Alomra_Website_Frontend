@@ -29,7 +29,7 @@ function Home() {
 
   useEffect(() => {
     if (omras?.length > 0) {
-      setOmra(omras[0]?.name);
+      setOmra(omras[1]?.name);
     }
   }, [omras]);
 
@@ -42,7 +42,7 @@ function Home() {
     "حالة الجواز": false,
     السفر: true,
     "نوع الغرفة": true,
-    "التكلفة الإجمالية": false,
+    "حالة التأشيرة":true,
     "رقم المقعد": false,
     // الصور: false,
   });

@@ -121,6 +121,13 @@ const Form = () => {
       nameInDocument: "taslim",
       errors: errors,
     },
+    {
+      labelOne: "إصدار التأشيرة",
+      labelTwo: "هل تم إصدار التأشيرة ؟",
+      register: register,
+      nameInDocument: "visa",
+      errors: errors,
+    },
   ];
 
   const isUpdateMode = typeof id === "string";
@@ -139,6 +146,7 @@ const Form = () => {
           paidAmount: found.paidAmount,
           taslim: found.taslim,
           totalAmount: found.totalAmount,
+          visa:found.visa,
           details: found.details,
           room: found.room,
           roomType: found.roomType,
@@ -181,6 +189,7 @@ const Form = () => {
     form.append("room", data.room);
     form.append("roomType", data.roomType);
     form.append("sitNumber", data.sitNumber);
+    form.append("visa", data.visa);
 
     if (omras.length > 0) {
       form.append("omra", data.omra);
@@ -199,7 +208,6 @@ const Form = () => {
     dispatch(action).then(() => {
       navigate("/");
     });
-
   };
   return (
     <div className="p-10">

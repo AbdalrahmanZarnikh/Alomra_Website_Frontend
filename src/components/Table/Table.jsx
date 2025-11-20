@@ -308,10 +308,13 @@ const Table = ({
 
                   <td
                     className={`p-3 text-center ${
-                      !checked["التكلفة الإجمالية"] && "print:hidden"
+                      !checked["حالة التأشيرة"] && "print:hidden"
                     }`}>
-                    <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-yellow-500">
-                      {ele.totalAmount}
+                    <span
+                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
+                        ele.visa ? "bg-green-600" : "bg-red-600"
+                      }`}>
+                      {ele.visa ? "صدرت التأشيرة" : "لم تصدر التأشيرة "}
                     </span>
                   </td>
 
