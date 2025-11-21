@@ -294,8 +294,10 @@ const Table = ({
                           : ele.roomType === "ثلاثية"
                           ? "bg-blue-600"
                           : ele.roomType === "ثنائية"
-                          ? "bg-red-600"
-                          : "bg-zinc-800"
+                          ?"bg-red-600"
+                          :ele.roomType === "خاصة"
+                          ?"bg-zinc-800"
+                          :"bg-orange-800"
                       }`}>
                       {ele.roomType}
                     </span>

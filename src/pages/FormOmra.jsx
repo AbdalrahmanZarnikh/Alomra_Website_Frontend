@@ -32,6 +32,7 @@ const FormOmra = () => {
       ثلاثية: "",
       رباعية: "",
       خماسية: "",
+      خاصة: "",
     },
   });
 
@@ -49,6 +50,7 @@ const FormOmra = () => {
         ثلاثية: "",
         رباعية: "",
         خماسية: "",
+        خاصة: "",
       });
     }
     if (isUpdateMode && omras.length > 0) {
@@ -60,21 +62,21 @@ const FormOmra = () => {
           ثلاثية: found.ثلاثية,
           رباعية: found.رباعية,
           خماسية: found.خماسية,
+          خاصة: found.خاصة,
         });
       }
     }
   }, [id, isUpdateMode, omras, reset]);
 
-  
   // Function To Handle Submit
   const onSubmit = async (data) => {
     const action = isUpdateMode
-    ? updateOmra({ id: id, data: data })
-    : addOmra(data);
-    
+      ? updateOmra({ id: id, data: data })
+      : addOmra(data);
+
     await dispatch(action);
   };
-  
+
   const [show, setShow] = useState(false);
   const [newId, setNewId] = useState("");
 
@@ -129,6 +131,15 @@ const FormOmra = () => {
       errors: errors,
       nameInDocument: "خماسية",
     },
+    {
+      type: "number",
+      label: "الغرفة الخاصة",
+      placeholder: "ادخل تكلفة الغرفة الخاصة",
+      register: register,
+      required: true,
+      errors: errors,
+      nameInDocument: "خاصة",
+    },
   ];
 
   return (
@@ -166,16 +177,14 @@ const FormOmra = () => {
                 className="text-blue-600 cursor-pointer hover:text-red-400 "
                 onClick={() => {
                   navigate(`/edit-omra/${omra._id}`);
-                }}
-              >
+                }}>
                 <Edit2 />
               </span>
               <span
                 className="text-red-600 cursor-pointer hover:text-red-400"
                 onClick={() => {
                   CheckPass(omra._id);
-                }}
-              >
+                }}>
                 <Trash2 />
               </span>
             </div>
