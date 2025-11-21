@@ -308,11 +308,11 @@ const Table = ({
                       !checked["رقم المقعد"] && "print:hidden"
                     }`}>
                     {Filter == "باص 1" || Filter == "باص 2" ? (
-                      <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-gray-800">
+                      <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-lg whitespace-nowrap bg-gray-800">
                         {ele.sitNumber.split(" ")[0] || "—"}
                       </span>
                     ) : (
-                      <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap bg-gray-800">
+                      <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-lg whitespace-nowrap bg-gray-800">
                         {ele.sitNumber || "—"}
                       </span>
                     )}
