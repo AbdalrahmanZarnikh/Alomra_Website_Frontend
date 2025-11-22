@@ -51,6 +51,7 @@ export default function Bus() {
         onClick={() => window.print()}>
         حفظ القائمة كملف PDF
       </h1>
+      
       <div id="print-area">
         <h2 className="text-2xl font-bold mb-4 text-center">
           مخطط مقاعد الحافلة
