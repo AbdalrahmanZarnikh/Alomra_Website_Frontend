@@ -79,7 +79,7 @@ function Home() {
           </div>
           {/* End Filter Section */}
 
-          <div className="flex  items-center gap-5">
+          <div className="hidden md:flex  items-center gap-5 ">
             <NavLink
               to="/bus/1"
               className={({ isActive }) =>
