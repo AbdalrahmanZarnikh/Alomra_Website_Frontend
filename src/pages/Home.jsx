@@ -8,6 +8,7 @@ import { deleteUser, getUsers } from "../redux/slice/user/userSlice";
 import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
 import { headTable, keywords } from "../constants/data";
+import { NavLink } from "react-router-dom";
 
 function Home() {
   const dispatch = useDispatch();
@@ -42,11 +43,10 @@ function Home() {
     "حالة الجواز": false,
     السفر: true,
     "نوع الغرفة": true,
-    "حالة التأشيرة":true,
+    "حالة التأشيرة": true,
     "رقم المقعد": false,
     // الصور: false,
   });
-
 
   return (
     <>
@@ -78,6 +78,31 @@ function Home() {
             />
           </div>
           {/* End Filter Section */}
+
+          <div className="flex  items-center gap-5">
+            <NavLink
+              to="/bus/1"
+              className={({ isActive }) =>
+                `rounded-lg p-3 ${
+                  isActive
+                    ? "bg-black text-white"
+                    : "bg-primary text-white hover:bg-primary/60 "
+                }`
+              }>
+              الباص الأول
+            </NavLink>
+            <NavLink
+              to="/bus/2"
+              className={({ isActive }) =>
+                `rounded-lg p-3 ${
+                  isActive
+                    ? "bg-black text-white"
+                    : "bg-primary text-white hover:bg-primary/60 "
+                }`
+              }>
+              الباص الثاني
+            </NavLink>
+          </div>
 
           {/* Start Head Section  */}
 

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
 import { useState } from "react";
 import { downloadAllVCards } from "../../utils/contactUtils";
+import Bus from "../../pages/bus";
 
 const Table = ({
   Filter,
@@ -115,9 +116,10 @@ const Table = ({
     return acc + ele.totalAmount;
   }, 0);
 
+
   return (
     <div id="print-area" className="w-full">
-      <h1
+     <h1
         className={`flex ${
           room ? "justify-evenly gap-10" : "justify-center"
         } items-center mb-5 text-5xl text-primary/90`}>
@@ -138,7 +140,7 @@ const Table = ({
         )}
       </h1>
 
-      <div className=" m-5  font-bold">
+      <div className=" m-5  font-bold ">
         {filteredData.length > 0 ? (
           <p className="flex flex-col md:flex-row gap-2 justify-between items-center ">
             <span>
@@ -185,7 +187,7 @@ const Table = ({
       </div>
 
       {/* نسخة الديسكتوب */}
-      <div className="w-full overflow-x-auto hidden md:block print:block">
+      <div className="w-full overflow-x-auto hidden md:block print:block ">
         <table className="w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
           <thead className="bg-gray-800 text-white text-sm md:text-base">
             <tr className="">
@@ -458,7 +460,9 @@ const Table = ({
             </div>
           </div>
         ))}
-      </div>
+      </div> 
+
+
     </div>
   );
 };
