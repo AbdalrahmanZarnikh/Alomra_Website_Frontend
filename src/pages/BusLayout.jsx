@@ -5,9 +5,12 @@ import { useParams } from "react-router-dom";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 
 const BusLayout = () => {
-  const { data } = useSelector((state) => state.userSlice);
-  const { id } = useParams();
   const seatMap = {};
+  const { id } = useParams();
+
+  // جعله تعليق من أجل باص فارغ
+
+  const { data } = useSelector((state) => state.userSlice);
   data?.forEach((p) => {
     if (p?.sitNumber && p.sitNumber.split(" - ")[1] == id) {
       const [n] = p.sitNumber.split(" - ");
@@ -15,6 +18,9 @@ const BusLayout = () => {
       seatMap[seatNum] = p.name;
     }
   });
+
+
+  // جعله تعليق من أجل باص فارغ
 
   // Seat pattern
   const rows = [
@@ -51,8 +57,8 @@ const BusLayout = () => {
       </h1>
 
       <div id="print-area">
-        <h2 className="text-5xl font-bold mb-5 text-center">
-         الباص     {id}  
+        <h2 className="text-5xl font-bold m-7 text-center text-primary ">
+          الباص {id}
         </h2>
 
         <div className="flex flex-col gap-4 items-center">
