@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 
-export default function BUS() {
+const BusLayout = () => {
   const { data } = useSelector((state) => state.userSlice);
   const { id } = useParams();
   const seatMap = {};
@@ -15,7 +15,6 @@ export default function BUS() {
       seatMap[seatNum] = p.name;
     }
   });
-
 
   // Seat pattern
   const rows = [
@@ -52,8 +51,8 @@ export default function BUS() {
       </h1>
 
       <div id="print-area">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          مخطط مقاعد الحافلة
+        <h2 className="text-5xl font-bold mb-5 text-center">
+         الباص     {id}  
         </h2>
 
         <div className="flex flex-col gap-4 items-center">
@@ -84,4 +83,6 @@ export default function BUS() {
       </div>
     </div>
   );
-}
+};
+
+export default BusLayout;
