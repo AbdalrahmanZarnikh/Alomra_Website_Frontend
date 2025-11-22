@@ -5,9 +5,11 @@ import Header from "./components/Header/Header";
 import FormOmra from "./pages/FormOmra";
 import Form from "./pages/Form";
 import PDF from "./pages/PDF";
-import Bus from "./pages/Bus";
+
 import Home from "./pages/Home";
 import { store } from "./redux/store";
+import BUS from "./pages/BUS";
+
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
           <Route path="/pdf" element={<PDF />} />
 
           {/* جلب data من ال Redux داخل Bus نفسه */}
-          <Route path="/bus/:id" element={<Bus />} />
+          <Route path="/bus/:id" element={<BUS />} />
         </Routes>
       </BrowserRouter>
     </Provider>

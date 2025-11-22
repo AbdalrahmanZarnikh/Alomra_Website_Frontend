@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 
-export default function Bus() {
+export default function BUS() {
   const { data } = useSelector((state) => state.userSlice);
   const { id } = useParams();
   const seatMap = {};

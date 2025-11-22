@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
 import { useState } from "react";
 import { downloadAllVCards } from "../../utils/contactUtils";
-import Bus from "../../pages/bus";
+import Bus from "../../pages/BUS";
 
 const Table = ({
   Filter,
@@ -116,10 +116,9 @@ const Table = ({
     return acc + ele.totalAmount;
   }, 0);
 
-
   return (
     <div id="print-area" className="w-full">
-     <h1
+      <h1
         className={`flex ${
           room ? "justify-evenly gap-10" : "justify-center"
         } items-center mb-5 text-5xl text-primary/90`}>
@@ -296,10 +295,10 @@ const Table = ({
                           : ele.roomType === "ثلاثية"
                           ? "bg-blue-600"
                           : ele.roomType === "ثنائية"
-                          ?"bg-red-600"
-                          :ele.roomType === "خاصة"
-                          ?"bg-zinc-800"
-                          :"bg-orange-800"
+                          ? "bg-red-600"
+                          : ele.roomType === "خاصة"
+                          ? "bg-zinc-800"
+                          : "bg-orange-800"
                       }`}>
                       {ele.roomType}
                     </span>
@@ -460,9 +459,7 @@ const Table = ({
             </div>
           </div>
         ))}
-      </div> 
-
-
+      </div>
     </div>
   );
 };
