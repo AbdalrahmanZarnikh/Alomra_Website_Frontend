@@ -15,6 +15,7 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
+      
         <Toaster />
         <Header />
 
