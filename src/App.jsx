@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import FormOmra from "./pages/FormOmra";
 import Form from "./pages/Form";
 import PDF from "./pages/PDF";
-import Bus from "./pages/bus";
+import Bus from "./pages/Bus";
 import Home from "./pages/Home";
 import { store } from "./redux/store";
 
