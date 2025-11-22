@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
 import { useState } from "react";
 import { downloadAllVCards } from "../../utils/contactUtils";
-import Bus from "../../pages/BUS";
 
 const Table = ({
   Filter,
