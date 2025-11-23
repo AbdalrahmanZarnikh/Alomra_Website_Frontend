@@ -68,7 +68,7 @@ const BusLayout = () => {
             return (
               <div key={idx} className="flex gap-10 items-center">
                 {/* RIGHT side */}
-                <div className="flex gap-2 ml-32">
+                <div className="flex gap-2 ml-26">
                   <Seat number={pair[0]} person={seatMap[pair[0]]} />
                   <Seat number={pair[1]} person={seatMap[pair[1]]} />
                 </div>
