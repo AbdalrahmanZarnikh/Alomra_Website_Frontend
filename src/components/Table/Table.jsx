@@ -44,23 +44,25 @@ const Table = ({
         ) {
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
-          return ele.safar === Filter;
+          return (ele.safar === Filter && ele.name !== "إدارة  الحملة");
         } else if (Filter === "لم يسلم الجواز") {
-          return ele.taslim === false;
+          return ele.taslim === false && ele.name !== "إدارة  الحملة";
         } else if (Filter === "تم تسليم الجواز") {
-          return ele.taslim === true;
+          return ele.taslim === true && ele.name !== "إدارة  الحملة";
         } else if (Filter == "لم يكمل الدفع") {
           return (
             ele.totalAmount - ele.paidAmount > 0 &&
             !ele.details.includes("خالد قوجة") &&
-            !ele.details.includes("أحمد المصري")
+            !ele.details.includes("أحمد المصري") &&
+            ele.name !== "إدارة  الحملة"
           );
         } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
           return ele.details.includes(Filter);
         } else if (Filter == "عبد الرزاق بيلوني") {
           return (
             !ele.details.includes("خالد قوجة") &&
-            !ele.details.includes("أحمد المصري")
+            !ele.details.includes("أحمد المصري") &&
+            ele.name !== "إدارة  الحملة"
           );
         } else if (Filter == "باص 1" || Filter == "باص 2") {
           return ele.sitNumber.split(" ")[2] === Filter.split(" ")[1];
