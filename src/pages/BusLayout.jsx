@@ -19,7 +19,6 @@ const BusLayout = () => {
     }
   });
 
-
   // جعله تعليق من أجل باص فارغ
 
   // Seat pattern
@@ -31,8 +30,8 @@ const BusLayout = () => {
     [15, [13, 14]],
     [18, [16, 17]],
     [21, [19, 20]],
-    [22, ["__", "__"]],
-    [23, ["__", "__"]],
+    [22,["___","___"]],
+    [23,["___","___"]],
     [26, [24, 25]],
     [29, [27, 28]],
     [32, [30, 31]],
@@ -68,11 +67,13 @@ const BusLayout = () => {
             return (
               <div key={idx} className="flex gap-10 items-center">
                 {/* RIGHT side */}
-                <div className="flex gap-2 ml-26">
-                  <Seat number={pair[0]} person={seatMap[pair[0]]} />
-                  <Seat number={pair[1]} person={seatMap[pair[1]]} />
-                </div>
 
+                {Array.isArray(pair) && (
+                  <div className="flex gap-2 ml-26">
+                    <Seat number={pair[0]} person={seatMap[pair[0]]} />
+                    <Seat number={pair[1]} person={seatMap[pair[1]]} />
+                  </div>
+                )}
                 {/* LEFT (single or double) */}
                 {Array.isArray(single) ? (
                   <div className="flex gap-2">
@@ -80,7 +81,7 @@ const BusLayout = () => {
                     <Seat number={single[1]} person={seatMap[single[1]]} />
                   </div>
                 ) : (
-                  <Seat number={single} person={seatMap[single]} />
+                    <Seat number={single} person={seatMap[single]} />
                 )}
               </div>
             );
