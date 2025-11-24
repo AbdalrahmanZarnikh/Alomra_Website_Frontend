@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Seat from "../components/Seat/Seat";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
+import FilterTable from "../components/FilterTable/FilterTable";
 
 const BusLayout = () => {
   const seatMap = {};
   const { id } = useParams();
 
+  const [omra, setOmra] = useState("");
+  const { omras } = useSelector((state) => state.omraSlice);
+
   // جعله تعليق من أجل باص فارغ
 
   const { data } = useSelector((state) => state.userSlice);
-  data?.forEach((p) => {
+
+  let filteredData = data?.filter((ele) => ele.omra?.name === omra);
+
+  filteredData?.forEach((p) => {
     if (p?.sitNumber && p.sitNumber.split(" - ")[1] == id) {
       const [n] = p.sitNumber.split(" - ");
       const seatNum = parseInt(n.trim());
@@ -30,8 +37,8 @@ const BusLayout = () => {
     [15, [13, 14]],
     [18, [16, 17]],
     [21, [19, 20]],
-    [22,["___","___"]],
-    [23,["___","___"]],
+    [22, ["___", "___"]],
+    [23, ["___", "___"]],
     [26, [24, 25]],
     [29, [27, 28]],
     [32, [30, 31]],
@@ -48,6 +55,8 @@ const BusLayout = () => {
   return (
     <div className="p-6 w-full flex flex-col gap-6">
       <ButtonReverse text={"رجوع"} />
+
+      <FilterTable data={omras} setFunction={setOmra} value={omra} />
 
       <h1
         className="mb-4 bg-primary/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-primary/50"
@@ -81,7 +90,7 @@ const BusLayout = () => {
                     <Seat number={single[1]} person={seatMap[single[1]]} />
                   </div>
                 ) : (
-                    <Seat number={single} person={seatMap[single]} />
+                  <Seat number={single} person={seatMap[single]} />
                 )}
               </div>
             );
