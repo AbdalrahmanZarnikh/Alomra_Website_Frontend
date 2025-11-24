@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Seat from "../components/Seat/Seat";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,6 +11,12 @@ const BusLayout = () => {
 
   const [omra, setOmra] = useState("");
   const { omras } = useSelector((state) => state.omraSlice);
+
+  useEffect(() => {
+    if (omras?.length > 0) {
+      setOmra(omras[1]?.name);
+    }
+  }, [omras]);
 
   // جعله تعليق من أجل باص فارغ
 
@@ -25,6 +31,8 @@ const BusLayout = () => {
       seatMap[seatNum] = p.name;
     }
   });
+
+  console.log(filteredData);
 
   // جعله تعليق من أجل باص فارغ
 

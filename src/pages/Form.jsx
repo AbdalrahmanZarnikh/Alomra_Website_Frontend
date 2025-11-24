@@ -6,7 +6,7 @@ import { createUser, updateUser } from "../redux/slice/user/userSlice";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 import FormLayout from "../components/FormLayout/FormLayout";
 import { useEffect, useState } from "react";
-import { typeRoom, typeSafar, rooms } from "../constants/data";
+import { typeRoom, typeSafar, rooms,sitNumbers } from "../constants/data";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -64,15 +64,6 @@ const Form = () => {
       errors: errors,
       nameInDocument: "details",
     },
-    {
-      type: "text",
-      label: "رقم المقعد",
-      placeholder: "ادخل  رقم المقعد",
-      register: register,
-      required: false,
-      errors: errors,
-      nameInDocument: "sitNumber",
-    },
   ];
 
   const contentFormFieldsSelector = [
@@ -112,6 +103,15 @@ const Form = () => {
       errors: errors,
       nameInDocument: "roomType",
     },
+    {
+      data: sitNumbers,
+      label: "رقم المقعد",
+      register: register,
+      required: true,
+      option: "اختر رقم المقعد",
+      errors: errors,
+      nameInDocument: "sitNumber",
+    },
   ];
   const contentFormFieldsCheckBox = [
     {
@@ -146,7 +146,7 @@ const Form = () => {
           paidAmount: found.paidAmount,
           taslim: found.taslim,
           totalAmount: found.totalAmount,
-          visa:found.visa,
+          visa: found.visa,
           details: found.details,
           room: found.room,
           roomType: found.roomType,
