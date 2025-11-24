@@ -25,7 +25,12 @@ export default function Seat({ number, person }) {
       </p>
 
       {/* Person Name displayed on seat */}
-      <p className="font-bold text-xl"> {person}</p>
+
+      {/* Person Name displayed on seat */}
+      <p className="font-bold text-xl text-yellow-900 tracking-wide drop-shadow-md italic">
+        {person}
+      </p>
+
 
     </div>
   );
