@@ -63,8 +63,10 @@ const BusLayout = () => {
   return (
     <div className="p-6 w-full flex flex-col gap-6">
       <ButtonReverse text={"رجوع"} />
-
-      <FilterTable data={omras} setFunction={setOmra} value={omra} />
+ 
+      <div className="w-72 m-auto">
+        <FilterTable data={omras} setFunction={setOmra} value={omra} />
+      </div>
 
       <h1
         className="mb-4 bg-primary/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-primary/50"
