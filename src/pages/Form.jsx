@@ -107,7 +107,7 @@ const Form = () => {
       data: sitNumbers,
       label: "رقم المقعد",
       register: register,
-      required: true,
+      required: false,
       option: "اختر رقم المقعد",
       errors: errors,
       nameInDocument: "sitNumber",
