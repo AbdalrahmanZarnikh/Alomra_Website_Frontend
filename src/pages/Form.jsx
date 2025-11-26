@@ -134,7 +134,7 @@ const Form = () => {
 
   useEffect(() => {
     dispatch(getOmras());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isUpdateMode && data.length > 0) {
