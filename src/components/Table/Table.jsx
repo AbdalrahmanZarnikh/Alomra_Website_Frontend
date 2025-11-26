@@ -69,6 +69,10 @@ const Table = ({
             !ele.details.includes("أحمد المصري") &&
             ele.name !== "إدارة  الحملة"
           );
+        } else if (FilterStatus == "حصل على تأشيرة") {
+          return ele.visa === true && ele.name !== "إدارة  الحملة";
+        } else if (FilterStatus == "لم يحصل على تأشيرة") {
+          return ele.visa === false && ele.name !== "إدارة  الحملة";
         } else {
           return ele;
         }

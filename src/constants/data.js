@@ -84,6 +84,8 @@ export const statusUsers = [
   "تم تسليم الجواز",
   "لم يسلم الجواز",
   "لم يكمل الدفع",
+  "حصل على تأشيرة",
+  "لم يحصل على تأشيرة"
 ];
 
 export const sitNumbers = [
