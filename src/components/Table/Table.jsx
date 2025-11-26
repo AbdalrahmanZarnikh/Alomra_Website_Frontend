@@ -7,6 +7,7 @@ import { downloadAllVCards } from "../../utils/contactUtils";
 
 const Table = ({
   Filter,
+  FilterStatus,
   headTable,
   checked,
   setChecked,
@@ -33,9 +34,6 @@ const Table = ({
           Filter !== "الكل" &&
           Filter !== "جواً" &&
           Filter !== "براً" &&
-          Filter !== "لم يسلم الجواز" &&
-          Filter !== "تم تسليم الجواز" &&
-          Filter !== "لم يكمل الدفع" &&
           Filter !== "خالد قوجة" &&
           Filter !== "أحمد المصري" &&
           Filter !== "عبد الرزاق بيلوني" &&
@@ -44,18 +42,7 @@ const Table = ({
         ) {
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
-          return (ele.safar === Filter && ele.name !== "إدارة  الحملة");
-        } else if (Filter === "لم يسلم الجواز") {
-          return ele.taslim === false && ele.name !== "إدارة  الحملة";
-        } else if (Filter === "تم تسليم الجواز") {
-          return ele.taslim === true && ele.name !== "إدارة  الحملة";
-        } else if (Filter == "لم يكمل الدفع") {
-          return (
-            ele.totalAmount - ele.paidAmount > 0 &&
-            !ele.details.includes("خالد قوجة") &&
-            !ele.details.includes("أحمد المصري") &&
-            ele.name !== "إدارة  الحملة"
-          );
+          return ele.safar === Filter && ele.name !== "إدارة  الحملة";
         } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
           return ele.details.includes(Filter);
         } else if (Filter == "عبد الرزاق بيلوني") {
@@ -66,6 +53,22 @@ const Table = ({
           );
         } else if (Filter == "باص 1" || Filter == "باص 2") {
           return ele.sitNumber.split(" ")[2] === Filter.split(" ")[1];
+        } else {
+          return ele;
+        }
+      })
+      .filter((ele) => {
+        if (FilterStatus === "لم يسلم الجواز") {
+          return ele.taslim === false && ele.name !== "إدارة  الحملة";
+        } else if (FilterStatus === "تم تسليم الجواز") {
+          return ele.taslim === true && ele.name !== "إدارة  الحملة";
+        } else if (FilterStatus == "لم يكمل الدفع") {
+          return (
+            ele.totalAmount - ele.paidAmount > 0 &&
+            !ele.details.includes("خالد قوجة") &&
+            !ele.details.includes("أحمد المصري") &&
+            ele.name !== "إدارة  الحملة"
+          );
         } else {
           return ele;
         }

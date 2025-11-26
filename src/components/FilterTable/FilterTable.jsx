@@ -1,6 +1,8 @@
 
 
 const FilterTable = ({ data, setFunction, value }) => {
+
+
   return (
     <div className="w-full md:w-auto">
       {data?.length > 0 && (

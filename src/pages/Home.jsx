@@ -7,7 +7,7 @@ import Table from "../components/Table/Table";
 import { deleteUser, getUsers } from "../redux/slice/user/userSlice";
 import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
-import { headTable, keywords } from "../constants/data";
+import { headTable, keywords, statusUsers } from "../constants/data";
 import { NavLink } from "react-router-dom";
 
 function Home() {
@@ -17,6 +17,7 @@ function Home() {
   const { omras } = useSelector((state) => state.omraSlice);
   const [omra, setOmra] = useState("");
   const [Filter, setFilter] = useState("الكل");
+  const [FilterStatus, setFilterStatus] = useState("الكل");
   const [show, setShow] = useState(false);
   const [newId, setNewId] = useState("");
 
@@ -48,6 +49,7 @@ function Home() {
     // الصور: false,
   });
 
+  console.log(FilterStatus);
   return (
     <>
       {isLoading === "Pending" ? (
@@ -68,14 +70,29 @@ function Home() {
 
           {/*Start Filter Section */}
 
-          <div className="flex flex-col items-center  md:flex-row justify-between ">
-            <FilterTable data={omras} setFunction={setOmra} value={omra} />
+          <div className="flex flex-col items-center  md:flex-row justify-between gap-4">
+            <div className="w-full">
+              <h1 className="text-yellow-900">حدد العمرة :</h1>
+              <FilterTable data={omras} setFunction={setOmra} value={omra} />
+            </div>
 
-            <FilterTable
-              data={keywords}
-              setFunction={setFilter}
-              value={Filter}
-            />
+            <div className="w-full">
+              <h1 className="text-yellow-900"> فلترة عامة :</h1>
+              <FilterTable
+                data={keywords}
+                setFunction={setFilter}
+                value={Filter}
+                />
+            </div>
+
+            <div className="w-full">
+              <h1 className="text-yellow-900"> حدد حسب حالة التسجيل :</h1>
+              <FilterTable
+                data={statusUsers}
+                setFunction={setFilterStatus}
+                value={FilterStatus}
+              />
+            </div>
           </div>
           {/* End Filter Section */}
 
@@ -129,6 +146,7 @@ function Home() {
 
           <Table
             Filter={Filter}
+            FilterStatus={FilterStatus}
             headTable={headTable}
             checked={checked}
             setChecked={setChecked}
