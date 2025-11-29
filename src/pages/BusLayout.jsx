@@ -14,7 +14,7 @@ const BusLayout = () => {
 
   useEffect(() => {
     if (omras?.length > 0) {
-      setOmra(omras[1]?.name);
+      setOmra(omras[0]?.name);
     }
   }, [omras]);
 
