@@ -11,9 +11,12 @@
 } */
 
 
+
+
 @font-face {
   font-family: "myFont";
   src: url("fonts/Hacen-Tehran.ttf") format("truetype");
+  /* src: url("fonts/bein.ttf") format("truetype"); */
 }
 
 * {
