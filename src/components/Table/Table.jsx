@@ -25,6 +25,15 @@ const Table = ({
     setNewId(id);
   };
 
+
+  const Room ={
+    "1":"خاصة",
+    "2":"ثنائية",
+    "3":"ثلاثية",
+    "4":"رباعية",
+    "5":"خماسية"
+  }
+
   // 🟢 فلترة البيانات
   let filteredData =
     data
@@ -99,7 +108,9 @@ const Table = ({
     Filter !== "باص 1" &&
     Filter !== "باص 2"
   ) {
-    var room = filteredData[0]?.roomType;
+    const numberOfUsers=filteredData.length;
+
+    var room = Room[numberOfUsers];
   }
 
   const totalPaid = filteredData.reduce((acc, ele) => {
