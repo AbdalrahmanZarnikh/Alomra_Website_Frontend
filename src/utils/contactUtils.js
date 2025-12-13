@@ -4,10 +4,10 @@
 export const generateVCard = (user) => {
   // تنظيف البيانات
   const name = (user.name || "مستخدم").trim();
-  const omra= user.omra.name;
+  const omra = user.omra.name;
   const phone = (user.phone || "").replace(/\D/g, "");
 
-  const newOmra=name +" "+ omra;
+  const newOmra = name + " " + omra;
   // بناء vCard بصيغة صحيحة
   const vCard = `BEGIN:VCARD
 VERSION:3.0
@@ -55,7 +55,13 @@ export const downloadAllVCards = (users) => {
     let allVCards = "";
 
     users.forEach((user) => {
-      allVCards += generateVCard(user) + "\n";
+      if (
+        user.name !== "عبد الرزاق بيلوني" &&
+        user.name !== "محمد فؤاد شالاتي" 
+      ) {
+        console.log("yes");
+        allVCards += generateVCard(user) + "\n";
+      }
     });
 
     const blob = new Blob([allVCards], {
