@@ -57,10 +57,12 @@ export const downloadAllVCards = (users) => {
     users.forEach((user) => {
       if (
         user.name !== "عبد الرزاق بيلوني" &&
-        user.name !== "محمد فؤاد شالاتي" 
+        user.name !== "محمد فؤاد شالاتي"
       ) {
-        console.log("yes");
-        allVCards += generateVCard(user) + "\n";
+        if (user.phone) {
+          console.log("yes");
+          allVCards += generateVCard(user) + "\n";
+        }
       }
     });
 

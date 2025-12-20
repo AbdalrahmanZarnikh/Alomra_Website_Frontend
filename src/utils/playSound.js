@@ -1,5 +1,6 @@
-export const playSound=(file="/sound.mp3")=>{
-    const audio =new Audio(file)
+export const playSound = (file = "/sound.mp3") => {
+  const audio = new Audio(file);
 
-    audio.play();
-}
+  audio.play();
+};
+
