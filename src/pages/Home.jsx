@@ -30,7 +30,10 @@ function Home() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (omras?.length > 0) {
+    if (omras?.length > 1) {
+      setOmra(omras[1]?.name);
+    }
+    else{
       setOmra(omras[0]?.name);
     }
   }, [omras]);
