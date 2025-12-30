@@ -129,7 +129,7 @@ function Home() {
           <h1 className="flex justify-center mb-10 text-2xl md:text-4xl mt-5 ">
             {omra.split(" ")[0]}
             <span className="mx-2  text-primary/90 font-bold">
-              {omra.split(" ").map((ele, index) => {
+              {omra?.split(" ").map((ele, index) => {
                 if (index !== 0) return ele + " ";
               })}
             </span>
