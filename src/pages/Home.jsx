@@ -52,7 +52,6 @@ function Home() {
     // الصور: false,
   });
 
-  console.log(FilterStatus);
   return (
     <>
       {isLoading === "Pending" ? (

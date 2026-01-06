@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
 import { useState } from "react";
 import { downloadAllVCards } from "../../utils/contactUtils";
+// import ButtonSits from "../ButtonSits/ButtonSits";
 
 const Table = ({
   Filter,
@@ -135,8 +136,13 @@ const Table = ({
     return acc + ele.totalAmount;
   }, 0);
 
+
+
+
+
   return (
     <div id="print-area" className="w-full">
+      {/* <ButtonSits data={filteredData}/> */}
       <h1
         className={`flex ${
           room ? "justify-evenly gap-10" : "justify-center"
@@ -159,7 +165,7 @@ const Table = ({
       </h1>
 
       <div className=" m-5  font-bold ">
-        {filteredData.length > 0 ? (
+        {filteredData.length > 0 && !room ? (
           <p className="flex flex-col md:flex-row gap-2 justify-between items-center ">
             <span>
               العدد الكلي في الجدول هو:{" "}
@@ -200,7 +206,8 @@ const Table = ({
             </span>
           </p>
         ) : (
-          "لا توجد بيانات حالياً"
+          // "لا توجد بيانات حاليا"
+          ""
         )}
       </div>
 
