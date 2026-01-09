@@ -26,14 +26,14 @@ const Table = ({
     setNewId(id);
   };
 
-
-  const Room ={
-    "1":"خاصة",
-    "2":"ثنائية",
-    "3":"ثلاثية",
-    "4":"رباعية",
-    "5":"خماسية"
-  }
+  const Room = {
+    1: "خاصة",
+    2: "ثنائية",
+    3: "ثلاثية",
+    4: "رباعية",
+    5: "خماسية",
+    6: "خماسية",
+  };
 
   // 🟢 فلترة البيانات
   let filteredData =
@@ -109,7 +109,7 @@ const Table = ({
     Filter !== "باص 1" &&
     Filter !== "باص 2"
   ) {
-    const numberOfUsers=filteredData.length;
+    const numberOfUsers = filteredData.length;
 
     var room = Room[numberOfUsers];
   }
@@ -135,10 +135,6 @@ const Table = ({
     }
     return acc + ele.totalAmount;
   }, 0);
-
-
-
-
 
   return (
     <div id="print-area" className="w-full">
