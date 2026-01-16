@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import Image from "../Image/Image";
 import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
 import { useState } from "react";

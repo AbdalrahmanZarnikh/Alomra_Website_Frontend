@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../api/configAxios";
 import toast from "react-hot-toast";
+import { playSound } from "../../../../utils/playSound";
 
 const updateUser = createAsyncThunk(
   "user/updateUser",
@@ -13,6 +14,7 @@ const updateUser = createAsyncThunk(
       );
 
       toast.success("تمت العملية بنجاح");
+      playSound()
 
       return res.data.data;
     } catch (error) {
