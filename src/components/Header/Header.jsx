@@ -40,8 +40,7 @@ const Header = () => {
       {/* زر القائمة للموبايل */}
       <button
         className="text-white text-3xl md:hidden cursor-pointer"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
+        onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <BiX /> : <BiMenu />}
       </button>
 
@@ -55,9 +54,8 @@ const Header = () => {
                 ? "bg-black text-white"
                 : "bg-white hover:bg-white/50 hover:text-white"
             }`
-          }
-        >
-          الجدول 
+          }>
+          الجدول
         </NavLink>
         <NavLink
           to="/add-user"
@@ -67,8 +65,7 @@ const Header = () => {
                 ? "bg-black text-white"
                 : "bg-white hover:bg-white/50 hover:text-white"
             }`
-          }
-        >
+          }>
           تسجيل جديد
         </NavLink>
         <NavLink
@@ -79,12 +76,9 @@ const Header = () => {
                 ? "bg-black text-white"
                 : "bg-white hover:bg-white/50 hover:text-white"
             }`
-          }
-        >
+          }>
           إنشاء حملة جديدة
         </NavLink>
-  
-      
       </nav>
 
       {/* شريط البحث */}
@@ -102,8 +96,7 @@ const Header = () => {
               input.current.value = "";
               setSearchTerm("");
             }}
-            className="absolute right-3 top-2 md:top-3 bg-gray-300 text-red-500 w-6 h-6 md:w-7 md:h-7 flex justify-center items-center rounded-full cursor-pointer"
-          >
+            className="absolute right-3 top-2 md:top-3 bg-gray-300 text-red-500 w-6 h-6 md:w-7 md:h-7 flex justify-center items-center rounded-full cursor-pointer">
             X
           </span>
         )}
@@ -123,9 +116,19 @@ const Header = () => {
                 ? "bg-black text-white"
                 : "bg-white hover:bg-white/50 hover:text-white"
             }`
-          }
-        >
+          }>
           جوازات السفر
+        </NavLink>
+        <NavLink
+          to="/tasks"
+          className={({ isActive }) =>
+            `rounded-lg p-3 font-bold ${
+              isActive
+                ? "bg-black text-white"
+                : "bg-white hover:bg-white/50 hover:text-white"
+            }`
+          }>
+          إدارة المهام
         </NavLink>
       </div>
 
@@ -141,8 +144,7 @@ const Header = () => {
                   : "bg-white hover:bg-white/50 hover:text-white"
               }`
             }
-            onClick={() => setMenuOpen(false)}
-          >
+            onClick={() => setMenuOpen(false)}>
             الجدول
           </NavLink>
           <NavLink
@@ -154,21 +156,19 @@ const Header = () => {
                   : "bg-white hover:bg-white/50 hover:text-white"
               }`
             }
-            onClick={() => setMenuOpen(false)}
-          >
+            onClick={() => setMenuOpen(false)}>
             تسجيل جديد
           </NavLink>
           <NavLink
             to="/add-omra"
-            className={({ isActive }) => 
+            className={({ isActive }) =>
               `rounded-lg p-3 w-full ${
                 isActive
                   ? "bg-black text-white"
                   : "bg-white hover:bg-white/50 hover:text-white"
               }`
             }
-            onClick={() => setMenuOpen(false)}
-          >
+            onClick={() => setMenuOpen(false)}>
             إنشاء حملة جديدة
           </NavLink>
           <NavLink
@@ -180,8 +180,7 @@ const Header = () => {
                   : "bg-white hover:bg-white/50 hover:text-white"
               }`
             }
-            onClick={() => setMenuOpen(false)}
-          >
+            onClick={() => setMenuOpen(false)}>
             جوازات السفر
           </NavLink>
         </div>

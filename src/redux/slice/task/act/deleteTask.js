@@ -2,12 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../api/configAxios";
 import toast from "react-hot-toast";
 
-const deleteUser = createAsyncThunk(
-  "user/deleteUser",
+const deleteTask = createAsyncThunk(
+  "task/deleteTask",
   async (id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      await axios.delete(`/api/users/${id}`);
+    const res= await axios.delete(`/api/tasks/${id}`);
 
       return id;
     } catch (error) {
@@ -19,4 +19,4 @@ const deleteUser = createAsyncThunk(
   }
 );
 
-export default deleteUser;
+export default deleteTask;

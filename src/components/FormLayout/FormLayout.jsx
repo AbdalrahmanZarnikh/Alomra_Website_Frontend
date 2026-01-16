@@ -16,27 +16,12 @@ const FormLayout = ({
   isLoading,
   Submit,
   total,
-  pdf
+  pdf,
 }) => {
   return (
     <>
       <form className="student-form-form" onSubmit={Submit}>
         {/* Form Fields */}
-
-        {contentFormFilds?.length > 0 &&
-          contentFormFilds.map((ele) => {
-            return (
-              <Field
-                type={ele.type}
-                label={ele.label}
-                placeholder={ele.placeholder}
-                register={ele.register}
-                required={ele.required}
-                errors={ele.errors}
-                nameInDocument={ele.nameInDocument}
-              />
-            );
-          })}
 
         {contentFormFieldsSelector?.length > 0 &&
           contentFormFieldsSelector.map((ele) => {
@@ -49,6 +34,22 @@ const FormLayout = ({
                 label={ele.label}
                 required={ele.required}
                 nameInDocument={ele.nameInDocument}
+              />
+            );
+          })}
+
+        {contentFormFilds?.length > 0 &&
+          contentFormFilds.map((ele) => {
+            return (
+              <Field
+                type={ele.type}
+                label={ele.label}
+                placeholder={ele.placeholder}
+                register={ele.register}
+                required={ele.required}
+                errors={ele.errors}
+                nameInDocument={ele.nameInDocument}
+                isTextarea={ele.isTextarea}
               />
             );
           })}
@@ -68,10 +69,13 @@ const FormLayout = ({
 
         {multipleImages && <UploadMultipleFiles form={form} records={data} />}
 
-
-
         <ButtonFrom id={id} isLoading={isLoading} />
-        {total > 0 && <h1 className="m-auto font-bold">التكلفة الإجمالية : <span className="text-red-600 font-bold text-xl">{total} </span>$</h1>}
+        {total > 0 && (
+          <h1 className="m-auto font-bold">
+            التكلفة الإجمالية :{" "}
+            <span className="text-red-600 font-bold text-xl">{total} </span>$
+          </h1>
+        )}
       </form>
     </>
   );

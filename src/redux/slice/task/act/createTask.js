@@ -1,15 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../api/configAxios";
 import toast from "react-hot-toast";
+import { playSound } from "../../../../utils/playSound";
 
-const deleteUser = createAsyncThunk(
-  "user/deleteUser",
-  async (id, thunkAPI) => {
+const createTask = createAsyncThunk(
+  "tasks/createTask",
+  async (data, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      await axios.delete(`/api/users/${id}`);
+      const res = await axios.post("/api/tasks",data);
+     
+      toast.success("تم التسجيل بنجاح")
+      playSound();
 
-      return id;
+      return res.data.data;
     } catch (error) {
       toast.error(error.response.data.message);
       if (axios.isAxiosError(error)) {
@@ -19,4 +23,4 @@ const deleteUser = createAsyncThunk(
   }
 );
 
-export default deleteUser;
+export default createTask;
