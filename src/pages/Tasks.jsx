@@ -18,6 +18,16 @@ export default function Tasks() {
 
   const navigate = useNavigate();
 
+  // الحصول على تاريخ الغد
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  // عرض اسم اليوم بالعربية
+  const dayArabic = new Intl.DateTimeFormat("ar", { weekday: "long" }).format(
+    tomorrow
+  );
+  console.log(dayArabic); // مثلاً: "السبت"
+  console.log(dayArabic);
   useEffect(() => {
     dispatch(getTasks());
   }, [dispatch]);
@@ -119,7 +129,7 @@ export default function Tasks() {
       {/* Task List */}
       <div className="grid md:grid-cols-1 gap-4" id="print-area">
         <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
-          برنامج المهام اليومي
+          توزيع مهام يوم <span className="text-black">{dayArabic}</span>
         </h1>
         {data?.map((task) => (
           <div
@@ -136,7 +146,9 @@ export default function Tasks() {
                 .split("\n")
                 .filter((line) => line.trim() !== "")
                 .map((line, index) => (
-                  <p key={index} className="bg-primary/90 mb-2 rounded-lg  text-white">
+                  <p
+                    key={index}
+                    className="bg-primary/90 mb-2 rounded-lg  text-white">
                     {index + 1}- {line}
                   </p>
                 ))}
