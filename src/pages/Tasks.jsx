@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,24 +10,28 @@ import {
   updateTask,
 } from "../redux/slice/task/taskSlice";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
+import { CircleCheck } from "lucide-react";
 
 export default function Tasks() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const isUpdateMode = typeof id === "string";
 
+  const [isStatus, setIsStatus] = useState(true);
+
   const navigate = useNavigate();
 
   // الحصول على تاريخ الغد
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  const day = isStatus
+    ? new Date()
+    : new Date().setDate(new Date().getDate() + 1);
+  // const tomorrow = new Date().setDate(new Date().getDate()+1);
 
   // عرض اسم اليوم بالعربية
   const dayArabic = new Intl.DateTimeFormat("ar", { weekday: "long" }).format(
-    tomorrow
+    day
   );
-  console.log(dayArabic); // مثلاً: "السبت"
-  console.log(dayArabic);
+
   useEffect(() => {
     dispatch(getTasks());
   }, [dispatch]);
@@ -106,7 +110,12 @@ export default function Tasks() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">إدارة مهام الفريق</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">إدارة مهام المكتبة</h1>
+      <button onClick={()=>{
+        setIsStatus(!isStatus)
+      }} className="bg-primary/90 mb-10 px-4 py-2 rounded-lg hover:bg-primary/50 cursor-pointer text-white">
+        تغيير صيغة العرض
+      </button>
       {isUpdateMode && (
         <ButtonReverse text={"العودة لإنشاء مهمام "} to={"/tasks"} />
       )}
@@ -128,17 +137,23 @@ export default function Tasks() {
       </h1>
       {/* Task List */}
       <div className="grid md:grid-cols-1 gap-4" id="print-area">
-        <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
-          توزيع مهام يوم <span className="text-black">{dayArabic}</span>
-        </h1>
+        {isStatus ? (
+          <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
+            حالة مهام يوم <span className="text-black">{dayArabic}</span>
+          </h1>
+        ) : (
+          <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
+            توزيع مهام يوم <span className="text-black">{dayArabic}</span>
+          </h1>
+        )}
         {data?.map((task) => (
           <div
-            key={task.id}
+            key={task._id}
             className={`border rounded-lg p-4 space-y-2 text-4xl 
            
             
             `}>
-            <h2 className="font-semibold text-center mb-10 bg-primary/90 w-fit m-auto px-4 py-2 rounded-lg text-white">
+            <h2 className="font-semibold text-center mb-10 bg-primary w-fit m-auto px-4 py-2 rounded-lg text-white">
               {task.nameUser}
             </h2>
             <p className="mb-4">
@@ -148,8 +163,8 @@ export default function Tasks() {
                 .map((line, index) => (
                   <p
                     key={index}
-                    className="bg-primary/90 mb-2 rounded-lg  text-white">
-                    {index + 1}- {line}
+                    className={`bg-primary mb-2 rounded-lg  text-white flex items-center justify-between `}>
+                    {index + 1}- {line}    
                   </p>
                 ))}
             </p>
@@ -160,22 +175,22 @@ export default function Tasks() {
                   onClick={() => {
                     navigate(`/edit-task/${task._id}`);
                   }}
-                  className="border px-3 py-1 mx-4 rounded hover:bg-gray-400 cursor-pointer print:hidden bg-white text-green-800">
+                  className="border px-3 py-1 mx-4 rounded hover:bg-blue-200 cursor-pointer print:hidden bg-white text-blue-800">
                   تعديل
                 </button>
                 <button
                   onClick={() => {
                     dispatch(deleteTask(task._id));
                   }}
-                  className="border px-3 py-1 rounded hover:bg-gray-400 cursor-pointer print:hidden bg-white text-red-800">
+                  className="border px-3 py-1 rounded hover:bg-red-200 cursor-pointer print:hidden bg-white text-red-800">
                   حذف
                 </button>
               </div>
               <p
-                className={`bg-white px-2 rounded-lg ${
+                className={` px-2 rounded-lg ${
                   task.status === "مكتمل"
-                    ? "text-green-800 border-green-700 border-2 px-4"
-                    : "text-red-800 border-red-700 border-2 px-4"
+                    ? "bg-green-700 text-white px-4"
+                    : "bg-red-700 text-white px-4"
                 } `}>
                 {task.status}
               </p>
