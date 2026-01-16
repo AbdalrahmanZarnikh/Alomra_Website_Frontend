@@ -45,7 +45,7 @@ export default function Tasks() {
 
   const contentFormFieldsSelector = [
     {
-      data: ["أبوحسين", "عبد الرحمن", "أحمد حمدو", "محمد زرنيخ"],
+      data: ["أبو حسين", "عبد الرحمن", "أحمد حمدو", "محمد زرنيخ"],
       label: "اسم الموظف",
       register: register,
       required: true,
@@ -124,17 +124,19 @@ export default function Tasks() {
         {data?.map((task) => (
           <div
             key={task.id}
-            className={`border rounded-lg p-4 space-y-2 text-3xl 
+            className={`border rounded-lg p-4 space-y-2 text-4xl 
            
             
             `}>
-            <h2 className="font-semibold text-center">{task.nameUser}</h2>
-            <p className="">
+            <h2 className="font-semibold text-center mb-10 bg-primary/90 w-fit m-auto px-4 py-2 rounded-lg text-white">
+              {task.nameUser}
+            </h2>
+            <p className="mb-4">
               {task.title
                 .split("\n")
                 .filter((line) => line.trim() !== "")
                 .map((line, index) => (
-                  <p key={index}>
+                  <p key={index} className="bg-primary/90 mb-2 rounded-lg  text-white">
                     {index + 1}- {line}
                   </p>
                 ))}
@@ -159,7 +161,9 @@ export default function Tasks() {
               </div>
               <p
                 className={`bg-white px-2 rounded-lg ${
-                  task.status === "مكتمل" ? "text-green-800 border-green-700 border-2 px-4" : "text-red-800 border-red-700 border-2 px-4"
+                  task.status === "مكتمل"
+                    ? "text-green-800 border-green-700 border-2 px-4"
+                    : "text-red-800 border-red-700 border-2 px-4"
                 } `}>
                 {task.status}
               </p>
