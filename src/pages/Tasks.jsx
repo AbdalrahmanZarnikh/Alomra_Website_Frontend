@@ -18,9 +18,9 @@ export default function Tasks() {
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    dispatch(getTasks())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(getTasks());
+  }, [dispatch]);
 
   const {
     register,
@@ -39,7 +39,7 @@ export default function Tasks() {
       required: true,
       errors: errors,
       nameInDocument: "title",
-      isTextarea:true
+      isTextarea: true,
     },
   ];
 
@@ -118,25 +118,29 @@ export default function Tasks() {
       </h1>
       {/* Task List */}
       <div className="grid md:grid-cols-1 gap-4" id="print-area">
-        <h1 className="text-center text-3xl font-bold">برنامج المهام اليومي</h1>
+        <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
+          برنامج المهام اليومي
+        </h1>
         {data?.map((task) => (
           <div
             key={task.id}
-            className={`border rounded-lg p-4 space-y-2 text-xl 
+            className={`border rounded-lg p-4 space-y-2 text-3xl 
            
             
             `}>
             <h2 className="font-semibold text-center">{task.nameUser}</h2>
-            <p className="">{task.title}</p>
+            <p className="">
+              {task.title
+                .split("\n")
+                .filter((line) => line.trim() !== "")
+                .map((line, index) => (
+                  <p key={index}>
+                    {index + 1}- {line}
+                  </p>
+                ))}
+            </p>
 
             <div className="flex justify-between items-end ">
-              <p
-                className={`bg-white px-2 rounded-lg ${
-                  task.status === "مكتمل" ? "text-green-800" : "text-red-800"
-                } `}>
-                {task.status}
-              </p>
-
               <div>
                 <button
                   onClick={() => {
@@ -146,11 +150,19 @@ export default function Tasks() {
                   تعديل
                 </button>
                 <button
-                  onClick={() => {dispatch(deleteTask(task._id))}}
+                  onClick={() => {
+                    dispatch(deleteTask(task._id));
+                  }}
                   className="border px-3 py-1 rounded hover:bg-gray-400 cursor-pointer print:hidden bg-white text-red-800">
                   حذف
                 </button>
               </div>
+              <p
+                className={`bg-white px-2 rounded-lg ${
+                  task.status === "مكتمل" ? "text-green-800 border-green-700 border-2 px-4" : "text-red-800 border-red-700 border-2 px-4"
+                } `}>
+                {task.status}
+              </p>
             </div>
           </div>
         ))}
