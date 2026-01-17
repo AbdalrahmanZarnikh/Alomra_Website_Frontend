@@ -29,6 +29,8 @@ export const rooms = [
   "غرفة 26",
   "غرفة 27",
   "غرفة 28",
+  "غرفة 29",
+  "غرفة 30",
 ];
 
 export const headTable = [
@@ -83,6 +85,8 @@ export const keywords = [
   "غرفة 26",
   "غرفة 27",
   "غرفة 28",
+  "غرفة 29",
+  "غرفة 30",
 ];
 
 export const statusUsers = [
