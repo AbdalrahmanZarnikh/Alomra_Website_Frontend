@@ -1,4 +1,4 @@
-export const typeSafar = ["جواً", "براً"];
+export const typeSafar = ["جواً", "براً","غير ذلك"];
 export const typeRoom = ["ثنائية", "ثلاثية", "رباعية", "خماسية", "خاصة"];
 export const rooms = [
   "غرفة 1",
