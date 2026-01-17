@@ -22,15 +22,19 @@ export default function Tasks() {
   const navigate = useNavigate();
 
   // الحصول على تاريخ الغد
-  const day = isStatus
-    ? new Date()
-    : new Date().setDate(new Date().getDate() + 1);
+
+  // const day = isStatus
+  //   ? new Date()
+  //   : new Date().setDate(new Date().getDate() + 1);
+
   // const tomorrow = new Date().setDate(new Date().getDate()+1);
 
   // عرض اسم اليوم بالعربية
-  const dayArabic = new Intl.DateTimeFormat("ar", { weekday: "long" }).format(
-    day
-  );
+  // const dayArabic = new Intl.DateTimeFormat("ar", { weekday: "long" }).format(
+  //   day
+  // );
+
+  const dayArabic=""
 
   useEffect(() => {
     dispatch(getTasks());
@@ -139,11 +143,11 @@ export default function Tasks() {
       <div className="grid md:grid-cols-1 gap-4" id="print-area">
         {isStatus ? (
           <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
-            حالة مهام يوم <span className="text-black">{dayArabic}</span>
+            حالة مهام اليوم <span className="text-black">{dayArabic}</span>
           </h1>
         ) : (
           <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
-            توزيع مهام يوم <span className="text-black">{dayArabic}</span>
+            توزيع مهام اليوم <span className="text-black">{dayArabic}</span>
           </h1>
         )}
         {data?.map((task) => (
