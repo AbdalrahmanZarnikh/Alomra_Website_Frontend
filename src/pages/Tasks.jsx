@@ -17,7 +17,7 @@ export default function Tasks() {
   const { id } = useParams();
   const isUpdateMode = typeof id === "string";
 
-  const [isStatus, setIsStatus] = useState(true);
+  const [isStatus, setIsStatus] = useState(false);
 
   const navigate = useNavigate();
 

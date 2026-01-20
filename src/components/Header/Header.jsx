@@ -183,6 +183,18 @@ const Header = () => {
             onClick={() => setMenuOpen(false)}>
             جوازات السفر
           </NavLink>
+
+          <NavLink
+            to="/tasks"
+            className={({ isActive }) =>
+              `rounded-lg p-3 font-bold ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }>
+            إدارة المهام
+          </NavLink>
         </div>
       )}
     </header>
