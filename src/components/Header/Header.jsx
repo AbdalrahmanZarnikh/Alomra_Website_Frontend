@@ -187,7 +187,7 @@ const Header = () => {
           <NavLink
             to="/tasks"
             className={({ isActive }) =>
-              `rounded-lg p-3 font-bold w-full ${
+              `rounded-lg p-3 w-full ${
                 isActive
                   ? "bg-black text-white"
                   : "bg-white hover:bg-white/50 hover:text-white"
