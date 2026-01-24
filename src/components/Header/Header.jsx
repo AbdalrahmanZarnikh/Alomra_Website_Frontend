@@ -117,7 +117,7 @@ const Header = () => {
                 : "bg-white hover:bg-white/50 hover:text-white"
             }`
           }>
-          جوازات السفر
+          ملفاتي
         </NavLink>
         <NavLink
           to="/tasks"
@@ -181,13 +181,13 @@ const Header = () => {
               }`
             }
             onClick={() => setMenuOpen(false)}>
-            جوازات السفر
+            ملفاتي
           </NavLink>
 
           <NavLink
             to="/tasks"
             className={({ isActive }) =>
-              `rounded-lg p-3 font-bold ${
+              `rounded-lg p-3 font-bold w-full ${
                 isActive
                   ? "bg-black text-white"
                   : "bg-white hover:bg-white/50 hover:text-white"
