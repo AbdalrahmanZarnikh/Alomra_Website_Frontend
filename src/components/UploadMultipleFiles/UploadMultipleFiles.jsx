@@ -32,7 +32,7 @@ const UploadMultipleFiles = ({ form, records }) => {
         form.append("images", file);
         const url = URL.createObjectURL(file);
         setImages((prev) => [...prev, url]);
-      } else if (mime === "application/pdf") {
+      } else if (!mime.startsWith("image")) {
         try {
           const res = await storage.createFile(
             "68e3f68b0010d81f0045", // Bucket ID

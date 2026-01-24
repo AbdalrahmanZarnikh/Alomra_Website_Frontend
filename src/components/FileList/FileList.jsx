@@ -54,7 +54,7 @@ export default function FileList() {
         }}
       />
       <h2 className="text-xl md:text-3xl font-bold mb-8 text-center text-white tracking-wide">
-        <span>📁 الجوازات PDF</span>
+        <span>ملفاتي</span>
       </h2>
 
       <span className="text-white text-xl md:text-3xl font-bold">
