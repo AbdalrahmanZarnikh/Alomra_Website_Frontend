@@ -141,7 +141,7 @@ const Table = ({
       <h1
         className={`flex ${
           room ? "justify-evenly gap-10" : "justify-center"
-        } items-center mb-5 text-5xl text-primary/90`}>
+        } items-center mb-5 p-4 text-5xl text-primary/90`}>
         <span>{Filter}</span>
         {room && (
           <span
