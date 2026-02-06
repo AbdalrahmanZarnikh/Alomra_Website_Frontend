@@ -33,6 +33,7 @@ function App() {
           <Route path="/bus/:id" element={<BusLayout />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/alhuda" element={<Alhuda />} />
+          <Route path="/edit-alhuda/:id" element={<Alhuda />} />
           <Route path="/edit-task/:id" element={<Tasks />} />
         </Routes>
       </BrowserRouter>

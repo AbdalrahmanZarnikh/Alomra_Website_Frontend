@@ -77,6 +77,9 @@ export default function Alhuda() {
 
   const { data, isLoading } = useSelector((state) => state.taskSlice);
 
+
+
+
   useEffect(() => {
     if (isUpdateMode && data.length > 0) {
       const found = data.find((item) => item._id === id);
@@ -105,7 +108,6 @@ export default function Alhuda() {
     });
   };
 
-  const sum = 2300;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -139,7 +141,7 @@ export default function Alhuda() {
               task.nameUser !== "عبد الرحمن" &&
               task.nameUser !== "أبو حسين" &&
               task.nameUser !== "أحمد حمدو" &&
-              task.nameUser !== "محمد زرنيخ"
+              task.nameUser !== "محمد زرنيخ",
           )
           .map((task) => (
             <div
@@ -159,16 +161,17 @@ export default function Alhuda() {
                     <p
                       key={index}
                       className={` bg-primary mb-2 rounded-lg  text-white flex items-center justify-center `}>
-                      {line}
+                      {line} +
                     </p>
                   ))}
+                  
               </p>
 
               <div className="flex justify-between items-end ">
                 <div>
                   <button
                     onClick={() => {
-                      navigate(`/edit-task/${task._id}`);
+                      navigate(`/edit-alhuda/${task._id}`);
                     }}
                     className="border px-3 py-1 mx-4 rounded hover:bg-blue-200 cursor-pointer print:hidden bg-white text-blue-800">
                     تعديل
@@ -183,7 +186,7 @@ export default function Alhuda() {
                 </div>
               </div>
 
-              <p>المجموع : {sum}</p>
+              <p>المجموع : {task.sum}</p>
             </div>
           ))}
       </div>
