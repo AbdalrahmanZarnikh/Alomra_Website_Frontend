@@ -130,6 +130,17 @@ const Header = () => {
           }>
           إدارة المهام
         </NavLink>
+        <NavLink
+          to="/alhuda"
+          className={({ isActive }) =>
+            `rounded-lg p-3 font-bold ${
+              isActive
+                ? "bg-black text-white"
+                : "bg-white hover:bg-white/50 hover:text-white"
+            }`
+          }>
+          الجرد السنوي
+        </NavLink>
       </div>
 
       {/* قائمة الموبايل المنسدلة */}
@@ -194,6 +205,17 @@ const Header = () => {
               }`
             }>
             إدارة المهام
+          </NavLink>
+          <NavLink
+            to="/alhuda"
+            className={({ isActive }) =>
+              `rounded-lg p-3 w-full ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }>
+            الجرد السنوي
           </NavLink>
         </div>
       )}

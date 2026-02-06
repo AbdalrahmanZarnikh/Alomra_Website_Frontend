@@ -10,6 +10,7 @@ import BusLayout from "./pages/BusLayout";
 import Home from "./pages/Home";
 import { store } from "./redux/store";
 import Tasks from "./pages/Tasks";
+import Alhuda from "./pages/Alhuda";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           {/* جلب data من ال Redux داخل Bus نفسه */}
           <Route path="/bus/:id" element={<BusLayout />} />
           <Route path="/tasks" element={<Tasks />} />
+          <Route path="/alhuda" element={<Alhuda />} />
           <Route path="/edit-task/:id" element={<Tasks />} />
         </Routes>
       </BrowserRouter>
