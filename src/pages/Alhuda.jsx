@@ -76,9 +76,17 @@ export default function Alhuda() {
   ];
 
   const { data, isLoading } = useSelector((state) => state.taskSlice);
-
-
-
+  const LastSum = data
+    ?.filter(
+      (task) =>
+        task.nameUser !== "عبد الرحمن" &&
+        task.nameUser !== "أبو حسين" &&
+        task.nameUser !== "أحمد حمدو" &&
+        task.nameUser !== "محمد زرنيخ",
+    )
+    .reduce((acc, ele) => {
+      return acc + Number(ele.sum);
+    }, 0);
 
   useEffect(() => {
     if (isUpdateMode && data.length > 0) {
@@ -107,7 +115,6 @@ export default function Alhuda() {
       navigate("/alhuda");
     });
   };
-
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -164,7 +171,6 @@ export default function Alhuda() {
                       {line} +
                     </p>
                   ))}
-                  
               </p>
 
               <div className="flex justify-between items-end ">
@@ -186,9 +192,11 @@ export default function Alhuda() {
                 </div>
               </div>
 
-              <p>المجموع : {task.sum}</p>
+              <p className="text-center mt-10">المجموع : {task.sum}</p>
             </div>
           ))}
+
+        <p className="text-3xl"> المجموع النهائي : {LastSum}</p>
       </div>
     </div>
   );
