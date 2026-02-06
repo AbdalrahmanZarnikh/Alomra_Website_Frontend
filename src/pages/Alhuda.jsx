@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +10,7 @@ import {
   updateTask,
 } from "../redux/slice/task/taskSlice";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
+import PopUp from "../components/PopUp/PopUp";
 
 export default function Alhuda() {
   const dispatch = useDispatch();
@@ -32,6 +33,14 @@ export default function Alhuda() {
   // );
 
   const dayArabic = "";
+
+  const [show, setShow] = useState(false);
+  const [newId, setNewId] = useState("");
+
+  const CheckPass = (id) => {
+    setShow(true);
+    setNewId(id);
+  };
 
   useEffect(() => {
     dispatch(getTasks());
@@ -128,6 +137,16 @@ export default function Alhuda() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      <PopUp
+        msg={"هل أنت متأكد من الحذف ؟"}
+        id={newId}
+        thunk={deleteTask}
+        showVar={show}
+        onClose={() => {
+          setShow(false);
+        }}
+      />
+
       <h1 className="text-3xl font-bold mb-6 text-center">الجرد السنوي </h1>
       {isUpdateMode && (
         <ButtonReverse text={"العودة لإنشاء مهمام "} to={"/tasks"} />
@@ -194,7 +213,7 @@ export default function Alhuda() {
                   </button>
                   <button
                     onClick={() => {
-                      dispatch(deleteTask(task._id));
+                      CheckPass(task._id);
                     }}
                     className="border px-3 py-1 rounded hover:bg-red-200 cursor-pointer print:hidden bg-white text-red-800">
                     حذف
