@@ -32,16 +32,16 @@ function Home() {
   useEffect(() => {
     if (omras?.length > 1) {
       setOmra(omras[1]?.name);
-    }
-    else{
+    } else {
       setOmra(omras[0]?.name);
     }
   }, [omras]);
 
   const [checked, setChecked] = useState({
     الاسم: true,
-    "رقم الجوال": true,
-    المبلغ: true,
+    الجنس: false,
+    "رقم الجوال": false,
+    المبلغ: false,
     الغرفة: true,
     ملاحظات: true,
     "حالة الجواز": false,
@@ -84,7 +84,7 @@ function Home() {
                 data={keywords}
                 setFunction={setFilter}
                 value={Filter}
-                />
+              />
             </div>
 
             <div className="w-full">

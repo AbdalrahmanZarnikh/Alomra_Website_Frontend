@@ -15,6 +15,11 @@ const Table = ({
   setNewId,
   omra,
 }) => {
+  const convertGender = {
+    ذكر: "رجال",
+    أنثى: "نساء",
+  };
+
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [order, setOrder] = useState(false);
@@ -82,6 +87,8 @@ const Table = ({
           return ele.visa === true && ele.name !== "إدارة  الحملة";
         } else if (FilterStatus == "لم يحصل على تأشيرة") {
           return ele.visa === false && ele.name !== "إدارة  الحملة";
+        } else if (FilterStatus == "ذكر" || FilterStatus == "أنثى") {
+          return ele.gender === FilterStatus;
         } else {
           return ele;
         }
@@ -89,7 +96,7 @@ const Table = ({
 
   if (order) {
     filteredData.sort(
-      (a, b) => +a.sitNumber.split(" ")[0] - +b.sitNumber.split(" ")[0]
+      (a, b) => +a.sitNumber.split(" ")[0] - +b.sitNumber.split(" ")[0],
     );
   }
 
@@ -142,17 +149,21 @@ const Table = ({
         className={`flex ${
           room ? "justify-evenly gap-10" : "justify-center"
         } items-center mb-5 p-4 text-5xl text-primary/90`}>
-        <span>{Filter}</span>
+        {FilterStatus === "ذكر" || FilterStatus === "أنثى" ? (
+          <span>{convertGender[FilterStatus]}</span>
+        ) : (
+          <span>{Filter}</span>
+        )}
         {room && (
           <span
             className={`inline-block px-4 py-1 rounded-full text-white font-bold text-3xl whitespace-nowrap  ${
               room === "رباعية"
                 ? "bg-green-600"
                 : room === "ثلاثية"
-                ? "bg-blue-600"
-                : room === "ثنائية"
-                ? "bg-red-600"
-                : "bg-zinc-800"
+                  ? "bg-blue-600"
+                  : room === "ثنائية"
+                    ? "bg-red-600"
+                    : "bg-zinc-800"
             }`}>
             {room}
           </span>
@@ -253,6 +264,12 @@ const Table = ({
                     } `}>
                     {ele.name}
                   </td>
+                  <td
+                    className={`p-3 text-center ${
+                      !checked.الجنس && "print:hidden"
+                    } `}>
+                    {ele.gender}
+                  </td>
 
                   <td
                     className={`p-3 text-center ${
@@ -314,12 +331,12 @@ const Table = ({
                         ele.roomType === "رباعية"
                           ? "bg-green-600"
                           : ele.roomType === "ثلاثية"
-                          ? "bg-blue-600"
-                          : ele.roomType === "ثنائية"
-                          ? "bg-red-600"
-                          : ele.roomType === "خاصة"
-                          ? "bg-zinc-800"
-                          : "bg-orange-800"
+                            ? "bg-blue-600"
+                            : ele.roomType === "ثنائية"
+                              ? "bg-red-600"
+                              : ele.roomType === "خاصة"
+                                ? "bg-zinc-800"
+                                : "bg-orange-800"
                       }`}>
                       {ele.roomType}
                     </span>

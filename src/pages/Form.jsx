@@ -6,7 +6,13 @@ import { createUser, updateUser } from "../redux/slice/user/userSlice";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 import FormLayout from "../components/FormLayout/FormLayout";
 import { useEffect, useState } from "react";
-import { typeRoom, typeSafar, rooms,sitNumbers } from "../constants/data";
+import {
+  typeRoom,
+  typeSafar,
+  rooms,
+  sitNumbers,
+  Gender,
+} from "../constants/data";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -112,6 +118,15 @@ const Form = () => {
       errors: errors,
       nameInDocument: "sitNumber",
     },
+    {
+      data: Gender,
+      label: "الجنس",
+      register: register,
+      required: false,
+      option: "حدد الجنس",
+      errors: errors,
+      nameInDocument: "gender",
+    },
   ];
   const contentFormFieldsCheckBox = [
     {
@@ -142,6 +157,7 @@ const Form = () => {
       if (found) {
         reset({
           name: found.name,
+          gender:found.gender,
           phone: found.phone,
           paidAmount: found.paidAmount,
           taslim: found.taslim,
@@ -182,6 +198,7 @@ const Form = () => {
   const form = new FormData();
   const onSubmit = (data) => {
     form.append("name", data.name);
+    form.append("gender", data.gender);
     form.append("paidAmount", +data.paidAmount);
     form.append("phone", data.phone);
     form.append("details", data.details);

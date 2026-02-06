@@ -1,4 +1,5 @@
 export const typeSafar = ["جواً", "براً","غير ذلك"];
+export const Gender = ["ذكر", "أنثى","غير ذلك"];
 export const typeRoom = ["ثنائية", "ثلاثية", "رباعية", "خماسية", "خاصة"];
 export const rooms = [
   "غرفة 1",
@@ -35,6 +36,7 @@ export const rooms = [
 
 export const headTable = [
   "الاسم",
+  "الجنس",
   "رقم الجوال",
   "المبلغ المدفوع",
   "المبلغ المتبقي",
@@ -95,7 +97,9 @@ export const statusUsers = [
   "لم يسلم الجواز",
   "لم يكمل الدفع",
   "حصل على تأشيرة",
-  "لم يحصل على تأشيرة"
+  "لم يحصل على تأشيرة",
+  "ذكر",
+  "أنثى"
 ];
 
 export const sitNumbers = [
