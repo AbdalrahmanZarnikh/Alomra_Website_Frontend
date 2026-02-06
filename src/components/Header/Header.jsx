@@ -11,6 +11,7 @@ const Header = () => {
   const location = window.location;
   const [searchTerm, setSearchTerm] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen2, setMenuOpen2] = useState(false);
   const input = useRef(null);
 
   useEffect(() => {
@@ -105,9 +106,14 @@ const Header = () => {
           size={21}
         />
       </div>
+      <button
+        className="text-white text-3xl hidden md:block cursor-pointer"
+        onClick={() => setMenuOpen2(!menuOpen2)}>
+        {menuOpen2 ? <BiX /> : <BiMenu />}
+      </button>
 
       {/* روابط صغيرة على اليمين */}
-      <div className="hidden md:flex gap-3 items-center">
+      {/* <div className="hidden md:flex gap-3 items-center">
         <NavLink
           to="/pdf"
           className={({ isActive }) =>
@@ -141,7 +147,7 @@ const Header = () => {
           }>
           الجرد السنوي
         </NavLink>
-      </div>
+      </div> */}
 
       {/* قائمة الموبايل المنسدلة */}
       {menuOpen && (
@@ -215,6 +221,47 @@ const Header = () => {
                   : "bg-white hover:bg-white/50 hover:text-white"
               }`
             }>
+            الجرد السنوي
+          </NavLink>
+        </div>
+      )}
+      {menuOpen2 && (
+        <div className="absolute top-full left-0 w-full bg-primary/70 shadow-md flex flex-col items-center text-center py-3 px-4 space-y-4  z-50 ">
+          <NavLink
+            to="/pdf"
+            className={({ isActive }) =>
+              `rounded-lg p-3 w-full ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }
+            onClick={() => setMenuOpen2(false)}>
+            ملفاتي
+          </NavLink>
+
+          <NavLink
+            to="/tasks"
+            className={({ isActive }) =>
+              `rounded-lg p-3 w-full ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }
+            onClick={() => setMenuOpen2(false)}>
+            إدارة المهام
+          </NavLink>
+          <NavLink
+            to="/alhuda"
+            className={({ isActive }) =>
+              `rounded-lg p-3 w-full ${
+                isActive
+                  ? "bg-black text-white"
+                  : "bg-white hover:bg-white/50 hover:text-white"
+              }`
+            }
+            onClick={() => setMenuOpen2(false)}>
             الجرد السنوي
           </NavLink>
         </div>
