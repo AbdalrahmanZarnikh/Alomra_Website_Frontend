@@ -103,6 +103,8 @@ export default function Alhuda() {
 
   const form = new FormData();
   const onSubmit = (data) => {
+    const form = new FormData();
+
     form.append("title", data.title);
     form.append("nameUser", data.nameUser);
     form.append("status", data.status);
@@ -112,6 +114,14 @@ export default function Alhuda() {
       : createTask(form);
 
     dispatch(action).then(() => {
+      if (!isUpdateMode) {
+        reset({
+          title: "",
+          nameUser: "",
+          status: "",
+        });
+      }
+
       navigate("/alhuda");
     });
   };
