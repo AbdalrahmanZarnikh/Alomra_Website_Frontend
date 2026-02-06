@@ -209,7 +209,8 @@ const Header = () => {
                   ? "bg-black text-white"
                   : "bg-white hover:bg-white/50 hover:text-white"
               }`
-            }>
+            }
+            onClick={() => setMenuOpen(false)}>
             إدارة المهام
           </NavLink>
           <NavLink
@@ -220,7 +221,8 @@ const Header = () => {
                   ? "bg-black text-white"
                   : "bg-white hover:bg-white/50 hover:text-white"
               }`
-            }>
+            }
+            onClick={() => setMenuOpen(false)}>
             الجرد السنوي
           </NavLink>
         </div>
