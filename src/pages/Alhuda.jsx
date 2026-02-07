@@ -19,20 +19,15 @@ export default function Alhuda() {
 
   const navigate = useNavigate();
 
-  // الحصول على تاريخ الغد
+  const today=new Date();
 
-  // const day = isStatus
-  //   ? new Date()
-  //   : new Date().setDate(new Date().getDate() + 1);
+  const hijriYear = new Intl.DateTimeFormat("ar-TN-u-ca-islamic", {
+    year: "numeric",
+  }).format(today);
 
-  // const tomorrow = new Date().setDate(new Date().getDate()+1);
+  console.log(hijriYear);
+  // مثال: "1447 هـ"
 
-  // عرض اسم اليوم بالعربية
-  // const dayArabic = new Intl.DateTimeFormat("ar", { weekday: "long" }).format(
-  //   day
-  // );
-
-  const dayArabic = "";
 
   const [show, setShow] = useState(false);
   const [newId, setNewId] = useState("");
@@ -169,7 +164,7 @@ export default function Alhuda() {
       {/* Task List */}
       <div className="grid md:grid-cols-1 gap-4" id="print-area">
         <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
-          جرد سنة 2026 <span className="text-black">{dayArabic}</span>
+          جرد سنة  <span className="text-black">{hijriYear}</span>
         </h1>
         {data
           ?.filter(
@@ -225,7 +220,7 @@ export default function Alhuda() {
             </div>
           ))}
 
-        <p className="text-3xl"> المجموع النهائي : {LastSum}</p>
+        <p className="text-5xl"> المجموع النهائي : <span className="text-primary text-6xl">{LastSum}</span></p>
       </div>
     </div>
   );
