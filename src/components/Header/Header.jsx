@@ -30,6 +30,12 @@ const Header = () => {
 
   return (
     <header className="bg-primary/90 p-3 md:p-5 flex flex-wrap justify-between items-center gap-3 relative">
+      <button
+        className="text-white text-3xl hidden md:block cursor-pointer"
+        onClick={() => setMenuOpen2(!menuOpen2)}>
+        {menuOpen2 ? <BiX /> : <BiMenu />}
+      </button>
+
       {/* الشعار */}
       <div className="flex items-center gap-2">
         <img src="image.png" alt="logo" className="w-12 h-12 md:w-16 md:h-16" />
@@ -106,48 +112,6 @@ const Header = () => {
           size={21}
         />
       </div>
-      <button
-        className="text-white text-3xl hidden md:block cursor-pointer"
-        onClick={() => setMenuOpen2(!menuOpen2)}>
-        {menuOpen2 ? <BiX /> : <BiMenu />}
-      </button>
-
-      {/* روابط صغيرة على اليمين */}
-      {/* <div className="hidden md:flex gap-3 items-center">
-        <NavLink
-          to="/pdf"
-          className={({ isActive }) =>
-            `rounded-lg p-3 font-bold ${
-              isActive
-                ? "bg-black text-white"
-                : "bg-white hover:bg-white/50 hover:text-white"
-            }`
-          }>
-          ملفاتي
-        </NavLink>
-        <NavLink
-          to="/tasks"
-          className={({ isActive }) =>
-            `rounded-lg p-3 font-bold ${
-              isActive
-                ? "bg-black text-white"
-                : "bg-white hover:bg-white/50 hover:text-white"
-            }`
-          }>
-          إدارة المهام
-        </NavLink>
-        <NavLink
-          to="/alhuda"
-          className={({ isActive }) =>
-            `rounded-lg p-3 font-bold ${
-              isActive
-                ? "bg-black text-white"
-                : "bg-white hover:bg-white/50 hover:text-white"
-            }`
-          }>
-          الجرد السنوي
-        </NavLink>
-      </div> */}
 
       {/* قائمة الموبايل المنسدلة */}
       {menuOpen && (
@@ -228,7 +192,7 @@ const Header = () => {
         </div>
       )}
       {menuOpen2 && (
-        <div className="absolute top-full left-0 w-full bg-primary/70 shadow-md flex flex-col items-center text-center py-3 px-4 space-y-4  z-50 ">
+        <div className="absolute top-full left-0 w-full  bg-primary/90 shadow-md flex flex-col items-center text-center py-10 px-4 space-y-4  z-50 ">
           <NavLink
             to="/pdf"
             className={({ isActive }) =>
