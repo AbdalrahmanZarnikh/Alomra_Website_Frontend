@@ -183,7 +183,7 @@ export default function Alhuda() {
           .map((task) => (
             <div
               key={task._id}
-              className={`border rounded-lg p-4 space-y-2 text-4xl 
+              className={`border rounded-lg p-4 space-y-2 text-4xl  bg-primary/30
            
             
             `}>
@@ -226,16 +226,16 @@ export default function Alhuda() {
             </div>
           ))}
 
-        <p className="text-5xl my-10">
+        <p className="text-5xl my-10 ">
           {" "}
-          المجموع النهائي (بالعملة السورية) بدون مقبوضات العمرة :{" "}
-          <span className="text-primary text-6xl ">{LastSum}</span>
+          المجموع النهائي  :
+          <span className="text-primary text-6xl mx-2">{(LastSum*1000).toLocaleString()}</span> ليرة 
         </p>
 
         <p className="text-5xl">
           {" "}
           مقبوضات العمرة  :
-          <span className="text-primary text-6xl ">{SumOmra} </span>دولار
+          <span className="text-primary text-6xl mx-2">{SumOmra} </span>دولار
         </p>
       </div>
     </div>
