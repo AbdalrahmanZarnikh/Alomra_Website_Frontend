@@ -19,7 +19,7 @@ export default function Alhuda() {
 
   const navigate = useNavigate();
 
-  const today=new Date();
+  const today = new Date();
 
   const hijriYear = new Intl.DateTimeFormat("ar-TN-u-ca-islamic", {
     year: "numeric",
@@ -27,7 +27,6 @@ export default function Alhuda() {
 
   console.log(hijriYear);
   // مثال: "1447 هـ"
-
 
   const [show, setShow] = useState(false);
   const [newId, setNewId] = useState("");
@@ -86,8 +85,15 @@ export default function Alhuda() {
         task.nameUser !== "عبد الرحمن" &&
         task.nameUser !== "أبو حسين" &&
         task.nameUser !== "أحمد حمدو" &&
-        task.nameUser !== "محمد زرنيخ",
+        task.nameUser !== "محمد زرنيخ" &&
+        task.status !== "عمرة",
     )
+    .reduce((acc, ele) => {
+      return acc + Number(ele.sum);
+    }, 0);
+
+  const SumOmra = data
+    ?.filter((task) => task.status === "عمرة")
     .reduce((acc, ele) => {
       return acc + Number(ele.sum);
     }, 0);
@@ -164,7 +170,7 @@ export default function Alhuda() {
       {/* Task List */}
       <div className="grid md:grid-cols-1 gap-4" id="print-area">
         <h1 className="text-center text-3xl font-bold mb-10 bg-primary/90 text-white p-4 rounded-lg">
-          جرد سنة  <span className="text-black">{hijriYear}</span>
+          جرد سنة <span className="text-black">{hijriYear}</span>
         </h1>
         {data
           ?.filter(
@@ -220,7 +226,17 @@ export default function Alhuda() {
             </div>
           ))}
 
-        <p className="text-5xl"> المجموع النهائي : <span className="text-primary text-6xl">{LastSum}</span></p>
+        <p className="text-5xl my-10">
+          {" "}
+          المجموع النهائي (بالعملة السورية) بدون مقبوضات العمرة :{" "}
+          <span className="text-primary text-6xl ">{LastSum}</span>
+        </p>
+
+        <p className="text-5xl">
+          {" "}
+          مقبوضات العمرة  :
+          <span className="text-primary text-6xl ">{SumOmra} </span>دولار
+        </p>
       </div>
     </div>
   );
