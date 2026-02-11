@@ -175,7 +175,7 @@ const Table = ({
           <p className="flex flex-col md:flex-row gap-2 justify-between items-center ">
             <span>
               العدد الكلي في الجدول هو:{" "}
-              <span className="text-sm md:text-3xl text-primary/90 m-2 ">
+              <span className="text-2xl md:text-3xl text-primary/90 m-2 ">
                 {lastNumber}
               </span>{" "}
               <div className="flex justify-start mt-2 items-center gap-4 print:hidden">
