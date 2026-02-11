@@ -86,7 +86,8 @@ export default function Alhuda() {
         task.nameUser !== "أبو حسين" &&
         task.nameUser !== "أحمد حمدو" &&
         task.nameUser !== "محمد زرنيخ" &&
-        task.status !== "عمرة",
+        task.status !== "عمرة" &&
+        task.status !== "دولار",
     )
     .reduce((acc, ele) => {
       return acc + Number(ele.sum);
@@ -94,6 +95,12 @@ export default function Alhuda() {
 
   const SumOmra = data
     ?.filter((task) => task.status === "عمرة")
+    .reduce((acc, ele) => {
+      return acc + Number(ele.sum);
+    }, 0);
+
+  const SumDoller = data
+    ?.filter((task) => task.status === "دولار")
     .reduce((acc, ele) => {
       return acc + Number(ele.sum);
     }, 0);
@@ -212,6 +219,7 @@ export default function Alhuda() {
                     className="border px-3 py-1 mx-4 rounded hover:bg-blue-200 cursor-pointer print:hidden bg-white text-blue-800">
                     تعديل
                   </button>
+
                   <button
                     onClick={() => {
                       CheckPass(task._id);
@@ -228,13 +236,22 @@ export default function Alhuda() {
 
         <p className="text-5xl my-10 ">
           {" "}
-          المجموع النهائي  :
-          <span className="text-primary text-6xl mx-2">{(LastSum*1000).toLocaleString()}</span> ليرة 
+          المجموع النهائي :
+          <span className="text-primary text-6xl mx-2">
+            {(LastSum * 1000).toLocaleString()}
+          </span>{" "}
+          ليرة +
+          <br />
+          <span className="text-primary text-5xl mx-2">
+            {/* {(LastSum * 1000).toLocaleString()} */}
+            {SumDoller}
+          </span>{" "}
+          دولار
         </p>
 
         <p className="text-5xl">
           {" "}
-          مقبوضات العمرة  :
+          مقبوضات العمرة :
           <span className="text-primary text-6xl mx-2">{SumOmra} </span>دولار
         </p>
       </div>
