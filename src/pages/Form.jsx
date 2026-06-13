@@ -12,6 +12,7 @@ import {
   rooms,
   sitNumbers,
   Gender,
+  Years
 } from "../constants/data";
 
 const Form = () => {
@@ -127,6 +128,15 @@ const Form = () => {
       errors: errors,
       nameInDocument: "gender",
     },
+     {
+      data: Years,
+      label: "العمر",
+      register: register,
+      required: false,
+      option: "حدد العمر",
+      errors: errors,
+      nameInDocument: "age",
+    },
   ];
   const contentFormFieldsCheckBox = [
     {
@@ -169,6 +179,7 @@ const Form = () => {
           omra: found.omra?._id || "",
           safar: found.safar,
           sitNumber: found.sitNumber,
+          age:found.age
         });
       }
     }
@@ -208,6 +219,7 @@ const Form = () => {
     form.append("roomType", data.roomType);
     form.append("sitNumber", data.sitNumber);
     form.append("visa", data.visa);
+    form.append("age",data.age)
 
     if (omras.length > 0) {
       form.append("omra", data.omra);

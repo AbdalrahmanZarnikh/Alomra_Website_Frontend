@@ -47,6 +47,10 @@ export const rooms = [
   "غرفة 610",
 ];
 
+// export const Ages = Array.from({ length: 100 }, (_, i) => (i + 1).toString());
+
+export const Years = Array.from({ length: 2026 - 1950 + 1 }, (_, i) => (1950 + i).toString());
+
 export const headTable = [
   "الاسم",
   "الجنس",

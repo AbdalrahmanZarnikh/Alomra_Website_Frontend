@@ -20,6 +20,11 @@ const Table = ({
     أنثى: "نساء",
   };
 
+  const calculateAge = (birthYear) => {
+    const currentYear = new Date().getFullYear();
+    return currentYear - parseInt(birthYear);
+  };
+
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [order, setOrder] = useState(false);
@@ -267,8 +272,11 @@ const Table = ({
                   <td
                     className={`p-3 text-center ${
                       !checked.الجنس && "print:hidden"
-                    } `}>
+                    }`}>
                     {ele.gender}
+                    <p className="text-red-600 text-xl">
+                      {calculateAge(ele.age)} {+calculateAge(ele.age)>10 ? "سنة":"سنوات"}
+                    </p>
                   </td>
 
                   <td
