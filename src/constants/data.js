@@ -1,5 +1,5 @@
 export const typeSafar = ["جواً", "براً", "غير ذلك"];
-export const Gender = ["ذكر", "أنثى", "غير ذلك"];
+export const Gender = ["ذكر", "أنثى", "طفل"];
 export const typeRoom = ["ثنائية", "ثلاثية", "رباعية", "خماسية", "خاصة"];
 export const rooms = [
   "غرفة 1",
@@ -74,6 +74,7 @@ export const keywords = [
   "عبد الرزاق بيلوني",
   "خالد قوجة",
   "أحمد المصري",
+  "الصابوني",
   "باص 1",
   "باص 2",
   "غرفة 1",
@@ -130,6 +131,7 @@ export const statusUsers = [
   "لم يحصل على تأشيرة",
   "ذكر",
   "أنثى",
+  "طفل"
 ];
 
 export const sitNumbers = [

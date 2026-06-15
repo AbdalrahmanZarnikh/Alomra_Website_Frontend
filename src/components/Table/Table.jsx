@@ -55,6 +55,7 @@ const Table = ({
           Filter !== "براً" &&
           Filter !== "خالد قوجة" &&
           Filter !== "أحمد المصري" &&
+          Filter !== "الصابوني" &&
           Filter !== "عبد الرزاق بيلوني" &&
           Filter !== "باص 1" &&
           Filter !== "باص 2"
@@ -62,12 +63,17 @@ const Table = ({
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
           return ele.safar === Filter && ele.name !== "إدارة  الحملة";
-        } else if (Filter == "خالد قوجة" || Filter == "أحمد المصري") {
+        } else if (
+          Filter == "خالد قوجة" ||
+          Filter == "أحمد المصري" ||
+          Filter == "الصابوني"
+        ) {
           return ele.details.includes(Filter);
         } else if (Filter == "عبد الرزاق بيلوني") {
           return (
             !ele.details.includes("خالد قوجة") &&
             !ele.details.includes("أحمد المصري") &&
+            !ele.details.includes("الصابوني") &&
             ele.name !== "إدارة  الحملة"
           );
         } else if (Filter == "باص 1" || Filter == "باص 2") {
@@ -92,7 +98,11 @@ const Table = ({
           return ele.visa === true && ele.name !== "إدارة  الحملة";
         } else if (FilterStatus == "لم يحصل على تأشيرة") {
           return ele.visa === false && ele.name !== "إدارة  الحملة";
-        } else if (FilterStatus == "ذكر" || FilterStatus == "أنثى") {
+        } else if (
+          FilterStatus == "ذكر" ||
+          FilterStatus == "أنثى" ||
+          FilterStatus == "طفل"
+        ) {
           return ele.gender === FilterStatus;
         } else {
           return ele;
@@ -274,9 +284,13 @@ const Table = ({
                       !checked.الجنس && "print:hidden"
                     }`}>
                     {ele.gender}
-                    <p className="text-red-600 text-xl">
-                      {calculateAge(ele.age)} {+calculateAge(ele.age)>10 ? "سنة":"سنوات"}
-                    </p>
+                    {ele.age  ?
+                      <p className="text-red-600 text-xl">
+                        {calculateAge(ele.age)}{" "}
+                        {+calculateAge(ele.age) > 10 ? "سنة" : "سنوات"}
+                      </p>
+                      :<p>—</p>
+                    }
                   </td>
 
                   <td
