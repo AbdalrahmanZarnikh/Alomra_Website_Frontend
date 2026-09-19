@@ -1,9 +1,35 @@
 import { useEffect, useRef, useState } from "react";
-import { BiSearch, BiMenu, BiX } from "react-icons/bi";
+import {
+  Search,
+  Menu,
+  X,
+  Table2,
+  UserPlus,
+  Megaphone,
+  FolderOpen,
+  ListChecks,
+  BookOpen,
+} from "lucide-react";
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import getUsersBySearch from "../../redux/slice/user/act/getUsersBySearch";
 import { getUsers } from "../../redux/slice/user/userSlice";
+
+const NAV_LINKS = [
+  { to: "/", label: "الجدول", icon: Table2 },
+  { to: "/add-user", label: "تسجيل جديد", icon: UserPlus },
+  { to: "/add-omra", label: "إنشاء حملة جديدة", icon: Megaphone },
+  { to: "/pdf", label: "ملفاتي", icon: FolderOpen },
+  { to: "/tasks", label: "إدارة المهام", icon: ListChecks },
+  { to: "/alhuda", label: "الجرد السنوي", icon: BookOpen },
+];
+
+const navLinkClass = ({ isActive }) =>
+  `flex items-center gap-3 rounded-lg border-r-[3px] px-4 py-2.5 text-[15px] font-medium transition-colors ${
+    isActive
+      ? "border-brass bg-white/10 text-white"
+      : "border-transparent text-white/65 hover:bg-white/5 hover:text-white"
+  }`;
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -11,7 +37,6 @@ const Header = () => {
   const location = window.location;
   const [searchTerm, setSearchTerm] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuOpen2, setMenuOpen2] = useState(false);
   const input = useRef(null);
 
   useEffect(() => {
@@ -28,210 +53,93 @@ const Header = () => {
 
   const handleSearch = (e) => setSearchTerm(e.target.value);
 
+  const searchBox = (
+    <div className="relative">
+      <Search
+        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50"
+        size={18}
+      />
+      <input
+        type="text"
+        ref={input}
+        placeholder="ابحث عن اسم"
+        className="w-full rounded-lg border border-white/10 bg-white/10 py-2.5 pr-10 pl-9 text-sm text-white placeholder:text-white/45 focus:border-brass focus:outline-none"
+        onChange={handleSearch}
+      />
+      {searchTerm.length > 0 && (
+        <button
+          type="button"
+          aria-label="مسح البحث"
+          onClick={() => {
+            input.current.value = "";
+            setSearchTerm("");
+          }}
+          className="absolute left-2.5 top-1/2 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white cursor-pointer">
+          <X size={12} />
+        </button>
+      )}
+    </div>
+  );
+
+  const brand = (
+    <div className="flex items-center gap-3">
+      <img src="/image.png" alt="" className="h-11 w-11 shrink-0" />
+      <div className="leading-tight">
+        <p className="font-display text-lg font-bold text-white">
+          مكتبة الهدى
+        </p>
+        <p className="text-xs text-white/55">نظام العمرة والحج</p>
+      </div>
+    </div>
+  );
+
   return (
-    <header className="bg-primary/90 p-3 md:p-5 flex flex-wrap justify-between items-center gap-3 relative">
-      <button
-        className="text-white text-3xl hidden md:block cursor-pointer"
-        onClick={() => setMenuOpen2(!menuOpen2)}>
-        {menuOpen2 ? <BiX /> : <BiMenu />}
-      </button>
+    <header className="print:hidden">
+      {/* شريط جانبي — سطح المكتب */}
+      <aside className="fixed right-0 top-0 z-40 hidden h-screen w-72 flex-col gap-8 bg-primary-800 px-5 py-7 md:flex">
+        {brand}
+        {searchBox}
+        <nav className="flex flex-col gap-1">
+          {NAV_LINKS.map(({ to, label, icon: Icon }) => (
+            <NavLink key={to} to={to} className={navLinkClass}>
+              <Icon size={18} />
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+        <p className="mt-auto border-t border-white/10 pt-4 text-xs text-white/40">
+          عمرة مكتبة الهدى
+        </p>
+      </aside>
 
-      {/* الشعار */}
-      <div className="flex items-center gap-2">
-        <img src="image.png" alt="logo" className="w-12 h-12 md:w-16 md:h-16" />
-        <h1 className="text-white font-bold text-lg md:text-2xl hidden sm:block">
-          نظام العمرة و الحج
-        </h1>
-      </div>
+      {/* شريط علوي — الموبايل */}
+      <div className="relative bg-primary-800 px-4 py-3 md:hidden">
+        <div className="flex items-center justify-between">
+          {brand}
+          <button
+            aria-label="القائمة"
+            className="text-white cursor-pointer"
+            onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+        <div className="mt-3">{searchBox}</div>
 
-      {/* زر القائمة للموبايل */}
-      <button
-        className="text-white text-3xl md:hidden cursor-pointer"
-        onClick={() => setMenuOpen(!menuOpen)}>
-        {menuOpen ? <BiX /> : <BiMenu />}
-      </button>
-
-      {/* روابط التنقل (للحاسوب) */}
-      <nav className="hidden md:flex gap-4 text-lg font-bold">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `rounded-lg p-3 ${
-              isActive
-                ? "bg-black text-white"
-                : "bg-white hover:bg-white/50 hover:text-white"
-            }`
-          }>
-          الجدول
-        </NavLink>
-        <NavLink
-          to="/add-user"
-          className={({ isActive }) =>
-            `rounded-lg p-3 ${
-              isActive
-                ? "bg-black text-white"
-                : "bg-white hover:bg-white/50 hover:text-white"
-            }`
-          }>
-          تسجيل جديد
-        </NavLink>
-        <NavLink
-          to="/add-omra"
-          className={({ isActive }) =>
-            `rounded-lg p-3 ${
-              isActive
-                ? "bg-black text-white"
-                : "bg-white hover:bg-white/50 hover:text-white"
-            }`
-          }>
-          إنشاء حملة جديدة
-        </NavLink>
-      </nav>
-
-      {/* شريط البحث */}
-      <div className="relative w-full md:w-1/3">
-        <input
-          type="text"
-          ref={input}
-          placeholder="ابحث عن اسم"
-          className="p-3 w-full rounded-lg border border-gray-300 bg-white text-sm md:text-lg text-center"
-          onChange={handleSearch}
-        />
-        {searchTerm.length > 0 && (
-          <span
-            onClick={() => {
-              input.current.value = "";
-              setSearchTerm("");
-            }}
-            className="absolute right-3 top-2 md:top-3 bg-gray-300 text-red-500 w-6 h-6 md:w-7 md:h-7 flex justify-center items-center rounded-full cursor-pointer">
-            X
-          </span>
+        {menuOpen && (
+          <nav className="absolute left-0 top-full z-50 flex w-full flex-col gap-1 bg-primary-800 px-4 pb-4 shadow-lg">
+            {NAV_LINKS.map(({ to, label, icon: Icon }) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={navLinkClass}
+                onClick={() => setMenuOpen(false)}>
+                <Icon size={18} />
+                {label}
+              </NavLink>
+            ))}
+          </nav>
         )}
-        <BiSearch
-          className="absolute left-3 top-2.5 md:top-3 text-gray-500"
-          size={21}
-        />
       </div>
-
-      {/* قائمة الموبايل المنسدلة */}
-      {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-primary/70 shadow-md flex flex-col items-center text-center py-3 px-4 space-y-2 md:hidden z-50 ">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen(false)}>
-            الجدول
-          </NavLink>
-          <NavLink
-            to="/add-user"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen(false)}>
-            تسجيل جديد
-          </NavLink>
-          <NavLink
-            to="/add-omra"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen(false)}>
-            إنشاء حملة جديدة
-          </NavLink>
-          <NavLink
-            to="/pdf"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen(false)}>
-            ملفاتي
-          </NavLink>
-
-          <NavLink
-            to="/tasks"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen(false)}>
-            إدارة المهام
-          </NavLink>
-          <NavLink
-            to="/alhuda"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen(false)}>
-            الجرد السنوي
-          </NavLink>
-        </div>
-      )}
-      {menuOpen2 && (
-        <div className="absolute top-full left-0 w-full  bg-primary/90 shadow-md flex flex-col items-center text-center py-10 px-4 space-y-4  z-50 ">
-          <NavLink
-            to="/pdf"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen2(false)}>
-            ملفاتي
-          </NavLink>
-
-          <NavLink
-            to="/tasks"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen2(false)}>
-            إدارة المهام
-          </NavLink>
-          <NavLink
-            to="/alhuda"
-            className={({ isActive }) =>
-              `rounded-lg p-3 w-full ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-white hover:bg-white/50 hover:text-white"
-              }`
-            }
-            onClick={() => setMenuOpen2(false)}>
-            الجرد السنوي
-          </NavLink>
-        </div>
-      )}
     </header>
   );
 };

@@ -83,9 +83,10 @@ export default function Alhuda() {
     ?.filter(
       (task) =>
         task.nameUser !== "عبد الرحمن" &&
-        task.nameUser !== "أبو حسين" &&
+        task.nameUser !== "زين كنج" &&
         task.nameUser !== "أحمد حمدو" &&
         task.nameUser !== "محمد زرنيخ" &&
+        task.nameUser !== "خالد حمدو" &&
         task.status !== "عمرة" &&
         task.status !== "دولار",
     )

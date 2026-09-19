@@ -154,9 +154,11 @@ export default function Tasks() {
           ?.filter(
             (task) =>
               task.nameUser === "عبد الرحمن" ||
-              task.nameUser === "أبو حسين" ||
+              task.nameUser === "خالد حمدو" ||
               task.nameUser === "أحمد حمدو" ||
-              task.nameUser === "محمد زرنيخ"
+              task.nameUser === "محمد زرنيخ" || 
+              task.nameUser === "زين كنج" 
+
           ).map((task) => (
           <div
             key={task._id}

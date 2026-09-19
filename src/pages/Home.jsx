@@ -9,6 +9,7 @@ import { getOmras } from "../redux/slice/category/omraSlice";
 import loading from "../utils/loading.json";
 import { headTable, keywords, statusUsers } from "../constants/data";
 import { NavLink } from "react-router-dom";
+import { Bus, Printer, SlidersHorizontal } from "lucide-react";
 
 function Home() {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ function Home() {
           <Lottie animationData={loading} className="w-10" />
         </div>
       ) : (
-        <div className="p-5 overflow-x-auto ">
+        <div className="p-4 md:p-6 overflow-x-auto ">
           <PopUp
             msg={"هل أنت متأكد من الحذف ؟"}
             id={newId}
@@ -70,64 +71,10 @@ function Home() {
             }}
           />
 
-          {/*Start Filter Section */}
-
-          <div className="flex flex-col items-center  md:flex-row justify-between gap-4">
-            <div className="w-full">
-              <h1 className="text-yellow-900">حدد العمرة :</h1>
-              <FilterTable data={omras} setFunction={setOmra} value={omra} />
-            </div>
-
-            <div className="w-full">
-              <h1 className="text-yellow-900"> فلترة عامة :</h1>
-              <FilterTable
-                data={keywords}
-                setFunction={setFilter}
-                value={Filter}
-              />
-            </div>
-
-            <div className="w-full">
-              <h1 className="text-yellow-900"> حدد حسب حالة التسجيل :</h1>
-              <FilterTable
-                data={statusUsers}
-                setFunction={setFilterStatus}
-                value={FilterStatus}
-              />
-            </div>
-          </div>
-          {/* End Filter Section */}
-
-          <div className="hidden md:flex  items-center gap-5 ">
-            <NavLink
-              to="/bus/1"
-              className={({ isActive }) =>
-                `rounded-lg p-3 ${
-                  isActive
-                    ? "bg-black text-white"
-                    : "bg-primary text-white hover:bg-primary/60 "
-                }`
-              }>
-              الباص الأول
-            </NavLink>
-            <NavLink
-              to="/bus/2"
-              className={({ isActive }) =>
-                `rounded-lg p-3 ${
-                  isActive
-                    ? "bg-black text-white"
-                    : "bg-primary text-white hover:bg-primary/60 "
-                }`
-              }>
-              الباص الثاني
-            </NavLink>
-          </div>
-
           {/* Start Head Section  */}
-
-          <h1 className="flex justify-center mb-10 text-2xl md:text-4xl mt-5 ">
+          <h1 className="flex justify-center items-center flex-wrap gap-2 mb-6 font-display text-3xl md:text-5xl font-black text-center text-neutral-900">
             {omra?.split(" ")[0]}
-            <span className="mx-2  text-primary/90 font-bold">
+            <span>
               {omra?.split(" ").map((ele, index) => {
                 if (index !== 0) return ele + " ";
               })}
@@ -135,14 +82,68 @@ function Home() {
           </h1>
           {/* End Head Section  */}
 
-          {/* Save Or Print Table */}
+          {/*Start Filter Section */}
+          <div className="rounded-2xl border border-neutral-200 bg-white shadow-sm p-4 md:p-5 mb-6 print:hidden">
+            <div className="flex items-center gap-2 mb-4 text-neutral-700 font-bold">
+              <SlidersHorizontal size={18} className="text-primary" />
+              <span>فلترة وعرض البيانات</span>
+            </div>
+            <div className="flex flex-col items-stretch md:flex-row justify-between gap-4">
+              <div className="w-full">
+                <h2 className="mb-1 text-sm font-semibold text-neutral-500">
+                  حدد العمرة
+                </h2>
+                <FilterTable data={omras} setFunction={setOmra} value={omra} />
+              </div>
 
-          <h1
-            className="mb-4 bg-primary/90 w-fit p-2 rounded-lg text-white cursor-pointer hover:bg-primary/50"
-            onClick={() => window.print()}>
-            حفظ القائمة كملف PDF
-          </h1>
-          {/* Save Or Print Table */}
+              <div className="w-full">
+                <h2 className="mb-1 text-sm font-semibold text-neutral-500">
+                  فلترة عامة
+                </h2>
+                <FilterTable
+                  data={keywords}
+                  setFunction={setFilter}
+                  value={Filter}
+                />
+              </div>
+
+              <div className="w-full">
+                <h2 className="mb-1 text-sm font-semibold text-neutral-500">
+                  حالة التسجيل
+                </h2>
+                <FilterTable
+                  data={statusUsers}
+                  setFunction={setFilterStatus}
+                  value={FilterStatus}
+                />
+              </div>
+            </div>
+          </div>
+          {/* End Filter Section */}
+
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6 print:hidden">
+            <div className="hidden md:flex items-center gap-3">
+              <NavLink
+                to="/bus/1"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 rounded-lg px-4 py-2.5 font-semibold shadow-sm transition-colors ${
+                    isActive
+                      ? "bg-neutral-900 text-white"
+                      : "bg-primary text-white hover:bg-primary-700"
+                  }`
+                }>
+                <Bus size={18} />
+                الباصات{" "}
+              </NavLink>
+            </div>
+
+            <button
+              onClick={() => window.print()}
+              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 font-semibold text-white shadow-sm cursor-pointer hover:bg-primary-700 transition-colors">
+              <Printer size={18} />
+              حفظ القائمة كملف PDF
+            </button>
+          </div>
 
           {/* Start Table */}
 

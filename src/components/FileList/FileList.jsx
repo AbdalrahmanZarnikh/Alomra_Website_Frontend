@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 import { storage } from "../../utils/appwriteClient";
 import { fetchFiles } from "../../utils/fetchFiles";
 import PopUp from "../PopUp/PopUp.jsx";
-import {
-  AiOutlineEye,
-  AiOutlineDownload,
-  AiOutlineDelete,
-  AiOutlineFilePdf,
-} from "react-icons/ai";
+import { Eye, Download, Trash2, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -43,7 +38,7 @@ export default function FileList() {
   };
 
   return (
-    <div className="w-full mx-auto mt-10 px-6 py-10 bg-primary rounded-3xl shadow-lg border border-gray-100">
+    <div className="w-full mx-auto mt-10 px-6 py-10 bg-primary rounded-3xl shadow-lg border border-primary-700">
       <PopUp
         msg={"هل أنت متأكد من الحذف ؟"}
         id={newId}
@@ -58,7 +53,7 @@ export default function FileList() {
       </h2>
 
       <span className="text-white text-xl md:text-3xl font-bold">
-        العدد الكلي :<span className="text-zinc-800"> {files.length} </span>
+        العدد الكلي :<span className="text-neutral-900"> {files.length} </span>
       </span>
 
       <input
@@ -66,11 +61,11 @@ export default function FileList() {
         placeholder="ابحث عن ملف..."
         value={searchQuery}
         onChange={handleSearch}
-        className="w-full p-3 mb-6 font-bold rounded-lg border border-gray-100 focus:outline-none focus:ring-2 focus:ring-primary bg-white placeholder:font-bold mt-4"
+        className="w-full p-3 mb-6 font-bold rounded-lg border border-neutral-100 focus:outline-none focus:ring-2 focus:ring-white/50 bg-white placeholder:font-bold mt-4"
       />
 
       {files.length === 0 ? (
-        <p className="text-center text-gray-500 italic py-16">لا توجد ملفات</p>
+        <p className="text-center text-white/70 italic py-16">لا توجد ملفات</p>
       ) : (
         <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {files.map((f, index) => {
@@ -84,15 +79,15 @@ export default function FileList() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all p-5 flex flex-col items-center text-center"
+                className="bg-white border border-neutral-200 rounded-lg shadow-sm hover:shadow-md transition-all p-5 flex flex-col items-center text-center"
               >
-                <div className="w-16 h-16 flex items-center justify-center bg-[#FFF3EB] text-primary rounded-full mb-4">
-                  <AiOutlineFilePdf size={36} />
+                <div className="w-16 h-16 flex items-center justify-center bg-primary/10 text-primary rounded-full mb-4">
+                  <FileText size={32} />
                 </div>
-                <h3 className="font-semibold text-gray-800 truncate w-full">
+                <h3 className="font-semibold text-neutral-800 truncate w-full">
                   {f.name}
                 </h3>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-neutral-500 mt-1">
                   {new Date(f.$createdAt).toLocaleDateString("ar-SY")}
                 </p>
                 <div className="flex justify-center gap-3 mt-4">
@@ -101,24 +96,24 @@ export default function FileList() {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="عرض الملف"
-                    className="p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
+                    className="p-2 rounded-full bg-info-light text-info hover:opacity-80 transition"
                   >
-                    <AiOutlineEye size={22} />
+                    <Eye size={20} />
                   </a>
                   <a
                     href={downloadUrl}
                     download
                     title="تحميل الملف"
-                    className="p-2 rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition"
+                    className="p-2 rounded-full bg-success-light text-success hover:opacity-80 transition"
                   >
-                    <AiOutlineDownload size={22} />
+                    <Download size={20} />
                   </a>
                   <button
                     onClick={() => CheckPass(f.$id)}
                     title="حذف الملف"
-                    className="p-2 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition"
+                    className="p-2 rounded-full bg-danger-light text-danger hover:opacity-80 transition"
                   >
-                    <AiOutlineDelete size={22} />
+                    <Trash2 size={20} />
                   </button>
                 </div>
               </motion.div>

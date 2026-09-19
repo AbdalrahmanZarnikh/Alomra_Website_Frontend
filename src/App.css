@@ -1,26 +1,120 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #ff8d4c;
-  /* --color-primary: rgb(52, 88, 44); */
-  /* --color-primary: rgb(52, 88, 20); */
+/* Thmanyah (ثمانية) — https://font.thmanyah.com/
+ * unicode-range is omitted on purpose so Latin glyphs render from the face
+ * instead of a fallback. */
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("https://cdn.jsdelivr.net/gh/engdawood/thmanyah-font-web@4266a9d/fonts/thmanyah-sans/woff2/thmanyah-sans-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("https://cdn.jsdelivr.net/gh/engdawood/thmanyah-font-web@4266a9d/fonts/thmanyah-sans/woff2/thmanyah-sans-Medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("https://cdn.jsdelivr.net/gh/engdawood/thmanyah-font-web@4266a9d/fonts/thmanyah-sans/woff2/thmanyah-sans-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("https://cdn.jsdelivr.net/gh/engdawood/thmanyah-font-web@4266a9d/fonts/thmanyah-sans/woff2/thmanyah-sans-Black.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Thmanyah Serif Display";
+  src: url("https://cdn.jsdelivr.net/gh/engdawood/thmanyah-font-web@4266a9d/fonts/thmanyah-serif-display/woff2/thmanyah-serif-display-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Thmanyah Serif Display";
+  src: url("https://cdn.jsdelivr.net/gh/engdawood/thmanyah-font-web@4266a9d/fonts/thmanyah-serif-display/woff2/thmanyah-serif-display-Black.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* * {
-  font-family: "Marhey", sans-serif;
-} */
+@theme {
+  --font-display: "Thmanyah Serif Display", "Thmanyah Sans", serif;
 
+  /* Primary — حبر جواز السفر */
+  --color-primary-50: #eef1f8;
+  --color-primary-100: #dce2f0;
+  --color-primary-200: #b9c4de;
+  --color-primary-300: #8b9cc4;
+  --color-primary-400: #5d75a8;
+  --color-primary-500: #3d5a8f;
+  --color-primary-600: #2a4478;
+  --color-primary-700: #1b2f5c;
+  --color-primary-800: #12213f;
+  --color-primary-900: #0b152b;
+  --color-primary: #1b2f5c;
 
+  /* Brass — لمسة واحدة فقط: خطوط وتمييز النشط */
+  --color-brass: #b8862b;
+  --color-brass-light: #f6ecd4;
 
+  /* Neutral — رمادي ورقي بارد */
+  --color-neutral-50: #f7f8fa;
+  --color-neutral-100: #edf0f5;
+  --color-neutral-200: #dfe3ea;
+  --color-neutral-300: #c8cedb;
+  --color-neutral-400: #97a0b2;
+  --color-neutral-500: #6b7488;
+  --color-neutral-600: #4d5568;
+  --color-neutral-700: #353c4d;
+  --color-neutral-800: #222837;
+  --color-neutral-900: #131826;
 
-@font-face {
-  font-family: "myFont";
-  src: url("fonts/Hacen-Tehran.ttf") format("truetype");
-  /* src: url("fonts/bein.ttf") format("truetype"); */
+  /* Semantic */
+  --color-success: #17724f;
+  --color-success-light: #e2f3ea;
+  --color-danger: #b8382d;
+  --color-danger-light: #fbe8e5;
+  --color-warning: #a8701a;
+  --color-warning-light: #faf0d9;
+  --color-info: #2a5aa0;
+  --color-info-light: #e4edf9;
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(31, 27, 22, 0.05);
+  --shadow-sm: 0 1px 3px rgba(31, 27, 22, 0.08), 0 1px 2px rgba(31, 27, 22, 0.04);
+  --shadow-md: 0 4px 10px rgba(31, 27, 22, 0.1), 0 2px 4px rgba(31, 27, 22, 0.06);
+  --shadow-lg: 0 12px 24px rgba(31, 27, 22, 0.12), 0 4px 8px rgba(31, 27, 22, 0.06);
 }
 
 * {
-  font-family:"myFont";
+  font-family: "Thmanyah Sans", "Tajawal", sans-serif;
+}
+
+body {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-900);
 }
 
 @media print {
@@ -39,185 +133,69 @@
     top: 0;
     width: 100%;
   }
-}
 
-.student-form-wrapper {
-  padding: 4rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
+  /* يجبر طباعة الباص كاملاً على صفحة A4 واحدة أفقياً بدون قطع */
+  @page {
+    size: A4 ;
+    margin: 8mm;
+  }
 
-.student-form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  position: relative;
-  z-index: 1;
-}
+  .bus-print-area .bus-intro {
+    display: none !important;
+  }
 
-/* img{
-    width: 34px;
-  } */
+  .bus-print-area .bus-title {
+    font-size: 40px !important;
+    margin: 25px 0 6px 0 !important;
+  }
 
-.student-form {
-  width: 1000px;
-  background-color: #ffffff;
-  border: 2px solid #262626;
-  border-radius: 8px;
-  padding: 0 100px;
-  padding-top: 120px;
-  padding-bottom: 100px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
+  .bus-print-area .bus-frame {
+    width: fit-content !important;
+    max-width: 100% !important;
+    padding: 6px 8px !important;
+    border-width: 2px !important;
+    border-radius: 10px !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+  }
 
-@media (min-width: 768px) {
-  .student-form-form {
-    grid-template-columns: 1fr 1fr;
+  .bus-print-area .bus-rows {
+    gap: 8px !important;
+  }
+
+  .bus-print-area .bus-row {
+    gap: 10px !important;
+  }
+
+  .bus-print-area .bus-aisle {
+    width: 16px !important;
+  }
+
+  .bus-print-area .bus-seat-group {
+    gap: 6px !important;
+  }
+
+  .bus-print-area .bus-seat {
+    width: 220px !important;
+    height: 54px !important;
+    padding: 0 8px !important;
+    gap: 6px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+  }
+
+  .bus-print-area .bus-seat-badge {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 14px !important;
+  }
+
+  .bus-print-area .bus-seat-name {
+    font-size: 15px !important;
   }
 }
 
-.form-group label {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: #333;
-}
-
-.student-form-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.form-group {
-  flex: 1 1 calc(50% - 1rem);
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group.full-width {
-  flex: 1 1 100%;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 15px;
-  font-size: 15px;
-  border: 2px solid #000;
-  border-radius: 0.5rem;
-  outline: none;
-  background-color: #fffcfa;
-}
 textarea {
   resize: none;
-}
-
-.submit-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 1392px;
-  border-radius: 10px;
-  padding: 23px 0px;
-  font-size: 21px;
-  font-weight: 600;
-  color: white;
-  gap: 10px;
-  outline: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.submit-button:hover {
-  background-color: darkblue;
-  transform: scale(1.02);
-}
-
-.submit-button:active {
-  transform: scale(0.98);
-}
-
-/* Responsive for Laptop Screens */
-@media (max-width: 1024px) {
-  .student-form-header h1,
-  .student-form-header p {
-    width: 90%;
-    font-size: 1.5rem;
-    line-height: 1.2;
-  }
-
-  .student-form {
-    width: 90%;
-    padding: 2rem 1rem;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-size: 15px;
-    padding: 15px;
-  }
-
-  .submit-button {
-    font-size: 15px;
-    padding: 15px 0;
-  }
-
-  .social-icon {
-    width: 120px;
-    height: 60px;
-    font-size: 1rem;
-  }
-}
-
-/* Responsive for Phone Screens */
-@media (max-width: 768px) {
-  .student-form-wrapper {
-    padding: 2rem 0.5rem;
-  }
-
-  .student-form-header h1,
-  .student-form-header p {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    width: 100%;
-  }
-
-  .student-form {
-    width: 100%;
-    padding: 1rem;
-  }
-
-  .student-form-form {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .form-group {
-    flex: 1 1 100%;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
-
-  .submit-button {
-    font-size: 1rem;
-    padding: 10px 0;
-  }
-
-  .social-icon {
-    width: 100px;
-    height: 50px;
-    font-size: 0.8rem;
-  }
 }

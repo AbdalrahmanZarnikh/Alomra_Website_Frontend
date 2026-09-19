@@ -2,8 +2,8 @@
 
 const FieldCheckbox = ({labelOne,labelTwo,register,errors,nameInDocument}) => {
   return (
-    <div className="form-group flex flex-col gap-2 mb-4">
-      <label htmlFor="Taslim" className="text-lg font-medium text-gray-700">
+    <div className="flex flex-col gap-2 mb-2">
+      <label htmlFor="Taslim" className="text-sm font-semibold text-neutral-700">
        {labelOne}
       </label>
       <div className="flex items-center gap-3">
@@ -11,12 +11,12 @@ const FieldCheckbox = ({labelOne,labelTwo,register,errors,nameInDocument}) => {
           id="Taslim"
           type="checkbox"
           {...register(nameInDocument)}
-          className="w-6 h-6 accent-green-600 cursor-pointer"
+          className="w-5 h-5 rounded-md accent-primary cursor-pointer"
         />
-        <span className="text-sm text-gray-600"> {labelTwo}  </span>
+        <span className="text-sm text-neutral-600"> {labelTwo}  </span>
       </div>
       {errors && (
-        <span className="text-sm text-red-500 mt-1">
+        <span className="text-xs font-medium text-danger mt-1">
           {errors[nameInDocument]?.message}
         </span>
       )}

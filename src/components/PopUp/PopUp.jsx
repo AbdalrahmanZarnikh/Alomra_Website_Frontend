@@ -30,27 +30,25 @@ const PopUp = ({ msg, id, thunk, showVar, onClose }) => {
   return (
     <div>
       {showVar && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black/50 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-5 rounded-lg shadow-lg">
-            <h2 className="text-xl mb-4">{msg}</h2>
-            <div className="form-group">
-              <input
-                type="text"
-                placeholder="ادخل الرمز السري للحذف"
-                className="rounded-lg p-2"
-                onChange={(e) => {
-                  setPass(e.target.value);
-                }}
-              />
-            </div>
-            <div className="flex  gap-2">
+        <div className="fixed top-0 left-0 w-full h-full bg-neutral-900/40 backdrop-blur-sm flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm mx-4">
+            <h2 className="text-xl mb-4 font-bold text-center text-neutral-800">{msg}</h2>
+            <input
+              type="text"
+              placeholder="ادخل الرمز السري للحذف"
+              className="w-full rounded-lg border border-neutral-300 p-3 text-center outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30"
+              onChange={(e) => {
+                setPass(e.target.value);
+              }}
+            />
+            <div className="flex gap-2 mt-5">
               <button
-                className="submit-button bg-primary m-auto mt-5 cursor-pointer "
+                className="flex-1 rounded-lg bg-danger py-2.5 font-semibold text-white transition-colors hover:opacity-90 cursor-pointer"
                 onClick={handleDelete}>
                 إدخال
               </button>
               <button
-                className="submit-button bg-primary m-auto mt-5  cursor-pointer "
+                className="flex-1 rounded-lg border border-neutral-300 py-2.5 font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 cursor-pointer"
                 onClick={() => {
                   onClose();
                 }}>

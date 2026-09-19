@@ -21,21 +21,23 @@ function App() {
         <Toaster />
         <Header />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/add-user" element={<Form />} />
-          <Route path="/add-omra" element={<FormOmra />} />
-          <Route path="/edit-user/:id" element={<Form />} />
-          <Route path="/edit-omra/:id" element={<FormOmra />} />
-          <Route path="/pdf" element={<PDF />} />
+        <main className="min-h-screen md:pr-72 print:pr-0">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/add-user" element={<Form />} />
+            <Route path="/add-omra" element={<FormOmra />} />
+            <Route path="/edit-user/:id" element={<Form />} />
+            <Route path="/edit-omra/:id" element={<FormOmra />} />
+            <Route path="/pdf" element={<PDF />} />
 
-          {/* جلب data من ال Redux داخل Bus نفسه */}
-          <Route path="/bus/:id" element={<BusLayout />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/alhuda" element={<Alhuda />} />
-          <Route path="/edit-alhuda/:id" element={<Alhuda />} />
-          <Route path="/edit-task/:id" element={<Tasks />} />
-        </Routes>
+            {/* جلب data من ال Redux داخل Bus نفسه */}
+            <Route path="/bus/:id" element={<BusLayout />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/alhuda" element={<Alhuda />} />
+            <Route path="/edit-alhuda/:id" element={<Alhuda />} />
+            <Route path="/edit-task/:id" element={<Tasks />} />
+          </Routes>
+        </main>
       </BrowserRouter>
     </Provider>
   );

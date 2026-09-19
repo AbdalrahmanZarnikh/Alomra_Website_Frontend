@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AiOutlineCloudUpload } from "react-icons/ai";
-import { TiDelete } from "react-icons/ti";
+import { UploadCloud, XCircle } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { storage } from "../../utils/appwriteClient";
 import toast from "react-hot-toast";
@@ -59,11 +58,11 @@ const UploadMultipleFiles = ({ form, records }) => {
   return (
     <div className="flex flex-col items-center gap-4 mt-4">
       <div
-        className="w-60 h-52 border-2 border-dashed border-gray-400 rounded-lg flex justify-center items-center cursor-pointer text-[#FF8D4C]"
+        className="w-60 h-52 border-2 border-dashed border-neutral-300 hover:border-primary rounded-lg flex justify-center items-center cursor-pointer text-primary transition-colors"
         onClick={() => inputRef.current.click()}
       >
         <div className="flex flex-col items-center">
-          <AiOutlineCloudUpload size={60} />
+          <UploadCloud size={60} />
           <p>اضغط هنا لإدراج الصور</p>
         </div>
       </div>
@@ -89,9 +88,9 @@ const UploadMultipleFiles = ({ form, records }) => {
               alt={`uploaded-${index}`}
               className="w-full h-full object-cover rounded"
             />
-            <TiDelete
+            <XCircle
               size={20}
-              className="absolute top-1 right-1 text-red-600 bg-white rounded-full cursor-pointer"
+              className="absolute top-1 right-1 text-danger bg-white rounded-full cursor-pointer"
               onClick={() => removeImage(index)}
             />
           </div>

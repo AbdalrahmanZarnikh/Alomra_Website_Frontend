@@ -8,17 +8,22 @@ const Field = ({
   required,
   isTextarea,
 }) => {
+  const inputClass =
+    "w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 shadow-xs " +
+    "placeholder:text-neutral-400 transition-colors focus:outline-none focus:border-primary " +
+    "focus:ring-2 focus:ring-primary/30";
+
   return (
-    <div className={`form-group ${isTextarea ? "col-span-full" : ""}`}>
-      <label htmlFor="Name">{label} </label>
+    <div className={`flex flex-col gap-1.5 ${isTextarea ? "col-span-full" : ""}`}>
+      <label htmlFor="Name" className="text-sm font-semibold text-neutral-700">
+        {label}
+      </label>
 
       {isTextarea ? (
         <textarea
           rows="10"
           placeholder={` ${placeholder} ...`}
-          className="w-full resize-y rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 shadow-sm
-           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
-           sm:text-sm "
+          className={`${inputClass} resize-y`}
           {...register(
             nameInDocument,
             required && { required: `هذا الحقل مطلوب` },
@@ -32,11 +37,13 @@ const Field = ({
             nameInDocument,
             required && { required: `هذا الحقل مطلوب` },
           )}
-          className="placeholder:text-gray-500"
+          className={inputClass}
         />
       )}
       {errors?.[nameInDocument] && (
-        <span className="text-red-400">{errors[nameInDocument].message}</span>
+        <span className="text-xs font-medium text-danger">
+          {errors[nameInDocument].message}
+        </span>
       )}
     </div>
   );

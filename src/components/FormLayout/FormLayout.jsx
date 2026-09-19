@@ -20,7 +20,7 @@ const FormLayout = ({
 }) => {
   return (
     <>
-      <form className="student-form-form" onSubmit={Submit}>
+      <form className="grid grid-cols-1 gap-4 md:grid-cols-2" onSubmit={Submit}>
         {/* Form Fields */}
 
         {contentFormFieldsSelector?.length > 0 &&
@@ -67,15 +67,19 @@ const FormLayout = ({
             );
           })}
 
-        {multipleImages && <UploadMultipleFiles form={form} records={data} />}
+        {multipleImages && (
+          <div className="col-span-full">
+            <UploadMultipleFiles form={form} records={data} />
+          </div>
+        )}
 
-        <ButtonFrom id={id} isLoading={isLoading} />
         {total > 0 && (
-          <h1 className="m-auto font-bold">
+          <h1 className="col-span-full text-center font-bold text-neutral-700">
             التكلفة الإجمالية :{" "}
-            <span className="text-red-600 font-bold text-xl">{total} </span>$
+            <span className="text-danger font-bold text-xl">{total} </span>$
           </h1>
         )}
+        <ButtonFrom id={id} isLoading={isLoading} />
       </form>
     </>
   );

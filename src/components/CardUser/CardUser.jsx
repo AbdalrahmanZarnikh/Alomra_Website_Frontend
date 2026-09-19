@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
+import { Contact, Phone } from "lucide-react";
 import { downloadVCard } from "../../utils/contactUtils";
-import {addUserSelected} from "../../redux/slice/user/userSlice"
+import { addUserSelected } from "../../redux/slice/user/userSlice";
+import Badge from "../Badge/Badge";
+import { roomTypeClass, statusClass } from "../../utils/badgeStyles";
 
 const CardUser = ({
   index,
@@ -16,118 +19,117 @@ const CardUser = ({
   ele,
   roomType,
 }) => {
-  const dispatch=useDispatch();
-
- 
+  const dispatch = useDispatch();
+  const remaining = totalAmount - paidAmount;
 
   return (
-    <div className="bg-white shadow-md rounded-xl p-4 border border-gray-200 mb-4">
-      {/* العنوان + الاسم */}
-      <div className="flex items-center gap-3">
+    <div className="bg-white shadow-sm rounded-2xl p-4 border border-neutral-200 mb-4">
+      {/* الرأس: الترتيب + الاسم + تحديد */}
+      <div className="flex items-center gap-3 mb-4">
         <input
           id="VCard"
           type="checkbox"
-          className="w-4 h-4 accent-green-600 cursor-pointer"
-          onChange={(e)=>{
-               if(e.target.checked){
-                dispatch(addUserSelected(ele));
-               }
+          className="w-4 h-4 accent-primary cursor-pointer shrink-0"
+          onChange={(e) => {
+            if (e.target.checked) {
+              dispatch(addUserSelected(ele));
+            }
           }}
         />
-        {/* <span className="text-sm text-gray-600">  </span> */}
-      </div>
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-red-600 font-bold text-lg">{index + 1}</span>
-        <h2 className="text-gray-800 font-bold text-2xl m-auto mb-4">{name}</h2>
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">
+          {index + 1}
+        </div>
+        <h2 className="text-neutral-800 font-bold text-lg flex-1">{name}</h2>
       </div>
 
       {/* التفاصيل الأساسية */}
-      <div className="space-y-2 text-sm text-gray-700">
-        <p className="flex justify-between bg-primary/70 px-4 shadow-2xl text-gray-900 p-2 rounded-lg w-full">
-          <span className="font-semibold text-gray-900">رقم الجوال:</span>
-          <span>{phone || "—"}</span>
-        </p>
+      <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+        <div className="rounded-lg bg-neutral-50 p-2.5">
+          <p className="text-xs font-semibold text-neutral-500 mb-0.5">
+            رقم الجوال
+          </p>
+          <p className="flex items-center gap-1 font-bold text-neutral-800">
+            <Phone size={13} className="text-neutral-400" />
+            {phone || "—"}
+          </p>
+        </div>
 
-        <p className="flex justify-between bg-primary/70 px-4 text-white p-2 rounded-lg w-full">
-          <span className="font-semibold text-gray-900">المبلغ المدفوع:</span>
-          <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">
-            {paidAmount}
-          </span>
-        </p>
+        <div className="rounded-lg bg-neutral-50 p-2.5">
+          <p className="text-xs font-semibold text-neutral-500 mb-0.5">
+            رقم الغرفة
+          </p>
+          <p className="font-bold text-neutral-800">{room || "—"}</p>
+        </div>
 
-        <p className="flex justify-between bg-primary/70 px-4 text-white p-2 rounded-lg w-full">
-          <span className="font-semibold text-gray-900">المبلغ المتبقي:</span>
-          {totalAmount - paidAmount > 0 ? (
-            <span className="text-red-600 font-bold bg-yellow-100 px-2 py-0.5 rounded-md">
-              {totalAmount - paidAmount}
-            </span>
-          ) : (
-            <span className="text-green-600 bg-yellow-100 px-2 py-0.5 rounded-md font-bold">
-              تم الدفع
-            </span>
-          )}
-        </p>
+        <div className="rounded-lg bg-success-light p-2.5">
+          <p className="text-xs font-semibold text-success mb-0.5">
+            المبلغ المدفوع
+          </p>
+          <p className="font-bold text-success">{paidAmount} $</p>
+        </div>
 
-        <p className="flex justify-between bg-primary/70 px-4 text-gray-900 p-2 rounded-lg w-full">
-          <span className="font-semibold text-gray-900">ملاحظات:</span>
-          <span>{details || "—"}</span>
-        </p>
+        <div
+          className={`rounded-lg p-2.5 ${
+            remaining > 0 ? "bg-danger-light" : "bg-success-light"
+          }`}>
+          <p
+            className={`text-xs font-semibold mb-0.5 ${
+              remaining > 0 ? "text-danger" : "text-success"
+            }`}>
+            المبلغ المتبقي
+          </p>
+          <p
+            className={`font-bold ${
+              remaining > 0 ? "text-danger" : "text-success"
+            }`}>
+            {remaining > 0 ? `${remaining} $` : "تم الدفع"}
+          </p>
+        </div>
 
-        <p className="flex justify-between bg-primary/70 px-4 text-gray-900 p-2 rounded-lg w-full">
-          <span className="font-semibold text-gray-900">رقم الغرفة:</span>
-          <span>{room || "—"}</span>
-        </p>
+        <div className="rounded-lg bg-neutral-50 p-2.5">
+          <p className="text-xs font-semibold text-neutral-500 mb-0.5">
+            رقم المقعد
+          </p>
+          <p className="font-bold text-neutral-800">{sitNumber || "—"}</p>
+        </div>
 
-        <p className="flex justify-between bg-primary/70 px-4 text-white p-2 rounded-lg w-full">
-          <span className="font-semibold text-gray-900">رقم المقعد:</span>
-          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
-            {sitNumber}
-          </span>
-        </p>
+        <div className="rounded-lg bg-neutral-50 p-2.5">
+          <p className="text-xs font-semibold text-neutral-500 mb-0.5">
+            التكلفة الإجمالية
+          </p>
+          <p className="font-bold text-neutral-800">{totalAmount} $</p>
+        </div>
 
-        <p className="flex justify-between bg-primary/70 px-4 text-white p-2 rounded-lg w-full">
-          <span className="font-semibold text-gray-900">
-            التكلفة الإجمالية:
-          </span>
-          <span className="bg-yellow-100 px-2 py-0.5 rounded-md font-bold text-yellow-800">
-            {totalAmount}
-          </span>
-        </p>
+        <div className="col-span-2 rounded-lg bg-neutral-50 p-2.5">
+          <p className="text-xs font-semibold text-neutral-500 mb-0.5">
+            ملاحظات
+          </p>
+          <p className="font-bold text-neutral-800">{details || "—"}</p>
+        </div>
       </div>
 
       {/* البادجات */}
-      <div className="flex flex-wrap items-center gap-2 mt-4 justify-center">
-        <span
-          className={`px-3 py-1 rounded-full text-white text-xs font-bold ${
-            roomType === "رباعية"
-              ? "bg-green-600"
-              : roomType === "ثلاثية"
-              ? "bg-blue-600"
-              : roomType === "ثنائية"
-              ? "bg-red-600"
-              : "bg-zinc-800"
-          }`}>
+      <div className="flex flex-wrap items-center gap-2">
+        <Badge size="sm" className={roomTypeClass(roomType)}>
           {roomType}
-        </span>
+        </Badge>
 
-        <span
-          className={`px-3 py-1 rounded-full text-white text-xs font-bold ${
-            taslim ? "bg-green-600" : "bg-red-600"
-          }`}>
+        <Badge size="sm" className={statusClass(taslim)}>
           {taslim ? "تم تسليم الجواز" : "لم يتم تسليم الجواز"}
-        </span>
+        </Badge>
 
-        <span className="px-3 py-1 rounded-full text-white text-xs font-bold bg-indigo-600">
+        <Badge size="sm" className="bg-neutral-100 text-neutral-700">
           {safar}
-        </span>
+        </Badge>
 
-        <span
-          className="px-3 py-1 cursor-pointer rounded-full flex justify-center items-center gap-2 text-white text-xs font-bold bg-yellow-600"
+        <button
+          className="px-3 py-1 cursor-pointer rounded-full flex justify-center items-center gap-1.5 text-white text-xs font-bold bg-primary hover:bg-primary-700 transition-colors"
           onClick={() => {
             downloadVCard(ele);
           }}>
-          إضافة إلى جهات الاتصال{" "}
-        </span>
+          <Contact size={13} />
+          جهات الاتصال
+        </button>
       </div>
 
       {/* الصور */}

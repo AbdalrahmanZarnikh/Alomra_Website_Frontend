@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AiOutlineCloudUpload } from "react-icons/ai";
-import { FaRegFileImage } from "react-icons/fa";
-import { TiDelete } from "react-icons/ti";
+import { UploadCloud, Image as ImageIcon, XCircle } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 
@@ -30,7 +28,7 @@ useEffect(() => {
     <div className="flex justify-center items-center cursor-pointer">
       <div className="bg-white rounded-lg w-60 p-2 flex flex-col justify-center items-center">
         <div
-          className="w-full h-52 rounded-lg border-dashed border-2 border-gray-400 text-[#FF8D4C] flex justify-center items-center overflow-hidden"
+          className="w-full h-52 rounded-lg border-dashed border-2 border-neutral-300 text-primary flex justify-center items-center overflow-hidden hover:border-primary transition-colors"
           onClick={() => {
             inputRef.current.click();
           }}
@@ -39,23 +37,23 @@ useEffect(() => {
             <img className="w-full object-contain " src={image} />
           ) : (
             <div className="w-full h-full flex flex-col justify-center items-center">
-              <AiOutlineCloudUpload size={60} className="text-[#FF8D4C]" />
+              <UploadCloud size={60} className="text-primary" />
               Browse Image To Upload
             </div>
           )}
         </div>
         <div className="w-full mt-2 ">
-          <div className="w-full flex justify-between items-center bg-[#FF8D4C] p-2 rounded-lg gap-4">
-            <FaRegFileImage
+          <div className="w-full flex justify-between items-center bg-primary p-2 rounded-lg gap-4">
+            <ImageIcon
               size={20}
-              className="text-black hover:text-gray-300"
+              className="text-white hover:opacity-70 cursor-pointer"
               onClick={() => {
                 inputRef.current.click();
               }}
             />
-            <TiDelete
+            <XCircle
               size={20}
-              className="hover:bg-white hover:text-red-600 rounded-full"
+              className="text-white hover:opacity-70 cursor-pointer"
               onClick={() => {
                 inputRef.current.value = "";
                 setImage("");

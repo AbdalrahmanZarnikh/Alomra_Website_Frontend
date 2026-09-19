@@ -1,8 +1,18 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CardUser from "../CardUser/CardUser";
+import Badge from "../Badge/Badge";
 import { useState } from "react";
 import { downloadAllVCards } from "../../utils/contactUtils";
+import { roomTypeClass, statusClass } from "../../utils/badgeStyles";
+import {
+  ChevronDown,
+  Contact,
+  Pencil,
+  Trash2,
+  Users,
+  Wallet,
+} from "lucide-react";
 // import ButtonSits from "../ButtonSits/ButtonSits";
 
 const Table = ({
@@ -57,8 +67,7 @@ const Table = ({
           Filter !== "أحمد المصري" &&
           Filter !== "الصابوني" &&
           Filter !== "عبد الرزاق بيلوني" &&
-          Filter !== "باص 1" &&
-          Filter !== "باص 2"
+          !Filter.startsWith("باص ")
         ) {
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
@@ -76,7 +85,7 @@ const Table = ({
             !ele.details.includes("الصابوني") &&
             ele.name !== "إدارة  الحملة"
           );
-        } else if (Filter == "باص 1" || Filter == "باص 2") {
+        } else if (Filter.startsWith("باص ")) {
           return ele.sitNumber.split(" ")[2] === Filter.split(" ")[1];
         } else {
           return ele;
@@ -127,8 +136,7 @@ const Table = ({
     Filter !== "خالد قوجة" &&
     Filter !== "أحمد المصري" &&
     Filter !== "عبد الرزاق بيلوني" &&
-    Filter !== "باص 1" &&
-    Filter !== "باص 2"
+    !Filter.startsWith("باص ")
   ) {
     const numberOfUsers = filteredData.length;
 
@@ -161,9 +169,9 @@ const Table = ({
     <div id="print-area" className="w-full">
       {/* <ButtonSits data={filteredData}/> */}
       <h1
-        className={`flex ${
-          room ? "justify-evenly gap-10" : "justify-center"
-        } items-center mb-5 p-4 text-5xl text-primary/90`}>
+        className={`flex flex-wrap ${
+          room ? "justify-center gap-4" : "justify-center"
+        } items-center mb-6 p-4 font-display text-3xl md:text-5xl font-black text-primary`}>
         {FilterStatus === "ذكر" || FilterStatus === "أنثى" ? (
           <span>{convertGender[FilterStatus]}</span>
         ) : (
@@ -171,71 +179,81 @@ const Table = ({
         )}
         {room && (
           <span
-            className={`inline-block px-4 py-1 rounded-full text-white font-bold text-3xl whitespace-nowrap  ${
-              room === "رباعية"
-                ? "bg-green-600"
-                : room === "ثلاثية"
-                  ? "bg-blue-600"
-                  : room === "ثنائية"
-                    ? "bg-red-600"
-                    : "bg-zinc-800"
-            }`}>
+            className={`inline-block px-4 py-1 rounded-full font-bold text-xl md:text-3xl whitespace-nowrap ${roomTypeClass(room)}`}>
             {room}
           </span>
         )}
       </h1>
 
-      <div className=" m-5  font-bold ">
-        {filteredData.length > 0 && !room ? (
-          <p className="flex flex-col md:flex-row gap-2 justify-between items-center ">
-            <span>
-              العدد الكلي في الجدول هو:{" "}
-              <span className="text-2xl md:text-3xl text-primary/90 m-2 ">
-                {lastNumber}
-              </span>{" "}
-              <div className="flex justify-start mt-2 items-center gap-4 print:hidden">
-                <label htmlFor="Order">ترتيب حسب المقاعد</label>
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 accent-green-600 cursor-pointer"
-                  name="order"
-                  id="Order"
-                  onChange={(e) => {
-                    setOrder(e.target.checked);
-                  }}
-                />
-              </div>
-              <p
-                className="bg-primary p-2 rounded-lg text-white mt-2 cursor-pointer hover:bg-primary/70 print:hidden"
-                onClick={() => {
-                  if (selectedUsers?.length > 0) {
-                    downloadAllVCards(selectedUsers);
-                  } else {
-                    downloadAllVCards(filteredData);
-                  }
-                }}>
-                إضافة جميع الأسماء إلى جهات الاتصال
+      {filteredData.length > 0 && !room ? (
+        <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4 print:hidden">
+          <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <Users size={22} />
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-neutral-500">
+                العدد الكلي في الجدول
               </p>
-            </span>
+              <p className="font-display text-3xl font-black text-neutral-900">{lastNumber}</p>
+            </div>
+          </div>
 
-            <span className="print:hidden">
-              إجمالي المدفوعات:{" "}
-              <span className="text-sm md:text-3xl text-primary/90 m-2 ">
-                {totalPaid} $ /{" "}
-                <span className="text-green-600">{totalAmountPred} $</span>
-              </span>{" "}
-            </span>
-          </p>
-        ) : (
-          // "لا توجد بيانات حاليا"
-          ""
-        )}
-      </div>
+          <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-success-light text-success">
+              <Wallet size={22} />
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-neutral-500">
+                إجمالي المدفوعات
+              </p>
+              <p className="font-display text-3xl font-black text-neutral-900">
+                {totalPaid} $
+                <span className="mx-1 text-sm font-medium text-neutral-400">
+                  /
+                </span>
+                <span className="text-base font-bold text-success">
+                  {totalAmountPred} $
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center gap-3 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+            <label
+              htmlFor="Order"
+              className="flex items-center justify-between gap-2 cursor-pointer text-sm font-semibold text-neutral-600">
+              ترتيب حسب المقاعد
+              <input
+                type="checkbox"
+                className="w-4 h-4 accent-primary cursor-pointer"
+                name="order"
+                id="Order"
+                onChange={(e) => {
+                  setOrder(e.target.checked);
+                }}
+              />
+            </label>
+            <button
+              className="flex items-center justify-center gap-2 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white cursor-pointer hover:bg-primary-700 transition-colors"
+              onClick={() => {
+                if (selectedUsers?.length > 0) {
+                  downloadAllVCards(selectedUsers);
+                } else {
+                  downloadAllVCards(filteredData);
+                }
+              }}>
+              <Contact size={16} />
+              إضافة الأسماء إلى جهات الاتصال
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       {/* نسخة الديسكتوب */}
-      <div className="w-full overflow-x-auto hidden md:block print:block ">
-        <table className="w-full bg-white rounded-lg shadow-md border border-gray-300 text-right">
-          <thead className="bg-gray-800 text-white text-sm md:text-base">
+      <div className="w-full overflow-x-auto hidden md:block print:block rounded-2xl border border-gray-200 shadow-sm">
+        <table className="w-full bg-white text-right">
+          <thead className="border-b-2 border-brass bg-white text-neutral-600 text-sm font-semibold">
             <tr className="">
               <th className="p-3 text-center">#</th>
               {headTable.map((head, index) => (
@@ -264,17 +282,19 @@ const Table = ({
             </tr>
           </thead>
 
-          <tbody className="text-sm md:text-base bg-yellow-50">
+          <tbody className="text-sm md:text-base">
             {filteredData.map((ele, index) => {
               // console.log(ele.sitNumber.split(" ")[2]);
               return (
                 <tr
                   key={ele._id}
-                  className="border-t border-gray-500 hover:bg-yellow-100 transition">
-                  <td className="p-3 text-center font-bold">{index + 1}</td>
+                  className="border-t border-neutral-200 bg-white hover:bg-primary-50 transition-colors">
+                  <td className="p-3 text-center font-bold text-neutral-400">
+                    {index + 1}
+                  </td>
 
                   <td
-                    className={`p-3 text-center ${
+                    className={`p-3 text-center font-bold text-neutral-800 ${
                       !checked.الاسم && "print:hidden"
                     } `}>
                     {ele.name}
@@ -285,7 +305,7 @@ const Table = ({
                     }`}>
                     {ele.gender}
                     {ele.age  ?
-                      <p className="text-red-600 text-xl">
+                      <p className="text-danger text-xl">
                         {calculateAge(ele.age)}{" "}
                         {+calculateAge(ele.age) > 10 ? "سنة" : "سنوات"}
                       </p>
@@ -301,25 +321,25 @@ const Table = ({
                   </td>
 
                   <td
-                    className={`p-3 text-center text-green-700 ${
+                    className={`p-3 text-center text-success ${
                       !checked["المبلغ المدفوع"] && "print:hidden"
                     } text-lg`}>
                     {ele.paidAmount}
                   </td>
 
                   <td
-                    className={`p-3 text-center text-red-700 ${
+                    className={`p-3 text-center text-danger ${
                       !checked["المبلغ المتبقي"] && "print:hidden"
                     } text-lg`}>
                     {ele.totalAmount - ele.paidAmount > 0 ? (
                       ele.totalAmount - ele.paidAmount
                     ) : (
-                      <p className="text-green-700">تم الدفع</p>
+                      <p className="text-success">تم الدفع</p>
                     )}
                   </td>
 
                   <td
-                    className={`p-3 text-center text-gray-800 font-bold ${
+                    className={`p-3 text-center text-neutral-800 font-bold ${
                       !checked.الغرفة && "print:hidden"
                     }`}>
                     {ele.room || "—"}
@@ -329,12 +349,9 @@ const Table = ({
                     className={`p-3 text-center ${
                       !checked["حالة الجواز"] && "print:hidden"
                     }`}>
-                    <span
-                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
-                        ele.taslim ? "bg-green-600" : "bg-red-600"
-                      }`}>
+                    <Badge className={statusClass(ele.taslim)}>
                       {ele.taslim ? "تم تسليم الجواز" : "لم يتم تسليم الجواز"}
-                    </span>
+                    </Badge>
                   </td>
 
                   <td
@@ -348,34 +365,23 @@ const Table = ({
                     className={`p-3 text-center ${
                       !checked["نوع الغرفة"] && "print:hidden"
                     }`}>
-                    <span
-                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap  ${
-                        ele.roomType === "رباعية"
-                          ? "bg-green-600"
-                          : ele.roomType === "ثلاثية"
-                            ? "bg-blue-600"
-                            : ele.roomType === "ثنائية"
-                              ? "bg-red-600"
-                              : ele.roomType === "خاصة"
-                                ? "bg-zinc-800"
-                                : "bg-orange-800"
-                      }`}>
+                    <Badge className={roomTypeClass(ele.roomType)}>
                       {ele.roomType}
-                    </span>
+                    </Badge>
                   </td>
 
                   <td
                     className={`p-3 text-center ${
                       !checked["رقم المقعد"] && "print:hidden"
                     }`}>
-                    {Filter == "باص 1" || Filter == "باص 2" ? (
-                      <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-lg whitespace-nowrap bg-gray-800">
+                    {Filter.startsWith("باص ") ? (
+                      <Badge size="lg" className="bg-neutral-800 text-white">
                         {ele.sitNumber.split(" ")[0] || "—"}
-                      </span>
+                      </Badge>
                     ) : (
-                      <span className="inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-lg whitespace-nowrap bg-gray-800">
+                      <Badge size="lg" className="bg-neutral-800 text-white">
                         {ele.sitNumber || "—"}
-                      </span>
+                      </Badge>
                     )}
                   </td>
 
@@ -383,12 +389,9 @@ const Table = ({
                     className={`p-3 text-center ${
                       !checked["حالة التأشيرة"] && "print:hidden"
                     }`}>
-                    <span
-                      className={`inline-block px-4 py-1 rounded-full text-white font-bold text-xs md:text-sm whitespace-nowrap ${
-                        ele.visa ? "bg-green-600" : "bg-red-600"
-                      }`}>
+                    <Badge className={statusClass(ele.visa)}>
                       {ele.visa ? "صدرت التأشيرة" : "لم تصدر التأشيرة "}
-                    </span>
+                    </Badge>
                   </td>
 
                   <td
@@ -420,13 +423,15 @@ const Table = ({
                   <td className="p-3 print:hidden">
                     <div className="flex gap-2 justify-end flex-wrap">
                       <button
-                        className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-400 text-xs md:text-sm cursor-pointer"
+                        className="flex items-center gap-1 bg-info text-white px-3 py-1.5 rounded-lg hover:opacity-90 text-xs md:text-sm cursor-pointer transition-colors"
                         onClick={() => navigate(`/edit-user/${ele._id}`)}>
+                        <Pencil size={14} />
                         تعديل
                       </button>
                       <button
                         onClick={() => CheckPass(ele._id)}
-                        className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-400 text-xs md:text-sm cursor-pointer">
+                        className="flex items-center gap-1 bg-danger text-white px-3 py-1.5 rounded-lg hover:opacity-90 text-xs md:text-sm cursor-pointer transition-colors">
+                        <Trash2 size={14} />
                         حذف
                       </button>
                     </div>
@@ -443,25 +448,19 @@ const Table = ({
         <div className="relative inline-block text-right">
           <button
             type="button"
-            className="inline-flex justify-between w-64 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+            className="inline-flex items-center justify-between w-64 rounded-lg border border-neutral-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 shadow-sm hover:bg-neutral-50 cursor-pointer"
             onClick={() => setDropdownOpen(!dropdownOpen)}>
             حدد ماتريد طباعته
-            <svg
-              className="w-5 h-5 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+            <ChevronDown
+              size={18}
+              className={`ml-2 transition-transform ${
+                dropdownOpen ? "rotate-180" : ""
+              }`}
+            />
           </button>
 
           {dropdownOpen && (
-            <div className="absolute z-10 mt-2 w-64 rounded-md bg-white shadow-lg border border-gray-200 max-h-60 overflow-y-auto ">
+            <div className="absolute z-10 mt-2 w-64 rounded-lg bg-white shadow-md border border-neutral-200 max-h-60 overflow-y-auto ">
               <div className="p-2 space-y-2">
                 {headTable.map((head) => (
                   <label
@@ -469,7 +468,7 @@ const Table = ({
                     className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
-                      className="accent-green-600"
+                      className="accent-primary"
                       checked={checked[head]}
                       onChange={(e) => {
                         setChecked((prev) => ({
@@ -487,9 +486,7 @@ const Table = ({
         </div>
 
         {filteredData.map((ele, index) => (
-          <div
-            key={ele._id}
-            className="bg-primary/90 rounded-lg shadow p-3 border border-gray-200 print:hidden">
+          <div key={ele._id} className="print:hidden">
             <CardUser
               name={ele.name}
               ele={ele}
@@ -505,15 +502,17 @@ const Table = ({
               details={ele.details}
               sitNumber={ele.sitNumber}
             />
-            <div className="flex gap-2 mt-3">
+            <div className="flex gap-2 -mt-2 mb-4">
               <button
-                className="bg-blue-600 cursor-pointer text-white px-3 py-1 rounded text-sm hover:bg-blue-400"
+                className="flex items-center gap-1.5 flex-1 justify-center bg-info cursor-pointer text-white px-3 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-colors"
                 onClick={() => navigate(`/edit-user/${ele._id}`)}>
+                <Pencil size={14} />
                 تعديل
               </button>
               <button
                 onClick={() => CheckPass(ele._id)}
-                className="bg-red-600 cursor-pointer text-white px-3 py-1 rounded text-sm hover:bg-red-400">
+                className="flex items-center gap-1.5 flex-1 justify-center bg-danger cursor-pointer text-white px-3 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-colors">
+                <Trash2 size={14} />
                 حذف
               </button>
             </div>

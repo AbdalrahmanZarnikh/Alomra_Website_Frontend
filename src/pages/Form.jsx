@@ -2,10 +2,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getOmras } from "../redux/slice/category/omraSlice";
-import { createUser, updateUser } from "../redux/slice/user/userSlice";
+import { createUser, getUsers, updateUser } from "../redux/slice/user/userSlice";
 import ButtonReverse from "../components/ButtonReverse/ButtonReverse";
 import FormLayout from "../components/FormLayout/FormLayout";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Armchair } from "lucide-react";
 import {
   typeRoom,
   typeSafar,
@@ -14,6 +15,26 @@ import {
   Gender,
   Years
 } from "../constants/data";
+import {
+  getBusCapacity,
+  FIRST_ASSIGNABLE_SEAT,
+  ALL_BUS_IDS,
+} from "../utils/busCapacity";
+
+// يملأ كل باص حسب سعته المختارة (38 أو 42) بالترتيب ثم يفيض إلى الباص التالي
+const findNextAvailableSeat = (occupiedSitNumbers) => {
+  const occupied = new Set(
+    occupiedSitNumbers.filter(Boolean).map((s) => s.trim()),
+  );
+  for (const busId of ALL_BUS_IDS) {
+    const seatsPerBus = getBusCapacity(busId);
+    for (let seatNum = FIRST_ASSIGNABLE_SEAT; seatNum <= seatsPerBus; seatNum++) {
+      const candidate = `${seatNum} - ${busId}`;
+      if (!occupied.has(candidate)) return candidate;
+    }
+  }
+  return null;
+};
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -27,12 +48,38 @@ const Form = () => {
     formState: { errors },
     reset,
     watch,
+    setValue,
   } = useForm({
     defaultValues: {},
   });
 
   const { data, isLoading } = useSelector((state) => state.userSlice);
   const { omras } = useSelector((state) => state.omraSlice);
+
+  const isUpdateMode = typeof id === "string";
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
+  const watchedOmra = watch("omra");
+
+  // يتيح تسجيل معتمر دون تعيين مقعد له فورًا (يُعيّن لاحقًا من صفحة الباص)
+  const [assignSeatNow, setAssignSeatNow] = useState(true);
+
+  const suggestedSeat = useMemo(() => {
+    if (isUpdateMode || !watchedOmra) return null;
+    const occupiedSitNumbers = (data || [])
+      .filter((u) => u.omra?._id === watchedOmra)
+      .map((u) => u.sitNumber);
+    return findNextAvailableSeat(occupiedSitNumbers);
+  }, [data, watchedOmra, isUpdateMode]);
+
+  useEffect(() => {
+    if (!isUpdateMode) {
+      setValue("sitNumber", assignSeatNow ? suggestedSeat || "" : "");
+    }
+  }, [suggestedSeat, isUpdateMode, setValue, assignSeatNow]);
 
   const contentFormFilds = [
     {
@@ -110,15 +157,19 @@ const Form = () => {
       errors: errors,
       nameInDocument: "roomType",
     },
-    {
-      data: sitNumbers,
-      label: "رقم المقعد",
-      register: register,
-      required: false,
-      option: "اختر رقم المقعد",
-      errors: errors,
-      nameInDocument: "sitNumber",
-    },
+    ...(isUpdateMode
+      ? [
+          {
+            data: sitNumbers,
+            label: "رقم المقعد",
+            register: register,
+            required: false,
+            option: "اختر رقم المقعد",
+            errors: errors,
+            nameInDocument: "sitNumber",
+          },
+        ]
+      : []),
     {
       data: Gender,
       label: "الجنس",
@@ -154,8 +205,6 @@ const Form = () => {
       errors: errors,
     },
   ];
-
-  const isUpdateMode = typeof id === "string";
 
   useEffect(() => {
     dispatch(getOmras());
@@ -241,21 +290,70 @@ const Form = () => {
     });
   };
   return (
-    <div className="p-10">
+    <div className="flex justify-center px-4 py-10 md:py-16">
+      <div className="w-full max-w-4xl">
       <ButtonReverse text={"رجوع"} to={"/"} />
 
-      <FormLayout
-        data={data}
-        id={id}
-        isLoading={isLoading}
-        Submit={handleSubmit(onSubmit)}
-        contentFormFilds={contentFormFilds}
-        contentFormFieldsCheckBox={contentFormFieldsCheckBox}
-        contentFormFieldsSelector={contentFormFieldsSelector}
-        multipleImages={true}
-        form={form}
-        total={total}
-      />
+      {!isUpdateMode && (
+        <div className="max-w-md mx-auto mb-4 flex flex-col gap-3 rounded-xl border border-primary/20 bg-primary/5 p-4">
+          <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={assignSeatNow}
+              onChange={(e) => setAssignSeatNow(e.target.checked)}
+              className="h-4 w-4 accent-primary cursor-pointer"
+            />
+            تعيين مقعد في الباص الآن
+          </label>
+
+          {assignSeatNow ? (
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Armchair size={20} />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500">
+                  المقعد الذي سيتم تعيينه تلقائيًا
+                </p>
+                {!watchedOmra ? (
+                  <p className="font-bold text-gray-400">اختر الحملة أولًا</p>
+                ) : suggestedSeat ? (
+                  <p className="font-bold text-primary">
+                    مقعد {suggestedSeat.split(" - ")[0]} — الباص{" "}
+                    {suggestedSeat.split(" - ")[1]}
+                  </p>
+                ) : (
+                  <p className="font-bold text-red-600">
+                    لا يوجد مقعد متاح في الباصين
+                  </p>
+                )}
+              </div>
+            </div>
+          ) : (
+            <p className="text-xs font-semibold text-gray-500">
+              سيتم تسجيل المعتمر بدون مقعد، ويمكن تعيينه لاحقًا من صفحة الباص
+            </p>
+          )}
+
+          <input type="hidden" {...register("sitNumber")} />
+        </div>
+      )}
+
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm md:p-10">
+        <FormLayout
+          data={data}
+          id={id}
+          isLoading={isLoading}
+          Submit={handleSubmit(onSubmit)}
+          contentFormFilds={contentFormFilds}
+          contentFormFieldsCheckBox={contentFormFieldsCheckBox}
+          contentFormFieldsSelector={contentFormFieldsSelector}
+          multipleImages={true}
+          form={form}
+          total={total}
+        />
+      </div>
+      </div>
     </div>
   );
 };
