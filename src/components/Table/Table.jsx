@@ -54,6 +54,11 @@ const Table = ({
     6: "خماسية",
   };
 
+  const detailsText = (ele) =>
+    typeof ele?.details === "string" ? ele.details : "";
+  const sitParts = (ele) =>
+    typeof ele?.sitNumber === "string" ? ele.sitNumber.split(" ") : [];
+
   // 🟢 فلترة البيانات
   let filteredData =
     data
@@ -67,7 +72,7 @@ const Table = ({
           Filter !== "أحمد المصري" &&
           Filter !== "الصابوني" &&
           Filter !== "عبد الرزاق بيلوني" &&
-          !Filter.startsWith("باص ")
+          !(typeof Filter === "string" && Filter.startsWith("باص "))
         ) {
           return ele.room === Filter;
         } else if (Filter === "براً" || Filter === "جواً") {
@@ -77,16 +82,16 @@ const Table = ({
           Filter == "أحمد المصري" ||
           Filter == "الصابوني"
         ) {
-          return ele.details.includes(Filter);
+          return detailsText(ele).includes(Filter);
         } else if (Filter == "عبد الرزاق بيلوني") {
           return (
-            !ele.details.includes("خالد قوجة") &&
-            !ele.details.includes("أحمد المصري") &&
-            !ele.details.includes("الصابوني") &&
+            !detailsText(ele).includes("خالد قوجة") &&
+            !detailsText(ele).includes("أحمد المصري") &&
+            !detailsText(ele).includes("الصابوني") &&
             ele.name !== "إدارة  الحملة"
           );
-        } else if (Filter.startsWith("باص ")) {
-          return ele.sitNumber.split(" ")[2] === Filter.split(" ")[1];
+        } else if (typeof Filter === "string" && Filter.startsWith("باص ")) {
+          return sitParts(ele)[2] === Filter.split(" ")[1];
         } else {
           return ele;
         }
@@ -99,8 +104,8 @@ const Table = ({
         } else if (FilterStatus == "لم يكمل الدفع") {
           return (
             ele.totalAmount - ele.paidAmount > 0 &&
-            !ele.details.includes("خالد قوجة") &&
-            !ele.details.includes("أحمد المصري") &&
+            !detailsText(ele).includes("خالد قوجة") &&
+            !detailsText(ele).includes("أحمد المصري") &&
             ele.name !== "إدارة  الحملة"
           );
         } else if (FilterStatus == "حصل على تأشيرة") {
@@ -120,7 +125,7 @@ const Table = ({
 
   if (order) {
     filteredData.sort(
-      (a, b) => +a.sitNumber.split(" ")[0] - +b.sitNumber.split(" ")[0],
+      (a, b) => +(sitParts(a)[0] || 0) - +(sitParts(b)[0] || 0),
     );
   }
 
@@ -136,7 +141,7 @@ const Table = ({
     Filter !== "خالد قوجة" &&
     Filter !== "أحمد المصري" &&
     Filter !== "عبد الرزاق بيلوني" &&
-    !Filter.startsWith("باص ")
+    !(typeof Filter === "string" && Filter.startsWith("باص "))
   ) {
     const numberOfUsers = filteredData.length;
 
@@ -146,23 +151,23 @@ const Table = ({
   const totalPaid = filteredData.reduce((acc, ele) => {
     if (
       ele.name == "عبدالرزاق بيلوني" ||
-      ele.details.includes("خالد قوجة") ||
-      ele.details.includes("أحمد المصري")
+      detailsText(ele).includes("خالد قوجة") ||
+      detailsText(ele).includes("أحمد المصري")
     ) {
       return acc;
     }
-    return acc + ele.paidAmount;
+    return acc + (ele.paidAmount || 0);
   }, 0);
 
   const totalAmountPred = filteredData.reduce((acc, ele) => {
     if (
       ele.name == "عبدالرزاق بيلوني" ||
-      ele.details.includes("خالد قوجة") ||
-      ele.details.includes("أحمد المصري")
+      detailsText(ele).includes("خالد قوجة") ||
+      detailsText(ele).includes("أحمد المصري")
     ) {
       return acc;
     }
-    return acc + ele.totalAmount;
+    return acc + (ele.totalAmount || 0);
   }, 0);
 
   return (
@@ -374,9 +379,9 @@ const Table = ({
                     className={`p-3 text-center ${
                       !checked["رقم المقعد"] && "print:hidden"
                     }`}>
-                    {Filter.startsWith("باص ") ? (
+                    {typeof Filter === "string" && Filter.startsWith("باص ") ? (
                       <Badge size="lg" className="bg-neutral-800 text-white">
-                        {ele.sitNumber.split(" ")[0] || "—"}
+                        {sitParts(ele)[0] || "—"}
                       </Badge>
                     ) : (
                       <Badge size="lg" className="bg-neutral-800 text-white">

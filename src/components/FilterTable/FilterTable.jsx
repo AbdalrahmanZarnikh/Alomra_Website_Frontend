@@ -10,20 +10,22 @@ const FilterTable = ({ data, setFunction, value }) => {
             value={value}
             onChange={(e) => setFunction(e.target.value)}
           >
-            {data.map((ele) => {
-              if (ele.name) {
+            {data.map((ele, index) => {
+              if (ele?.name) {
                 return (
-                  <option key={ele.name} value={ele.name}>
+                  <option
+                    key={ele._id ?? `${ele.name}-${index}`}
+                    value={ele.name}
+                  >
                     {ele.name}
                   </option>
                 );
-              } else {
-                return (
-                  <option key={ele} value={ele}>
-                    {ele}
-                  </option>
-                );
               }
+              return (
+                <option key={`${String(ele)}-${index}`} value={ele}>
+                  {ele}
+                </option>
+              );
             })}
           </select>
           <ChevronDown
